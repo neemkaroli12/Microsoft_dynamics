@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: microsoft-dynamics-app
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn my_microsoft.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: my_microsoft.settings
+    staticPublishPath: staticfiles
