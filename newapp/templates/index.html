@@ -114,6 +114,61 @@
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
+.why-choose-us {
+  background: #f9f9fb;
+  padding: 60px 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: 0.3s ease;
+  border-top: 4px solid #4c8bf5;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.feature-card img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #2b2b2b;
+}
+
+.feature-card p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+}
+
 
 </style>
 
@@ -137,7 +192,42 @@
   </div>
 </section>
 
-<section class="dynamics-section">
+<section class="why-choose-us mt-5">
+  <div class="container">
+    <h2 class="section-title">Why Choose Us for Microsoft Dynamics 365 Training?</h2>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Certified Trainers">
+        <h3>Certified Trainers</h3>
+        <p>Learn from Microsoft-certified professionals with real-world Dynamics 365 experience.</p>
+      </div>
+
+      <div class="feature-card">
+  <img src="https://cdn-icons-png.flaticon.com/512/1006/1006547.png" alt="Hands-on Training">
+  <h3>100% Hands-on Training</h3>
+  <p>Practice live projects and real scenarios using Dynamics 365 CRM & ERP tools.</p>
+</div>
+
+<div class="feature-card">
+  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Placement Assistance">
+  <h3>Placement Assistance</h3>
+  <p>We offer resume building, mock interviews, and job assistance post course completion.</p>
+</div>
+
+
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Flexible Batches">
+        <h3>Flexible Batches</h3>
+        <p>Choose from weekday, weekend, or fast-track batches as per your convenience.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="dynamics-section mt-5">
     <h2 class="section-title">Microsoft Dynamics Courses</h2>
     <div class="course-container">
         {% for course in courses %}
