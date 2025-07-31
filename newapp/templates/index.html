@@ -13,7 +13,6 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    border-radius: 10px;
   }
 
   .hero-img-wrapper {
@@ -38,13 +37,19 @@
     padding: 20px;
   }
 
+  /* Mobile View Styles */
   @media (max-width: 768px) {
     .hero-section {
+        background-color: blanchedalmond;
       flex-direction: column;
-      background-position: center;
+      background-image: none !important;  /* Remove background on small screens */
       text-align: center;
       min-height: auto;
       padding: 40px 20px;
+    }
+
+    .text-content {
+      color: black !important;  /* Text turns black on small screens */
     }
 
     .hero-img {
@@ -53,6 +58,7 @@
       height: auto;
       max-width: 90%;
       margin: 0 auto 20px;
+      display: none; /* Optionally hide image on mobile */
     }
 
     .hero-img-wrapper {
@@ -60,6 +66,7 @@
     }
   }
 </style>
+
 
 <section class="hero-section">
   <div class="container">
