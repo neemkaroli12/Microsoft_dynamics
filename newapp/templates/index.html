@@ -1,81 +1,160 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-<style>
+  <style>
     .hero-section {
-    position: relative;
-    min-height: 450px;
-     background-image: url("{% static 'images/verticalwave.png' %}");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right center;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-</style>
-<section class="hero-section">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 px-4 py-3 position-relative">
-        <div class="hero-img-wrapper">
-          <img src="{% static 'images/banner-img.png' %}" alt="Hero Image" class="hero-img">
+      position: relative;
+      min-height: 450px;
+      background-image: url("{% static 'images/verticalwave.png' %}");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right center;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .how-it-works {
+      color: #2f2e41;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: #ff6584;
+    }
+    
+    .line-decorator {
+      width: 100px;
+      height: 4px;
+      background: #6c63ff;
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+    
+    .how-it-works ul li i {
+      font-size: 18px;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+    .section-title-works {
+      font-size: 32px;
+    }
+    .svg-wrapper {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .svg-img {
+      width: 500px;
+      height: 400px;
+      object-fit: contain;
+      display: block;
+    }
+    
+    .content-box {
+      padding: 20px;
+      background: #fefefe;
+      border-radius: 16px;
+    }
+  </style>
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 px-4 py-3 position-relative">
+          <div class="hero-img-wrapper">
+            <img src="{% static 'images/banner-img.png' %}" alt="Hero Image" class="hero-img" />
+          </div>
+        </div>
+        <div class="col-lg-6 text-content text-center mt-4 mt-lg-0">
+          <h1 class="display-6 fw-bold">Learn from Experts,<br />Grow in Your Career</h1>
+          <p class="lead mt-2">Enroll in our Microsoft Dynamics 365 courses and boost your job-ready skills.</p>
         </div>
       </div>
-      <div class="col-lg-6 text-content text-center mt-4 mt-lg-0">
-        <h1 class="display-6 fw-bold">Learn from Experts,<br>Grow in Your Career</h1>
-        <p class="lead mt-2">Enroll in our Microsoft Dynamics 365 courses and boost your job-ready skills.</p>
+    </div>
+  </section>
+
+  {% comment %}why choose section{% endcomment %}
+  <section class="why-choose-us mt-5">
+    <div class="container">
+      <h2 class="section-title">Why Choose Us for Microsoft Dynamics 365 Training?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Certified Trainers" />
+          <h3>Certified Trainers</h3>
+          <p>Learn from Microsoft-certified professionals with real-world Dynamics 365 experience.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1006/1006547.png" alt="Hands-on Training" />
+          <h3>100% Hands-on Training</h3>
+          <p>Practice live projects and real scenarios using Dynamics 365 CRM & ERP tools.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Placement Assistance" />
+          <h3>Placement Assistance</h3>
+          <p>We offer resume building, mock interviews, and job assistance post course completion.</p>
+        </div>
+
+        <div class="feature-card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Flexible Batches" />
+          <h3>Flexible Batches</h3>
+          <p>Choose from weekday, weekend, or fast-track batches as per your convenience.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{% comment %} why choose section {% endcomment %}
-<section class="why-choose-us mt-5">
-  <div class="container">
-    <h2 class="section-title">Why Choose Us for Microsoft Dynamics 365 Training?</h2>
-    <div class="features-grid">
-
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Certified Trainers">
-        <h3>Certified Trainers</h3>
-        <p>Learn from Microsoft-certified professionals with real-world Dynamics 365 experience.</p>
-      </div>
-
-      <div class="feature-card">
-  <img src="https://cdn-icons-png.flaticon.com/512/1006/1006547.png" alt="Hands-on Training">
-  <h3>100% Hands-on Training</h3>
-  <p>Practice live projects and real scenarios using Dynamics 365 CRM & ERP tools.</p>
-</div>
-
-<div class="feature-card">
-  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Placement Assistance">
-  <h3>Placement Assistance</h3>
-  <p>We offer resume building, mock interviews, and job assistance post course completion.</p>
-</div>
-
-
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Flexible Batches">
-        <h3>Flexible Batches</h3>
-        <p>Choose from weekday, weekend, or fast-track batches as per your convenience.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-{% comment %} course section {% endcomment %}
-<section class="dynamics-section mt-5">
+  {% comment %}course section{% endcomment %}
+  <section class="dynamics-section mt-5">
     <h2 class="section-title">Microsoft Dynamics Courses</h2>
     <div class="course-container">
-        {% for course in courses %}
+      {% for course in courses %}
         <div class="course-card">
-            <img src="{{ course.image.url }}" alt="{{ course.title }}">
-            <h3>{{ course.title }}</h3>
-            <p>{{ course.description }}</p>
+          <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+          <h3>{{ course.title }}</h3>
+          <p>{{ course.description }}</p>
         </div>
-        {% endfor %}
+      {% endfor %}
     </div>
-</section>
+  </section>
+
+  <section class="how-it-works py-5">
+    <div class="container">
+      <div class="text-center mt-5">
+        <p class="subtitle text-muted">Achieve Your Learning Goals</p>
+        <h4 class="section-title-works mb-2">How it Works?</h4>
+        <div class="line-decorator mx-auto"></div>
+      </div>
+
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 d-flex justify-content-center">
+          <div class="col-lg-6 d-flex justify-content-center">
+            <div class="svg-wrapper text-center">
+              <img src="{% static 'images/Webinar-amico.svg' %}" alt="Online Learning" class="svg-img" />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="content-box">
+            <h3 class="" style="font-size: 45px;">Engaging Live Instructor LED Online Sessions</h3>
+            <div class="line-decorator mb-3"></div>
+            <p class="text-muted fs-5">
+              Our live screen-sharing and interactive demonstrations by industry experts help you
+              <strong>visualize each concept</strong> clearly. If you miss a class, don’t worry — we’ll reschedule it for you, so your learning never stops!
+            </p>
+            <button style=" background-color: #ff6584; padding: 10px; border-radius: 20px; border: none; color: white;">Start Learning Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
