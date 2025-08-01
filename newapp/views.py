@@ -4,6 +4,7 @@ from .models import DynamicsCourse
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
 def home(request):
     courses = DynamicsCourse.objects.all()
     return render(request, 'index.html', {'courses': courses})

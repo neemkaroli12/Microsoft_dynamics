@@ -81,6 +81,23 @@
       </div>
     </nav>
     <hr class="gradient-line" />
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+  {% if messages %}
+    {% for message in messages %}
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: `{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}`,
+        title: `{{ message|escapejs }}`,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      });
+    {% endfor %}
+  {% endif %}
+</script>
+
 
     {% block content %}
     {% endblock %}
