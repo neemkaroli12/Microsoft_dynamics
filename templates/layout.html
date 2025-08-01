@@ -1,60 +1,94 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Dynamics 365 Academy{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}
+        Dynamics 365 Academy
+      {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
 
   <body>
-   
     <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
       <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="#">
-          <img src="{% static 'images/logo.png' %}" alt="Academy Logo" height="80" width="80">
-        </a>
+        <a class="navbar-brand fw-bold text-primary" href="#"><img src="{% static 'images/logo.png' %}" alt="Academy Logo" height="80" width="80" /></a>
 
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-          <span class="navbar-toggler-icon" style="background-color: rgba(0,0,0,0.2); border-radius: 3px;"></span>
-        </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"><span class="navbar-toggler-icon" style="background-color: rgba(0,0,0,0.2); border-radius: 3px;"></span></button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Home</a>
+              <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-semibold text-dark" href="#">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Courses</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">All Courses</a>
+              <ul class="dropdown-menu mega-dropdown shadow-sm">
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Microsoft Dynamics</a>
+                  <ul class="dropdown-menu sub-dropdown">
+                    <li>
+                      <a class="dropdown-item" href="#">MS Dynamics 365 BC Functional Training</a>
+                    </li>
+                    <div class="custom-divider"></div>
+                    <li>
+                      <a class="dropdown-item" href="#">MS Dynamics 365 BC Technical Training</a>
+                    </li>
+                    <div class="custom-divider"></div>
+                    <li>
+                      <a class="dropdown-item" href="#">MS Dynamics 365 BC techno Functional Training</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Odoo</a>
+                  <ul class="dropdown-menu sub-dropdown">
+                    <li>
+                      <a class="dropdown-item" href="#"> Odoo Functional Courses (Non-technical)</a>
+                    </li>
+                    <div class="custom-divider"></div>
+                    <li>
+                      <a class="dropdown-item" href="#">Odoo Technical Courses (Developer oriented)</a>
+                    </li>
+                    <div class="custom-divider"></div>
+                    <li>
+                      <a class="dropdown-item" href="#">Odoo Administration / Deployment Courses</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </li>
+
             <li class="nav-item">
               <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="{% url "login" %}" class="btn btn-outline-primary btn-sm ms-lg-3 me-5">Login</a>
-              <a href="{% url "register" %}" class="btn btn-primary btn-sm ms-2">Register</a>
+              <a href="{% url 'login' %}" class="btn btn-primary btn-sm ms-lg-3 me-3">Login</a>
+              <a href="{% url 'register' %}" class="btn btn-primary btn-sm ms-2">Register</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-<hr class="gradient-line">
+    <hr class="gradient-line" />
 
-
-    {% block content %}{% endblock %}
-
+    {% block content %}
+    {% endblock %}
 
     <footer class="footer bg-light mt-5 pt-4 pb-3">
       <div class="container-fluid">
         <div class="row d-flex flex-column flex-md-row">
-          <div class="col-lg-3 mb-4 footer-logo ">
+          <div class="col-lg-3 mb-4 footer-logo">
             <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Logo" height="150" width="150" /></a>
           </div>
           <div class="col-lg-2 mb-4">
@@ -117,6 +151,49 @@
         <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
       </div>
     </footer>
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const dropdownToggles = document.querySelectorAll(".dropdown-submenu > .dropdown-item");
+
+    dropdownToggles.forEach(function (toggle) {
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const currentSubmenu = this.nextElementSibling;
+
+        // Close all other open submenus first
+        document.querySelectorAll(".sub-dropdown").forEach(function (submenu) {
+          if (submenu !== currentSubmenu) {
+            submenu.classList.remove("show-sub");
+          }
+        });
+
+        // Toggle current submenu
+        if (currentSubmenu && currentSubmenu.classList.contains("sub-dropdown")) {
+          currentSubmenu.classList.toggle("show-sub");
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbarCollapse = document.getElementById("mainNavbar");
+
+    // Bootstrap collapse events
+    navbarCollapse.addEventListener("shown.bs.collapse", function () {
+      document.body.classList.add("scroll-lock");
+    });
+
+    navbarCollapse.addEventListener("hidden.bs.collapse", function () {
+      document.body.classList.remove("scroll-lock");
+    });
+  });
+</script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
