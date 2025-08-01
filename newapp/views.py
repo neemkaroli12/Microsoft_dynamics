@@ -9,6 +9,4 @@ def home(request):
     return render(request, 'index.html', {'courses': courses})
 
 
-
-
     

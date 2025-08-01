@@ -95,7 +95,7 @@
   /* Mobile View Styles */
   @media (max-width: 768px) {
     .hero-section {
-        background-color: #4390b9;
+      background-color: #4390b9;
       flex-direction: column;
       background-image: none !important;  /* Remove background on small screens */
       text-align: center;
