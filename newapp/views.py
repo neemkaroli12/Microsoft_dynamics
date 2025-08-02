@@ -18,7 +18,7 @@ def register_view(request):
             user = form.save()
             login(request, user)  # optional: auto login
             messages.success(request, "Account created successfully!")
-            return redirect('index')  # home page ka url name
+            return redirect('login')  # home page ka url name
         else:
             messages.error(request, "Please fix the errors below.")
     else:
