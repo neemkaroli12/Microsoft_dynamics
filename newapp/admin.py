@@ -1,9 +1,6 @@
 from django.contrib import admin
-from .models import DynamicsCourse,Course
+from .models import Course
 
-@admin.register(DynamicsCourse)
-class DynamicsCourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at')
 
 
 @admin.register(Course)

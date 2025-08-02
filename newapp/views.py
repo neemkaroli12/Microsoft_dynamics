@@ -1,14 +1,14 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DynamicsCourse,Course
+from .models import Course
 from .forms import RegisterForm,LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-
 def home(request):
-    courses = DynamicsCourse.objects.all()
-    return render(request, 'index.html', {'courses': courses})
+    courses = Course.objects.all()
+    # courses = DynamicsCourse.objects.all()
+    return render(request, 'index.html', {'courses': courses })
 
  # <-- apna custom form import
 
