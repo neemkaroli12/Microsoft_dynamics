@@ -17,96 +17,85 @@
 
   <body>
     <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-primary" href="#">
-      <img src="{% static 'images/logo.png' %}" alt="Academy Logo" height="80" width="80" />
-    </a>
+      <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="#"><img src="{% static 'images/logo.png' %}" alt="Academy Logo" height="80" width="80" /></a>
 
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon" style="background-color: rgba(0,0,0,0.2); border-radius: 3px;"></span>
-    </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"><span class="navbar-toggler-icon" style="background-color: rgba(0,0,0,0.2); border-radius: 3px;"></span></button>
 
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#">About</a>
-        </li>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">About</a>
+            </li>
 
-        <!-- All Courses Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">
-            All Courses
-          </a>
-          <ul class="dropdown-menu mega-dropdown shadow-sm">
+            <!-- All Courses Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">All Courses</a>
+              <ul class="dropdown-menu mega-dropdown shadow-sm">
+                <!-- Microsoft Dynamics -->
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Microsoft Dynamics</a>
+                  <ul class="dropdown-menu sub-dropdown">
+                    {% for course in courses %}
+                      {% if course.category == 'Microsoft Dynamics' and course.slug and course.title %}
+                        <li>
+                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+                        </li>
+                        <div class="custom-divider"></div>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
 
-            <!-- Microsoft Dynamics -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item" href="#">Microsoft Dynamics</a>
-              <ul class="dropdown-menu sub-dropdown">
-                {% for course in courses %}
-                  {% if course.category == "Microsoft Dynamics" and course.slug and course.title %}
-                    <li>
-                      <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">
-                        {{ course.title }}
-                      </a>
-                    </li>
-                    <div class="custom-divider"></div>
-                  {% endif %}
-                {% endfor %}
+                <!-- Odoo -->
+                <li class="dropdown-submenu">
+                  <a class="dropdown-item" href="#">Odoo</a>
+                  <ul class="dropdown-menu sub-dropdown">
+                    {% for course in courses %}
+                      {% if course.category == 'Odoo' and course.slug and course.title %}
+                        <li>
+                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+                        </li>
+                        <div class="custom-divider"></div>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
               </ul>
             </li>
 
-            <!-- Odoo -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item" href="#">Odoo</a>
-              <ul class="dropdown-menu sub-dropdown">
-                {% for course in courses %}
-                  {% if course.category == "Odoo" and course.slug and course.title %}
-                    <li>
-                      <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">
-                        {{ course.title }}
-                      </a>
-                    </li>
-                    <div class="custom-divider"></div>
-                  {% endif %}
-                {% endfor %}
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
+            </li>
+
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+            {% endif %}
           </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
-        </li>
-
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
+        </div>
+      </div>
+    </nav>
 
     <hr class="gradient-line" />
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
   {% if messages %}
     {% for message in messages %}
@@ -122,7 +111,6 @@
     {% endfor %}
   {% endif %}
 </script>
-
 
     {% block content %}
 
