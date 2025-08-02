@@ -1,7 +1,10 @@
 body{
-      font-family:'Times New Roman', Times, serif !important;
+  font-family:'Times New Roman', Times, serif !important;
 }
-
+*{
+  margin:0px;
+  padding:0px;
+}
 /* ------------------ Navbar Styling ------------------ */
 .navbar {
   padding: 15px 0;
