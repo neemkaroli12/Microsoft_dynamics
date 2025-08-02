@@ -5,12 +5,10 @@
 <style>
   
 .training-modes-section .card {
-
   width: 180px !important;
   height: 180px !important;
   border-radius: 1.5rem !important;
   border: 1px solid rgba(123, 78, 255, 0.3) !important;
-  
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   background-color: white !important;
   padding: 30px 20px !important;
@@ -38,12 +36,9 @@
   transform: scale(1.2) !important;
 }
 </style>
-
-  <!-- Course Header -->
   <section style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); color: white;">
     <div class="container py-5" style="text-align: justify;">
       <div class="row g-4">
-        <!-- Left Column -->
         <div class="col-md-7 pe-lg-5">
           <h1 class="mb-4" style="word-break: break-word; white-space: normal; text-align: left; text-justify: none;">{{ course.title }}</h1>
           <p class="mt-3">⭐ {{ course.rating }} - {{ course.review_count }} reviews</p>
@@ -66,12 +61,9 @@
 
           <div class="mt-4">
             <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
-            <!-- Always show Syllabus button -->
             <a href="#syllabus-section" class="btn btn-light text-danger">📄 View Syllabus</a>
           </div>
         </div>
-
-        <!-- Right Column -->
         <div class="col-md-5 d-flex align-items-center justify-content-center">
           <div class="w-100" style="max-width: 400px;">
             <div class="ratio ratio-16x9">
@@ -86,7 +78,6 @@
       </div>
     </div>
   </section>
- <!-- Add Bootstrap & Bootstrap Icons CDN -->
 
 <section class="training-modes-section py-5 bg-white text-center">
   <div class="container">
@@ -95,35 +86,35 @@
     <p class="mb-5 fs-5">Learn From World’s Top Microsoft Dynamics Business Central Certified Faculty And Industry Leaders</p>
 
     <div class="row g-4 justify-content-center">
-      <!-- Card 1 -->
+      {% comment %} Card 1{% endcomment %}
       <div class="col-md-4 col-lg-2">
         <div class="card">
           <i class="bi bi-people-fill"></i>
           <h5>Online Batch Training</h5>
         </div>
       </div>
-      <!-- Card 2 -->
+      {% comment %} Card 2  {% endcomment %}
       <div class="col-md-4 col-lg-2">
         <div class="card">
           <i class="bi bi-person-lines-fill"></i>
           <h5>One To One Training</h5>
         </div>
       </div>
-      <!-- Card 3 -->
+      {% comment %} Card 3 {% endcomment %}
       <div class="col-md-4 col-lg-2">
         <div class="card">
           <i class="bi bi-gear-fill"></i>
           <h5>Customized Training</h5>
         </div>
       </div>
-      <!-- Card 4 -->
+      {% comment %} Card 4 {% endcomment %}
       <div class="col-md-4 col-lg-2">
         <div class="card">
           <i class="bi bi-clock-fill"></i>
           <h5>Fast Track Training</h5>
         </div>
       </div>
-      <!-- Card 5 -->
+      {% comment %} Card 5 {% endcomment %}
       <div class="col-md-4 col-lg-2">
         <div class="card">
           <i class="bi bi-person-badge-fill"></i>
@@ -131,28 +122,31 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="mt-5">
+        <a href="#" class= " me-5"style=" background-color: blue; padding: 10px; border-radius: 20px; border: none; color: white; font-size:1.4rem; text-decoration:none;">Enroll Now</a>
+       <a href="#" class="" style=" background-color: blue; padding: 10px; border-radius: 20px; border: none; color: white;font-size:1.4rem; text-decoration:none;">Free Demo</a>
+      </div>
+    </div>
   </div>
 </section>
-
-
-
-  <!-- Syllabus Section -->
+  {% comment %}  Syllabus Section {% endcomment %}
   <section id="syllabus-section" class="py-5 bg-light text-dark">
     <div class="container">
       <h2 class="fw-bold mb-4">📘 Course Syllabus</h2>
 
       {% if course.syllabus_link %}
         {% if course.syllabus_link|slice:':4' == 'http' %}
-          <!-- If syllabus_link is a URL -->
+          {% comment %} If syllabus_link is a URL {% endcomment %}
           <p>
             <a href="{{ course.syllabus_link }}" target="_blank" class="btn btn-outline-primary">📥 Download Syllabus</a>
           </p>
         {% else %}
-          <!-- If syllabus_link is text -->
+          {% comment %}  syllabus_link is text  {% endcomment %}
           <p>{{ course.syllabus_link|safe }}</p>
         {% endif %}
       {% else %}
-        <!-- If syllabus not available -->
+        {% comment %} If syllabus not available  {% endcomment %}
         <p class="text-muted">Syllabus is not available for this course yet.</p>
       {% endif %}
     </div>
