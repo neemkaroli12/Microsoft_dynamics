@@ -6,6 +6,7 @@
   }
 </style>
 
+<!-- Course Header -->
 <section style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); color: white;">
   <div class="container py-5" style="text-align: justify;">
     <div class="row g-4">
@@ -32,12 +33,10 @@
 
         <div class="mt-4">
           <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
-          {% if course.syllabus_link %}
-            <!-- Smooth scroll to syllabus section -->
-            <a href="#syllabus-section" class="btn btn-light text-danger">
-              📄 View Syllabus
-            </a>
-          {% endif %}
+          <!-- Always show Syllabus button -->
+          <a href="#syllabus-section" class="btn btn-light text-danger">
+            📄 View Syllabus
+          </a>
         </div>
       </div>
 
@@ -58,24 +57,27 @@
 </section>
 
 <!-- Syllabus Section -->
-{% if course.syllabus_link %}
 <section id="syllabus-section" class="py-5 bg-light text-dark">
   <div class="container">
     <h2 class="fw-bold mb-4">📘 Course Syllabus</h2>
 
-    <!-- If syllabus_link is an external file -->
-    {% if course.syllabus_link|slice:":4" == "http" %}
-      <p>
-        <a href="{{ course.syllabus_link }}" target="_blank" class="btn btn-outline-primary">
-          📥 Download Syllabus
-        </a>
-      </p>
+    {% if course.syllabus_link %}
+      {% if course.syllabus_link|slice:":4" == "http" %}
+        <!-- If syllabus_link is a URL -->
+        <p>
+          <a href="{{ course.syllabus_link }}" target="_blank" class="btn btn-outline-primary">
+            📥 Download Syllabus
+          </a>
+        </p>
+      {% else %}
+        <!-- If syllabus_link is text -->
+        <p>{{ course.syllabus_link|safe }}</p>
+      {% endif %}
     {% else %}
-      <!-- If syllabus_link contains syllabus text -->
-      <p>{{ course.syllabus_link|safe }}</p>
+      <!-- If syllabus not available -->
+      <p class="text-muted">Syllabus is not available for this course yet.</p>
     {% endif %}
   </div>
 </section>
-{% endif %}
 
 {% endblock %}
