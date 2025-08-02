@@ -15,229 +15,6 @@
   </head>
 
   <body>
-   
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
-      <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Academy Logo" height="80" width="80" /></a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"><span class="navbar-toggler-icon" style="background-color: rgba(0,0,0,0.2); border-radius: 3px;"></span></button>
-
-        <div class="collapse navbar-collapse" id="mainNavbar">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">About</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">All Courses</a>
-              <ul class="dropdown-menu mega-dropdown shadow-sm">
-                <li class="dropdown-submenu">
-                  <a class="dropdown-item" href="#">Microsoft Dynamics</a>
-                  <ul class="dropdown-menu sub-dropdown">
-                    {% for course in courses %}
-                      {% if course.category == 'Microsoft Dynamics' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
-                        <div class="custom-divider"></div>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="dropdown-item" href="#">Odoo</a>
-                  <ul class="dropdown-menu sub-dropdown">
-                    {% for course in courses %}
-                      {% if course.category == 'Odoo' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
-                        <div class="custom-divider"></div>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
-            </li>
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <hr class="gradient-line" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    {% if messages %}
-      {% for message in messages %}
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
-          title: "{{ message|escapejs }}",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true
-        });
-      {% endfor %}
-    {% endif %}
-  </script>
-{% block content %}
-{% endblock %}
-
-    <footer class="footer bg-light mt-5 pt-4 pb-3">
-      <div class="container-fluid">
-        <div class="row d-flex flex-column flex-md-row">
-          <div class="col-lg-3 mb-4 footer-logo">
-            <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Logo" height="150" width="150" /></a>
-          </div>
-
-          <div class="col-lg-2 mb-4">
-            <h5>Quick Links</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-2 mb-4">
-            <h5>Company</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-2 mb-4">
-            <h5>NIITF</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="#">Our Programs</a>
-              </li>
-              <li>
-                <a href="#">Partners</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 mb-4">
-            <h5>Contact Us</h5>
-            <div class="footer-contact-item">
-              <i class="bi bi-geo-alt-fill"></i>
-              <p>
-                Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand
-              </p>
-            </div>
-            <div class="footer-contact-item">
-              <i class="bi bi-envelope-fill"></i>
-              <p>info@niitf.org</p>
-            </div>
-            <div class="footer-contact-item">
-              <i class="bi bi-telephone"></i>
-              <p>+91 93891 49580</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
-      </div>
-    </footer>
-
-    <!-- Dropdown Submenu Script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item');
-      dropdownToggles.forEach(function (toggle) {
-        toggle.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-
-          const currentSubmenu = this.nextElementSibling;
-
-          document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
-            if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
-          });
-
-          if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
-            currentSubmenu.classList.toggle('show-sub');
-          }
-        });
-      });
-    });
-  </script>
-
-    <!-- Navbar Scroll Lock Script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const navbarCollapse = document.getElementById('mainNavbar');
-
-      navbarCollapse.addEventListener('shown.bs.collapse', function () {
-        document.body.classList.add('scroll-lock');
-      });
-
-      navbarCollapse.addEventListener('hidden.bs.collapse', function () {
-        document.body.classList.remove('scroll-lock');
-      });
-    });
-  </script>
-
-    <!-- Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      {% block title %}
-        Dynamics 365 Academy
-      {% endblock %}
-    </title>
-
-    <!-- CSS Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  </head>
-
-  <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
       <div class="container">
@@ -246,41 +23,30 @@
 
         <div class="collapse navbar-collapse" id="mainNavbar">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">About</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">About</a></li>
 
             <!-- Courses Dropdown -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">All Courses</a>
               <ul class="dropdown-menu mega-dropdown shadow-sm">
-                <!-- Microsoft Dynamics -->
                 <li class="dropdown-submenu">
                   <a class="dropdown-item" href="#">Microsoft Dynamics</a>
                   <ul class="dropdown-menu sub-dropdown">
                     {% for course in courses %}
                       {% if course.category == 'Microsoft Dynamics' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
                         <div class="custom-divider"></div>
                       {% endif %}
                     {% endfor %}
                   </ul>
                 </li>
-
-                <!-- Odoo -->
                 <li class="dropdown-submenu">
                   <a class="dropdown-item" href="#">Odoo</a>
                   <ul class="dropdown-menu sub-dropdown">
                     {% for course in courses %}
                       {% if course.category == 'Odoo' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
                         <div class="custom-divider"></div>
                       {% endif %}
                     {% endfor %}
@@ -289,27 +55,15 @@
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Blog</a></li>
 
             {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
             {% endif %}
           </ul>
         </div>
@@ -342,24 +96,23 @@
 
 <footer class="footer bg-light mt-5 pt-4 pb-3">
     <script>
-    {% if messages %}
-      {% for message in messages %}
-        Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
-          title: "{{ message|escapejs }}",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true
-        });
-      {% endfor %}
-    {% endif %}
-  </script>
+      {% if messages %}
+        {% for message in messages %}
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
+            title: "{{ message|escapejs }}",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+          });
+        {% endfor %}
+      {% endif %}
+    </script>
 
     <!-- Page Content -->
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <!-- Footer -->
     <footer class="footer bg-light mt-5 pt-4 pb-3">
@@ -368,56 +121,34 @@
           <div class="col-lg-3 mb-4 footer-logo">
             <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Logo" height="150" width="150" /></a>
           </div>
-
           <div class="col-lg-2 mb-4">
             <h5>Quick Links</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
             </ul>
           </div>
-
           <div class="col-lg-2 mb-4">
             <h5>Company</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
             </ul>
           </div>
-
           <div class="col-lg-2 mb-4">
             <h5>NIITF</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Our Programs</a>
-              </li>
-              <li>
-                <a href="#">Partners</a>
-              </li>
+              <li><a href="#">Our Programs</a></li>
+              <li><a href="#">Partners</a></li>
             </ul>
           </div>
-
           <div class="col-lg-3 mb-4">
             <h5>Contact Us</h5>
             <div class="footer-contact-item">
               <i class="bi bi-geo-alt-fill"></i>
-              <p>
-                Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand
-              </p>
+              <p>Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand</p>
             </div>
             <div class="footer-contact-item">
               <i class="bi bi-envelope-fill"></i>
@@ -429,50 +160,46 @@
             </div>
           </div>
         </div>
-
         <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
       </div>
     </footer>
 
     <!-- Dropdown Submenu Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item');
-      dropdownToggles.forEach(function (toggle) {
-        toggle.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
+      document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item');
+        dropdownToggles.forEach(function (toggle) {
+          toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-          const currentSubmenu = this.nextElementSibling;
+            const currentSubmenu = this.nextElementSibling;
 
-          document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
-            if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
+            document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
+              if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
+            });
+
+            if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
+              currentSubmenu.classList.toggle('show-sub');
+            }
           });
-
-          if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
-            currentSubmenu.classList.toggle('show-sub');
-          }
         });
       });
-    });
-  </script>
+    </script>
 
     <!-- Navbar Scroll Lock Script -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const navbarCollapse = document.getElementById('mainNavbar');
-
-      navbarCollapse.addEventListener('shown.bs.collapse', function () {
-        document.body.classList.add('scroll-lock');
+      document.addEventListener('DOMContentLoaded', function () {
+        const navbarCollapse = document.getElementById('mainNavbar');
+        navbarCollapse.addEventListener('shown.bs.collapse', function () {
+          document.body.classList.add('scroll-lock');
+        });
+        navbarCollapse.addEventListener('hidden.bs.collapse', function () {
+          document.body.classList.remove('scroll-lock');
+        });
       });
+    </script>
 
-      navbarCollapse.addEventListener('hidden.bs.collapse', function () {
-        document.body.classList.remove('scroll-lock');
-      });
-    });
-  </script>
-
-    <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
