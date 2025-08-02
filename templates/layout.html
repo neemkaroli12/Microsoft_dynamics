@@ -54,7 +54,7 @@
                   <a class="dropdown-item" href="#">Odoo</a>
                   <ul class="dropdown-menu sub-dropdown">
                     <li>
-                      <a class="dropdown-item" href="#"> Odoo Functional Courses (Non-technical)</a>
+                      <a class="dropdown-item" href="#">Odoo Functional Courses (Non-technical)</a>
                     </li>
                     <div class="custom-divider"></div>
                     <li>
@@ -62,7 +62,7 @@
                     </li>
                     <div class="custom-divider"></div>
                     <li>
-                      <a class="dropdown-item" href="#">Odoo Administration / Deployment Courses</a>
+                      <a class="dropdown-item" href="#">Odoo Administration / Deployment Courses</a>
                     </li>
                   </ul>
                 </li>
@@ -72,10 +72,18 @@
             <li class="nav-item">
               <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
             </li>
-            <li class="nav-item d-flex align-items-center">
-              <a href="{% url "login" %}" class="btn btn-primary btn-sm ms-lg-3 me-3">Login</a>
-              <a href="{% url 'register' %}" class="btn btn-primary btn-sm ms-2">Register</a>
-            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -83,6 +91,7 @@
     <hr class="gradient-line" />
 
     {% block content %}
+
     {% endblock %}
 
     <footer class="footer bg-light mt-5 pt-4 pb-3">
@@ -151,48 +160,47 @@
         <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
       </div>
     </footer>
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const dropdownToggles = document.querySelectorAll(".dropdown-submenu > .dropdown-item");
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item')
+      
+        dropdownToggles.forEach(function (toggle) {
+          toggle.addEventListener('click', function (e) {
+            e.preventDefault()
+            e.stopPropagation()
+      
+            const currentSubmenu = this.nextElementSibling
+      
+            // Close all other open submenus first
+            document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
+              if (submenu !== currentSubmenu) {
+                submenu.classList.remove('show-sub')
+              }
+            })
+      
+            // Toggle current submenu
+            if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
+              currentSubmenu.classList.toggle('show-sub')
+            }
+          })
+        })
+      })
+    </script>
 
-    dropdownToggles.forEach(function (toggle) {
-      toggle.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const currentSubmenu = this.nextElementSibling;
-
-        // Close all other open submenus first
-        document.querySelectorAll(".sub-dropdown").forEach(function (submenu) {
-          if (submenu !== currentSubmenu) {
-            submenu.classList.remove("show-sub");
-          }
-        });
-
-        // Toggle current submenu
-        if (currentSubmenu && currentSubmenu.classList.contains("sub-dropdown")) {
-          currentSubmenu.classList.toggle("show-sub");
-        }
-      });
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navbarCollapse = document.getElementById("mainNavbar");
-
-    // Bootstrap collapse events
-    navbarCollapse.addEventListener("shown.bs.collapse", function () {
-      document.body.classList.add("scroll-lock");
-    });
-
-    navbarCollapse.addEventListener("hidden.bs.collapse", function () {
-      document.body.classList.remove("scroll-lock");
-    });
-  });
-</script>
-
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const navbarCollapse = document.getElementById('mainNavbar')
+      
+        // Bootstrap collapse events
+        navbarCollapse.addEventListener('shown.bs.collapse', function () {
+          document.body.classList.add('scroll-lock')
+        })
+      
+        navbarCollapse.addEventListener('hidden.bs.collapse', function () {
+          document.body.classList.remove('scroll-lock')
+        })
+      })
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>
