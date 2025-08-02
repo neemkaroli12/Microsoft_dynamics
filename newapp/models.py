@@ -18,6 +18,7 @@ class Course(models.Model):
     assignments_duration = models.CharField(max_length=50, blank=True)
     job_oriented_training = models.BooleanField(default=False)
     support_available = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='courses/', blank=True, null=True)
     video = models.FileField(upload_to='courses/videos/', blank=True, null=True)
     syllabus_link = models.CharField(max_length=255, blank=True, null=True) 
 
