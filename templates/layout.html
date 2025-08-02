@@ -37,7 +37,7 @@
                   <a class="dropdown-item" href="#">Microsoft Dynamics</a>
                   <ul class="dropdown-menu sub-dropdown">
                     <li>
-                      <a class="dropdown-item" href="#">MS Dynamics 365 BC Functional Training</a>
+                      <a class="dropdown-item" href="{% url 'course' %}">MS Dynamics 365 BC Functional Training</a>
                     </li>
                     <div class="custom-divider"></div>
                     <li>
@@ -68,10 +68,16 @@
                 </li>
               </ul>
             </li>
-
+             <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
+            </li>
+
             {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>

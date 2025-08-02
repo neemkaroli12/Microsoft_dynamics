@@ -47,3 +47,5 @@ def logout_view(request):
     messages.success(request, "You have been logged out.")
     return redirect('login')
 
+def  course_page(request):
+    return render(request, 'course.html')
