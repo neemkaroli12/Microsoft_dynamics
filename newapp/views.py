@@ -1,9 +1,10 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import DynamicsCourse
+from .models import DynamicsCourse,Course
 from .forms import RegisterForm,LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
 
 def home(request):
     courses = DynamicsCourse.objects.all()
@@ -47,5 +48,7 @@ def logout_view(request):
     messages.success(request, "You have been logged out.")
     return redirect('login')
 
-def  course_page(request):
-    return render(request, 'course.html')
+
+def course_detail(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    return render(request, 'course_detail.html', {'course': course})

@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<section class="py-5" style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); color: white;">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- Left Column -->
+            <div class="col-md-8">
+                <h1>{{ course.title }}</h1>
+                <p>⭐ {{ course.rating }} - {{ course.review_count }} reviews</p>
+                <p>{{ course.full_description }}</p>
+
+                <div class="row mt-4">
+                    <div class="col-6 col-md-3">
+                        👩‍🎓 <strong>{{ course.total_learners }}+</strong><br>Total Learners
+                    </div>
+                    <div class="col-6 col-md-3">
+                        ⏳ <strong>{{ course.course_duration }}</strong><br>Course Duration
+                    </div>
+                    <div class="col-6 col-md-3">
+                        📚 <strong>{{ course.assignments_duration }}</strong><br>Assignments
+                    </div>
+                    <div class="col-6 col-md-3">
+                        💼 {% if course.job_oriented_training %}100%{% endif %}<br>Job Oriented
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
+                    {% if course.syllabus_link %}
+                        <a href="{{ course.syllabus_link }}" class="btn btn-light text-danger">📄 View Syllabus</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-4">
+                {% if course.video %}
+                    <video width="100%" controls>
+                        <source src="{{ course.video.url }}" type="video/mp4">
+                    </video>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
