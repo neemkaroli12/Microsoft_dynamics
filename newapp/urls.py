@@ -9,6 +9,6 @@ urlpatterns=[
     path('register/', views.register_view, name="register"),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('courses/', views.course_page, name='course'),
+    path('courses/<slug:slug>/', views.course_detail, name='course_detail'),
 ]
 
