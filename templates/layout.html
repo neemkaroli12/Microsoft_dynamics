@@ -23,12 +23,8 @@
 
         <div class="collapse navbar-collapse" id="mainNavbar">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">About</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="{% url 'index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">About</a></li>
 
             <!-- Courses Dropdown -->
             <li class="nav-item dropdown">
@@ -39,9 +35,7 @@
                   <ul class="dropdown-menu sub-dropdown">
                     {% for course in courses %}
                       {% if course.category == 'Microsoft Dynamics' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
                         <div class="custom-divider"></div>
                       {% endif %}
                     {% endfor %}
@@ -52,9 +46,7 @@
                   <ul class="dropdown-menu sub-dropdown">
                     {% for course in courses %}
                       {% if course.category == 'Odoo' and course.slug and course.title %}
-                        <li>
-                          <a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
-                        </li>
+                        <li><a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
                         <div class="custom-divider"></div>
                       {% endif %}
                     {% endfor %}
@@ -63,27 +55,15 @@
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link fw-semibold text-dark" href="#">Blog</a>
-            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Become an Instructor</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Contact</a></li>
+            <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Blog</a></li>
 
             {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
             {% endif %}
           </ul>
         </div>
@@ -94,6 +74,22 @@
 
     <!-- SweetAlert Notifications -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  {% if messages %}
+    {% for message in messages %}
+        Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: `{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}`,
+        title: `{{ message|escapejs }}`,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      });
+    {% endfor %}
+  {% endif %}
+</script>
+<footer class="footer bg-light mt-5 pt-4 pb-3">
     <script>
       {% if messages %}
         {% for message in messages %}
@@ -111,8 +107,7 @@
     </script>
 
     <!-- Page Content -->
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     <!-- Footer -->
     <footer class="footer bg-light mt-5 pt-4 pb-3">
@@ -124,49 +119,31 @@
           <div class="col-lg-2 mb-4">
             <h5>Quick Links</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
             </ul>
           </div>
           <div class="col-lg-2 mb-4">
             <h5>Company</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
-              </li>
-              <li>
-                <a href="#">Privacy</a>
-              </li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
             </ul>
           </div>
           <div class="col-lg-2 mb-4">
             <h5>NIITF</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="#">Our Programs</a>
-              </li>
-              <li>
-                <a href="#">Partners</a>
-              </li>
+              <li><a href="#">Our Programs</a></li>
+              <li><a href="#">Partners</a></li>
             </ul>
           </div>
           <div class="col-lg-3 mb-4">
             <h5>Contact Us</h5>
             <div class="footer-contact-item">
               <i class="bi bi-geo-alt-fill"></i>
-              <p>
-                Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand
-              </p>
+              <p>Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand</p>
             </div>
             <div class="footer-contact-item">
               <i class="bi bi-envelope-fill"></i>

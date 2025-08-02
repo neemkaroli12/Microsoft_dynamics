@@ -5,47 +5,51 @@
       <div class="row g-4">
         <!-- Left Column -->
         <div class="col-md-7 pe-lg-5">
-          <h1>{{ course.title }}</h1>
+          <h1 >{{ course.title }}</h1>
           <p class="mt-3">⭐ {{ course.rating }} - {{ course.review_count }} reviews</p>
           <p>{{ course.full_description }}</p>
 
-          <div class="row mt-4">
-            <div class="col-6 col-md-3">
-              👩‍🎓 <strong>{{ course.total_learners }}+</strong><br />Total Learners
-            </div>
-            <div class="col-6 col-md-3">
-              ⏳ <strong>{{ course.course_duration }}</strong><br />Course Duration
-            </div>
-            <div class="col-6 col-md-3">
-              📚 <strong>{{ course.assignments_duration }}</strong><br />Assignments
-            </div>
-            <div class="col-6 col-md-3">
-              💼{% if course.job_oriented_training %}100%{% endif %}<br />Job Oriented
-            </div>
+        <div class="row mt-4">
+          <div class="col-6 col-md-3">
+            👩‍🎓 <strong>{{ course.total_learners }}+</strong><br />Total Learners
           </div>
-
-          <div class="mt-4">
-            <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
-            {% if course.syllabus_link %}
-              <a href="{{ course.syllabus_link }}" class="btn btn-light text-danger">📄 View Syllabus</a>
-            {% endif %}
+          <div class="col-6 col-md-3">
+            ⏳ <strong>{{ course.course_duration }}</strong><br />Course Duration
+          </div>
+          <div class="col-6 col-md-3">
+            📚 <strong>{{ course.assignments_duration }}</strong><br />Assignments
+          </div>
+          <div class="col-6 col-md-3">
+            💼 {% if course.job_oriented_training %}100%{% endif %}<br />Job Oriented
           </div>
         </div>
+
+        <div class="mt-4">
+          <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
+          {% if course.syllabus_link %}
+            <!-- Smooth scroll to syllabus section -->
+            <a href="#syllabus-section" class="btn btn-light text-danger">
+              📄 View Syllabus
+            </a>
+          {% endif %}
+        </div>
+      </div>
 
         <!-- Right Column -->
         <div class="col-md-5 d-flex align-items-center justify-content-center">
           <div class="w-100" style="max-width: 400px;">
             <div class="ratio ratio-16x9">
-              {% if course.video %}
-                <video width="100%" controls style="border: 5px solid white;">
-                  <source src="{{ course.video.url }}" type="video/mp4" />
-                </video>
-              {% endif %}
+                {% if course.video %}
+            <video width="100%" controls>
+              <source src="{{ course.video.url }}" type="video/mp4" />
+            </video>
+          {% endif %} 
             </div>
           </div>
+         
         </div>
       </div>
     </div>
   </section>
- 
+
 {% endblock %}

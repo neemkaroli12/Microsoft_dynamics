@@ -19,7 +19,7 @@ class Course(models.Model):
     job_oriented_training = models.BooleanField(default=False)
     support_available = models.BooleanField(default=False)
     video = models.FileField(upload_to='courses/videos/', blank=True, null=True)
-    syllabus_link = models.URLField(blank=True, null=True)
+    syllabus_link = models.CharField(max_length=255, blank=True, null=True) 
 
     def __str__(self):
         return self.title
