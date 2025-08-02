@@ -1,6 +1,5 @@
 body{
       font-family:'Times New Roman', Times, serif !important;
-       text-align: justify !important;
 }
 
 /* ------------------ Navbar Styling ------------------ */
@@ -16,6 +15,7 @@ body{
   height: 100px;
   width: 100px;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 .navbar-nav .nav-link {
@@ -219,7 +219,6 @@ body.no-scroll {
     background: linear-gradient(135deg, #0078D7, #00B294);
     color: white;
     text-align: center;
-    text-align: justify !important;
 }
 
 .section-title-courses {
@@ -268,7 +267,6 @@ body.no-scroll {
 .why-choose-us {
   background: #f9f9fb;
   padding: 60px 20px;
-   text-align: justify !important;
 }
 
 .section-title-why {
