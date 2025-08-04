@@ -1,0 +1,108 @@
+<!-- templates/includes/custom_navbar.html -->
+<nav class="custom-navbar">
+  <div class="nav-container">
+    <a href="#upcoming-batches" class="nav-link">Upcoming Batches</a>
+    <a href="#course-details" class="nav-link">Course Details</a>
+    <a href="#curriculum" class="nav-link">Curriculum</a>
+    <a href="#features" class="nav-link">Key Features</a>
+    <a href="#certification" class="nav-link">Certification</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#trainer-profile" class="nav-link">Trainer Profile</a>
+    <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="#placements" class="nav-link">Placements</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+  </div>
+</nav>
+<style>
+    .custom-navbar {
+  position: sticky;
+  top: 135px; /* adjust if your main navbar is taller */
+  z-index: 1020;
+  background-color: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+
+.custom-navbar .nav-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.custom-navbar .nav-link {
+  font-size: 1rem;
+  text-decoration: none;
+  padding-bottom: 6px;
+  color: #333;
+  position: relative;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #7b4eff;
+}
+
+.custom-navbar .nav-link.active {
+  color: #7b4eff;
+  font-weight: bold;
+}
+
+.custom-navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #7b4eff;
+  border-radius: 2px;
+}
+
+.custom-navbar .nav-link {
+  font-size: 19px;
+  text-decoration: none;
+  padding-bottom: 6px;
+  color: #333;
+  position: relative;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.custom-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #7b4eff;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.custom-navbar .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.custom-navbar .nav-link:hover {
+  color: #7b4eff;
+}
+
+.custom-navbar .nav-link.active {
+  color: #7b4eff;
+  font-weight: bold;
+}
+
+.custom-navbar .nav-link.active::after {
+  transform: scaleX(1); /* Show underline for active tab */
+}
+</style>
