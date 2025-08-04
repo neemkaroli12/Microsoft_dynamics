@@ -37,7 +37,7 @@ class UpcomingBatch(models.Model):
     batch_type = models.CharField(max_length=20, choices=BATCH_TYPE_CHOICES)
     title = models.CharField(max_length=255, help_text="Example: Weekdays Regular (Class 1Hr - 1:30Hrs) / Per Session.")
     schedule_details = models.TextField(help_text="Example: (Monday - Friday) Time: 08:00 AM (IST)")
-    course_fees_link = models.URLField(blank=True, null=True, help_text="Optional: Link to course fees page")
+    course_fees = models.IntegerField(blank=True, null=True, help_text="Optional: Link to course fees page")
 
     def __str__(self):
         return f"{self.start_date} - {self.title}"

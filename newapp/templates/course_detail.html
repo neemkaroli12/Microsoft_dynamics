@@ -191,8 +191,8 @@
             <p>{{ batch.title }}</p>
             <p>{{ batch.schedule_details }}</p>
           </div>
-          {% if batch.course_fees_link %}
-          <a href="{{ batch.course_fees_link }}" class="course-fees-btn">Course Fees</a>
+          {% if batch.course_fees %}
+          <a href="{{ batch.course_fees }}" class="course-fees-btn">Course Fees</a>
           {% endif %}
         </div>
         {% empty %}
