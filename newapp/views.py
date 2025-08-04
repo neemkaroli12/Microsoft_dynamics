@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course
+from .models import Course, UpcomingBatch
 from .forms import RegisterForm,LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -35,7 +35,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, "Logged in successfully!")
-            return redirect('index')  # apne home page ka url name
+            return redirect('index')  
         else:
             messages.error(request, "Invalid username or password.")
     else:
@@ -51,4 +51,6 @@ def logout_view(request):
 
 def course_detail(request, slug):
     course = get_object_or_404(Course, slug=slug)
-    return render(request, 'course_detail.html', {'course': course})
+    upcoming_batches = UpcomingBatch.objects.all().order_by('start_date')
+    return render(request, 'course_detail.html', {'course': course,'upcoming_batches': upcoming_batches})
+   
