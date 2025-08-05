@@ -3,8 +3,27 @@
 {% block content %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <style>
-    .navbar{
-      position:static;
+    h2,
+    h1,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #6c2eb9;
+    }
+    i {
+      color: #6a11cb;
+    }
+    .accordion-body, .list-unstyled li{
+      font-size: 1.1rem;
+      text-align: justify;
+    } 
+   .accordion-button,
+.accordion-body {
+  font-size: 1.2rem !important;
+}
+    .navbar {
+      position: static;
     }
     .training-modes-section .card {
       width: 180px !important;
@@ -30,7 +49,7 @@
     
     .training-modes-section .card:hover {
       transform: translateY(-8px) !important;
-      box-shadow: 0 5px 5px blue !important;
+      box-shadow: 0 8px 8px #6c2eb9 !important;
       /* purple glow on hover */
     }
     
@@ -40,9 +59,8 @@
     
     @media (max-width: 576px) {
       .training-modes-section .card {
-        margin: 0 auto; 
+        margin: 0 auto;
       }
-      
     
       .training-buttons {
         flex-direction: column !important;
@@ -55,7 +73,7 @@
         text-align: center;
       }
     }
-
+    
     .upcoming-batch-section {
       padding: 40px 20px;
       background-color: #fff;
@@ -68,67 +86,54 @@
       font-size: 1rem;
       color: black;
     }
-.batch-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.batch-card {
-  background: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 350px;
-  height: 200px;
-  border-top: 5px solid #6c2eb9;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-
-.batch-header-wrapper {
-  position: absolute;
-  top: -25px;       
-  right: 0;
-  width: 130px;
-  height: 130px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.batch-header {
-  background-color: #6c2eb9;
-  color: #fff;
-  padding: 4px 10px;
-  font-size: 10px;
-  width: 160px;
-  text-align: center;
-  transform: rotate(45deg);
-  transform-origin: top right;
-  position: relative;
-  left: 2px;  
-  top: 105px;    
-}
-
-.batch-date {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: start;
-}
+    .batch-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
     
-.batch-info p {
-  font-size: 14px;
-  margin: 2px 0;
-}
-
+    .batch-card {
+      background: #fff;
+      border: 1px solid #eee;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 350px;
+      height: 200px;
+      border-top: 5px solid #6c2eb9;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    
+    .batch-header-wrapper {
+      position: absolute;
+      top: -25px;
+      right: 0;
+      width: 130px;
+      height: 130px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .batch-header {
+      background-color: #6c2eb9;
+      color: #fff;
+      padding: 4px 10px;
+      font-size: 10px;
+      width: 160px;
+      text-align: center;
+      transform: rotate(45deg);
+      transform-origin: top right;
+      position: relative;
+      left: 2px;
+      top: 105px;
+    }
+    
     .batch-date {
       font-size: 1.2rem;
       font-weight: bold;
@@ -136,24 +141,23 @@
       text-align: start;
     }
     
-    .batch-info p {
-      font-size: 14px;
-      margin: 2px 0;
-      text-align: start;
-    }
-    
-    .course-fees-btn {
-      display:flex;
-      margin-top: 15px;
-      padding: 5px 10px;
-      border: 1px solid #6c2eb9;
-      color: #6c2eb9;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: 0.3s;
-      align-items: flex-start;
-      width: 120px;
-      margin-top:auto;
+.batch-info p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.course-fees-btn {
+  display:flex;
+  margin-top: 15px;
+  padding: 5px 10px;
+  border: 1px solid #6c2eb9;
+  color: #6c2eb9;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  align-items: flex-start;
+  width: 120px;
+  margin-top:auto;
     }
 
     
@@ -161,14 +165,50 @@
       background-color: #6c2eb9;
       color: #fff;
     }
-
-  
+    
+    .sticky-form {
+      position: sticky;
+      top: 20px; 
+      background: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    }
+     .sticky-form {
+      position: sticky;
+      top: 100px;
+      width: 300px;
+      height: auto;
+    }
+    .form-control {
+      margin-bottom: 20px;
+    }
+    .form-heading {
+      text-align: center;
+      color: #212529;
+      margin-bottom: 20px;
+    }
+    .phone-input-group {
+      display: flex;
+      gap: 10px;
+     
+    }
+    select.country-code {
+      max-width: 100px;
+      margin-bottom: 10px;
+       height: 40px;
+    }
+    .hands-on-trainig {
+      height: 150px;
+      box-shadow: 10px 10px 10px 10px lightgray;
+    }
   </style>
   <section style="background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); color: white;">
     <div class="container py-5" style="text-align: justify;">
       <div class="row g-4">
         <div class="col-md-7 pe-lg-5">
-          <h1 class="mb-4" style="word-break: break-word; white-space: normal; text-align: left; text-justify: none;">{{ course.title }}</h1>
+          <h1 class="mb-4 text-white" style="word-break: break-word; white-space: normal; text-align: left; text-justify: none;">{{ course.title }}</h1>
           <p class="mt-3">⭐ {{ course.rating }} - {{ course.review_count }} reviews</p>
           <p>{{ course.full_description }}</p>
 
@@ -210,8 +250,8 @@
   <section class="training-modes-section py-5 bg-white text-center">
     <div class="container">
       <h1 class="text-purple mb-3">NIITF's Training Modes</h1>
-      <div class="line-decorator mx-auto mb-4" style="width: 80px; height: 3px; background-color: #7b4eff; border-radius: 5px;"></div>
-      <p class="mb-5 fs-5">Learn From World’s Top Microsoft Dynamics Business Central Certified Faculty And Industry Leaders</p>
+      <div class="line-decorator mx-auto mb-4" style="width: 80px; height: 3px; background-color: #6c2eb9; border-radius: 5px;"></div>
+      <p class="mb-5 fs-5">Learn From World’s Top {{ course.title }} Certified Faculty And Industry Leaders</p>
 
       <div class="row g-4 justify-content-center">
         {% comment %}Card 1{% endcomment %}
@@ -252,8 +292,8 @@
       </div>
       <div class="row">
         <div class="mt-5 d-flex justify-content-center training-buttons flex-wrap gap-3">
-          <a href="#" style="background-color: blue; padding: 10px 20px; border-radius: 20px; border: none; color: white; font-size:1.4rem; text-decoration:none;">Enroll Now</a>
-          <a href="#" style="background-color: blue; padding: 10px 20px; border-radius: 20px; border: none; color: white; font-size:1.4rem; text-decoration:none;">Free Demo</a>
+          <a href="#" style="background-color: #6c2eb9; padding: 10px 20px; border-radius: 20px; border: none; color: white; font-size:1.4rem; text-decoration:none;">Enroll Now</a>
+          <a href="#" style="background-color: #6c2eb9; padding: 10px 20px; border-radius: 20px; border: none; color: white; font-size:1.4rem; text-decoration:none;">Free Demo</a>
         </div>
       </div>
     </div>
@@ -261,7 +301,7 @@
   {% comment %}navbar{% endcomment %}
   {% include 'includes/custom_navbar.html' %}
 
-  {% comment %} upcoming batches {% endcomment %}
+  {% comment %}upcoming batches{% endcomment %}
   <section id="upcoming-batches" class="upcoming-batch-section">
   <div class="container">
     <h1>Upcoming Batch Schedule</h1>
@@ -269,7 +309,6 @@
     <p class="description">
       Check Out Our Microsoft Dynamics Online Certification Batch Timings. Does This Batch Not Suit Your Timings? No Worries, We Will Customize And Arrange The Batch Timings That Match You Perfectly To Your Interest.
     </p>
-
     <div class="row d-flex">
       <div class="batch-grid">
         {% for batch in upcoming_batches %}
@@ -279,8 +318,8 @@
           </div>
           <div class="batch-date">{{ batch.start_date|date:"d-m-Y" }}</div>
           <div class="batch-info">
-            <p>{{ batch.title }}</p>
-            <p>{{ batch.schedule_details }}</p>
+            <p style="text-align: start;">{{ batch.title }}</p>
+            <p style="text-align: start;">{{ batch.schedule_details }}</p>
           </div>
           {% if batch.course_fees %}
           <a href="{{ batch.course_fees }}" class="course-fees-btn">Course Fees</a>
@@ -294,10 +333,142 @@
   </div>
 </section>
 
-{% comment %} course details {% endcomment %}
+  {% comment %}course details{% endcomment %}
+
+  <section id="course-details" class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="mb-4">Best {{ course.title }} Certification Online Course</h2>
+          <div class="line-decorator mb-4" style="width: 200px; height: 3px; background-color: #7b4eff; border-radius: 5px;"></div>
+          <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem;">Are you in search of the Best Online Training institute for {{course.title}} Training, NIIFT is one of the top {{course.title}} Online Training institutes! They provide the best {{course.title}} training for the aspirants by the industry experts.</p>
+         <div class="d-flex align-items-start mb-3">
+  <div class="me-2">
+    <i class="fas fa-plane-departure fs-5"></i>
+  </div>
+  <div style="text-align: justify; line-height: 1.3; font-size: 1.3rem;">
+    Benefits of Learning {{course.category}} at NIIFT.
+  </div>
+</div>
+
+          <ul class="list-unstyled">
+            {% comment %}1{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>NIIFT provides fully hands-on training for the learners to gain practical experience in all the core concepts of {{course.title}} course.</div>
+            </li>
+            {% comment %}2{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>MS Dynamics 365 BC Functional course curriculum is designed with the utmost care at NIIFT by well-experienced professionals in {{course.title}}.</div>
+            </li>
+            {% comment %}3{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5" style="color: #6a11cb;"></i>
+              </div>
+              <div>Our trainers at NIIFT cover all the concepts of {{course.title}} from basic level to advance level to make learners get a clear idea about every small aspect of a concept.</div>
+            </li>
+            {% comment %}4{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>We make learners work on case studies and real-life use cases to gain hands-on experience in a particular field of {{course.title}} and make students remember each concept with real-time examples.</div>
+            </li>
+            {% comment %}5{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>We provide {{course.title}} video recordings of the sessions for the students who want to listen again and also our trainers make sure that they recap the previous session topics before they start any fresh concept.</div>
+            </li>
+            {% comment %}6{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>We at NIIFT are very glad to tell you that our {{course.title}} trainers will be available for the students 24/7 to clarify their doubts.</div>
+            </li>
+            {% comment %}7{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>NIIFT provides 100% job-oriented {{course.title}} training.</div>
+            </li>
+            {% comment %}8{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>Certification Guidance is also provided for the learners at NIIFT.</div>
+            </li>
+            {% comment %}9{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>At NIIFT you will find the affordable fee structure.</div>
+            </li>
+            {% comment %}10{% endcomment %}
+            <li class="d-flex align-items-start mb-3">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+              </div>
+              <div>NIIFT offers more than 250+ IT training courses all over with 10+ years of experienced trainers.</div>
+            </li>
+          </ul>
+
+          
+          <div class="hands-on-trainig  mt-5 d-flex align-items-center justify-content-center bg-white" style="text-align: center;">
+            <div class="heading">
+               <h6 class="">Looking for Hands-On Training?</h6>
+            <p>Get Practical Assignments and Real time projects</p>
+            </div>
+            <div class="button ms-5">
+              <button class="btn btn-primary">Enroll Now</button>
+            </div>
+          </div>
+
+          {% comment %}2 col{% endcomment %}
+
+        </div>
+          {% comment %} form {% endcomment %}
+         <div class="col-lg-3 ms-5">
+        <div class="sticky-form p-4 bg-white shadow rounded">
+          <h4 class="form-heading">Drop Us A Query</h4>
+          <form>
+            <input type="text" class="form-control" placeholder="Full Name" required>
+
+            <div class="phone-input-group">
+              <select class="form-select country-code" required>
+                <option value="+91" selected>+91 (IN)</option>
+                <option value="+1">+1 (US)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+61">+61 (AU)</option>
+                <option value="+81">+81 (JP)</option>
+                <option value="+971">+971 (UAE)</option>
+                <!-- Add more countries as needed -->
+              </select>
+              <input type="tel" class="form-control" placeholder="Mobile Number" required>
+            </div>
+
+            <input type="email" class="form-control" placeholder="Email" required>
+            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
   {% comment %}Syllabus Section{% endcomment %}
-  <section id="syllabus-section" class="py-5 bg-light text-dark">
+  <section id="curriculum" class="py-5 bg-light text-dark">
     <div class="container">
       <h2 class="fw-bold mb-4">📘 Course Syllabus</h2>
 
