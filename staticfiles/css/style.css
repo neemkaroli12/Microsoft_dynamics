@@ -1,4 +1,5 @@
-/* ------------------ Navbar Styling ------------------ */
+/*Navbar Styling*/
+
 .navbar {
   padding: 12px 0;
   background-color: white !important;
@@ -160,7 +161,7 @@ body.no-scroll {
 
 
 
-/* ------------------ Toggler Button (Mobile) ------------------ */
+/*Toggler Button (Mobile)*/
 .navbar-toggler {
   border: none;
 }
