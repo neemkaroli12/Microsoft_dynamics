@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
   </head>
 
-  <body>
+ <body data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-offset="100" tabindex="0">
     <!-- Navbar -->
     <nav id="main-navbar" class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
       <div class="container">
@@ -29,7 +29,7 @@
             <!-- Courses Dropdown -->
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" role="button" data-bs-toggle="dropdown">All Courses</a>
-              <ul class="dropdown-menu mega-dropdown shadow-sm">
+              <ul class="dropdown-menu mega-dropdown shadow-sm ">
                 <li class="dropdown-submenu">
                   <a class="dropdown-item" href="#">Microsoft Dynamics</a>
                   <ul class="dropdown-menu sub-dropdown">
@@ -41,6 +41,7 @@
                     {% endfor %}
                   </ul>
                 </li>
+
                 <li class="dropdown-submenu">
                   <a class="dropdown-item" href="#">Odoo</a>
                   <ul class="dropdown-menu sub-dropdown">
