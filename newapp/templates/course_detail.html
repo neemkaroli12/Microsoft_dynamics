@@ -592,7 +592,7 @@
           <button class="accordion-button collapsed" type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#module{{ module.pk }}">
-            Module {{ module.order|stringformat:"02d" }} : {{ module.title }}
+            Module {{ forloop.counter|stringformat:"02d" }} : {{ module.title }}
           </button>
         </h2>
         <div id="module{{ module.pk }}" class="accordion-collapse collapse"
@@ -603,7 +603,7 @@
         </div>
       </div>
     {% endfor %}
-  </div>
+</div>
 
           <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white ">
             <div class="heading mb-3 mb-md-0">
