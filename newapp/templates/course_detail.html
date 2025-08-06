@@ -51,7 +51,6 @@
   .training-modes-section .card:hover {
     transform: translateY(-8px) !important;
     box-shadow: 0 8px 8px #6c2eb9 !important;
-    /* purple glow on hover */
   }
 
   .training-modes-section .card:hover i {
@@ -180,71 +179,88 @@
     height: 40px;
   }
   .hands-on-training {
-    display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  gap: 10px;
+  text-align: left;
+  height: auto; /* Change from fixed height */
+}
+
+.hands-on-training .heading h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.hands-on-training .heading p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.hands-on-training .button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  .hands-on-training {
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    background-color: #ffffff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-    gap: 10px !important;
-    text-align: left;
-    height:172px;
+    text-align: center;
+    padding: 20px;
   }
 
+  .hands-on-training .heading,
+  .hands-on-training .button {
+    width: 100%;
+  }
+
+  .hands-on-training .button {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+/* Small tablets and phones */
+@media (max-width: 768px) {
   .hands-on-training .heading h2 {
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 28px;
   }
 
   .hands-on-training .heading p {
-    font-size: 16px;
-    margin: 0;
+    font-size: 15px;
   }
 
   .hands-on-training .button button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+  .hands-on-training .heading h2 {
+    font-size: 22px;
   }
 
-  /* Tablet and below */
-  @media (max-width: 768px) {
-    .hands-on-training {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hands-on-training .heading {
-      width: 100%;
-    }
-
-    .hands-on-training .button {
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-    }
+  .hands-on-training .heading p {
+    font-size: 14px;
   }
 
-  /* Mobile */
-  @media (max-width: 480px) {
-    .hands-on-training .heading h2 {
-      font-size: 26px;
-    }
-
-    .hands-on-training .heading p {
-      font-size: 14px;
-    }
-
-    .hands-on-training .button button {
-      font-size: 15px;
-      padding: 10px;
-    }
+  .hands-on-training .button button {
+    font-size: 14px;
+    padding: 10px 16px;
   }
+}
+
   @media (max-width: 576px) {
     .training-modes-section .card {
       margin: 0 auto;
@@ -612,13 +628,17 @@
           </li>
         </ul>
 
-        <div class="hands-on-training mt-5 py-4 px-3">
-          <div class="heading mb-3 mb-md-0">
+        <div
+          class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+        >
+          <div class="heading mb-3 col-lg-6 col-md-12">
             <h2 class="mb-1">Looking for Hands-On Training?</h2>
-            <p class="mb-0">Get Practical Assignments and Real-time Projects</p>
+            <p class="mb-0" style="font-size: 1.2rem">
+              Get Practical Assignments and Real-time Projects
+            </p>
           </div>
-          <div class="button">
-            <button class="btn btn-primary enroll-btn">
+          <div class="button col-lg-5 col-md-12 text-lg-end text-center">
+            <button class="btn btn-primary">
               Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
             </button>
           </div>
@@ -822,17 +842,17 @@
         </div>
 
         <div
-          class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white text-justify"
+          class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
         >
-          <div class="heading mb-3 mb-md-0">
-            <h2 class="mb-1">Launch your dream career Now!</h2>
+          <div class="heading mb-3 col-lg-6 col-md-12">
+            <h2 class="mb-1">Looking for Hands-On Training?</h2>
             <p class="mb-0" style="font-size: 1.2rem">
-              Get personalized career coaching & mentors from industry
+              Get Practical Assignments and Real-time Projects
             </p>
           </div>
-          <div class="button">
+          <div class="button col-lg-5 col-md-12 text-lg-end text-center">
             <button class="btn btn-primary">
-              Enroll Now<i class="fas fa-fighter-jet ms-2 text-white"></i>
+              Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
             </button>
           </div>
         </div>
@@ -867,7 +887,8 @@
                   data-bs-toggle="collapse"
                   data-bs-target="#module{{ module.pk }}"
                 >
-                  Module {{ forloop.counter|stringformat:"02d" }} : {{module.title }}
+                  Module {{ forloop.counter|stringformat:"02d" }} :
+                  {{module.title }}
                 </button>
               </h2>
               <div
@@ -877,8 +898,8 @@
               >
                 <div class="accordion-body ms-5">
                   <ul style="padding-left: 1.2rem">
-                    {% for point in module.description.splitlines %} 
-                    {% if point.strip %}
+                    {% for point in module.description.splitlines %}
+                     {% if point.strip %}
                     <li>{{ point }}</li>
                     {% endif %} 
                     {% endfor %}
@@ -889,19 +910,18 @@
             {% endfor %}
           </div>
 
-          
           <div
             class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
           >
-            <div class="heading mb-3 mb-md-0">
+            <div class="heading mb-3 col-lg-6 col-md-12">
               <h2 class="mb-1">Looking for Hands-On Training?</h2>
               <p class="mb-0" style="font-size: 1.2rem">
                 Get Practical Assignments and Real-time Projects
               </p>
             </div>
-            <div class="button">
+            <div class="button col-lg-5 col-md-12 text-lg-end text-center">
               <button class="btn btn-primary">
-                Enroll Now<i class="fas fa-fighter-jet ms-2 text-white"></i>
+                Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
               </button>
             </div>
           </div>
