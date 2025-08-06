@@ -41,3 +41,15 @@ class UpcomingBatch(models.Model):
 
     def __str__(self):
         return f"{self.start_date} - {self.title}"
+
+class Module(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def _str_(self):
+        return f"{self.course.title} - {self.title}"
