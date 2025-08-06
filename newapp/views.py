@@ -53,4 +53,4 @@ def course_detail(request, slug):
     course = get_object_or_404(Course, slug=slug)
     upcoming_batches = UpcomingBatch.objects.all().order_by('start_date')
     return render(request, 'course_detail.html', {'course': course,'upcoming_batches': upcoming_batches})
-   
+
