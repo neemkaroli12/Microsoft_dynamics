@@ -346,6 +346,62 @@
         width: 274px !important;
       }
     }
+    
+    .logo-showcase-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 40px 0;
+      background-color: #fff;
+      position: relative;
+    }
+
+    .logo-showcase-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: fit-content;
+    }
+
+    .logo-item {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo-item img {
+      width: 100px;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-item img:hover {
+      transform: scale(1.1);
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    .logo-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .logo-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #ccc;
+      border-radius: 50%;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .logo-dot.active {
+      background-color: #000;
+    }
   </style>
   <section style="
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
@@ -1017,6 +1073,21 @@
             <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF has tie-up with small, medium, and large scale corporations across the world. We provide you with the complete placement assistance by forwarding your resume to the companies we tie-up with.</p>
           </div>
           {% comment %}col-lg-8{% endcomment %}
+          <div class="logo-showcase-container">
+  <div class="logo-showcase-track" id="logoTrack">
+    <div class="logo-item"><img src="logo1.png" alt="Logo 1"></div>
+    <div class="logo-item"><img src="logo2.png" alt="Logo 2"></div>
+    <div class="logo-item"><img src="logo3.png" alt="Logo 3"></div>
+    <div class="logo-item"><img src="logo4.png" alt="Logo 4"></div>
+  </div>
+
+  <div class="logo-dots" id="logoDots">
+    <span class="logo-dot active" onclick="moveLogo(0)"></span>
+    <span class="logo-dot" onclick="moveLogo(1)"></span>
+    <span class="logo-dot" onclick="moveLogo(2)"></span>
+    <span class="logo-dot" onclick="moveLogo(3)"></span>
+  </div>
+</div>
         </div>
         {% comment %}form{% endcomment %}
         <div class="col-lg-3 mt-2 px-4">
@@ -1045,22 +1116,27 @@
     </div>
   </section>
   <!-- Swiper JS CDN -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+ 
 
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      loop: true,
-      autoplay: {
-        delay: 2000,
-        disableOnInteraction: false
-      },
-      breakpoints: {
-        768: { slidesPerView: 4 },
-        576: { slidesPerView: 3 },
-        320: { slidesPerView: 2 }
-      }
-    })
-  </script>
+<script>
+  const logoTrack = document.getElementById('logoTrack');
+  const logoDots = document.querySelectorAll('.logo-dot');
+  let logoIndex = 0;
+
+  function moveLogo(index) {
+    const itemWidth = document.querySelector('.logo-item').offsetWidth;
+    logoTrack.style.transform = `translateX(-${index * itemWidth}px)`;
+
+    logoDots.forEach(dot => dot.classList.remove('active'));
+    logoDots[index].classList.add('active');
+
+    logoIndex = index;
+  }
+
+  // Optional: Auto Slide
+  setInterval(() => {
+    logoIndex = (logoIndex + 1) % logoDots.length;
+    moveLogo(logoIndex);
+  }, 3000);
+</script>
 {% endblock %}
