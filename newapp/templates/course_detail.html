@@ -1197,21 +1197,7 @@
           </div>
 
           {% comment %}col-lg-8{% endcomment %}
-          <div class="logo-showcase-container">
-  <div class="logo-showcase-track" id="logoTrack">
-    <div class="logo-item"><img src="logo1.png" alt="Logo 1"></div>
-    <div class="logo-item"><img src="logo2.png" alt="Logo 2"></div>
-    <div class="logo-item"><img src="logo3.png" alt="Logo 3"></div>
-    <div class="logo-item"><img src="logo4.png" alt="Logo 4"></div>
-  </div>
 
-  <div class="logo-dots" id="logoDots">
-    <span class="logo-dot active" onclick="moveLogo(0)"></span>
-    <span class="logo-dot" onclick="moveLogo(1)"></span>
-    <span class="logo-dot" onclick="moveLogo(2)"></span>
-    <span class="logo-dot" onclick="moveLogo(3)"></span>
-  </div>
-</div>
         </div>
         {% comment %}form{% endcomment %}
         <div class="col-lg-3 mt-2 px-4">
@@ -1239,23 +1225,7 @@
       </div>
     </div>
   </section>
-  <!-- Swiper JS CDN -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      loop: true,
-      autoplay: {
-        delay: 2000,
-        disableOnInteraction: false
-      },
-      breakpoints: {
-        768: { slidesPerView: 4 },
-        576: { slidesPerView: 3 },
-        320: { slidesPerView: 2 }
-      }
-    })
-  </script>
+
+
 {% endblock %}
