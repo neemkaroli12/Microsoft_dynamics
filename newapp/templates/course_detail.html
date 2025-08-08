@@ -929,7 +929,7 @@
           {{ module.title }}
         </button>
       </h2>
-      <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+      <div id="module{{ module.pk }}" class="accordion-collapse collapse">
         <div class="accordion-body">
           {% for point in module.description.splitlines %}
             {% if point.strip %}
