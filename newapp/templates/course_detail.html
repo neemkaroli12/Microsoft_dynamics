@@ -412,62 +412,64 @@
         width: 274px !important;
       }
     }
-    
-    .logo-showcase-container {
-      width: 100%;
-      overflow: hidden;
-      padding: 40px 0;
-      background-color: #fff;
-      position: relative;
-    }
+    /* Custom accordion styling */
+.custom-accordion .accordion-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
 
-    .logo-showcase-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      width: fit-content;
-    }
+.custom-accordion .accordion-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
 
-    .logo-item {
-      flex: 0 0 auto;
-      width: 200px;
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+.custom-accordion .accordion-button {
+  background-color: #f8f9fa;
+  font-size: 1.1rem;
+  padding: 1rem 1.25rem;
+  transition: background-color 0.3s ease;
+}
 
-    .logo-item img {
-      width: 100px;
-      filter: grayscale(100%);
-      opacity: 0.8;
-      transition: transform 0.3s ease;
-    }
+.custom-accordion .accordion-button:hover {
+  background-color: #e9ecef;
+}
 
-    .logo-item img:hover {
-      transform: scale(1.1);
-      filter: grayscale(0%);
-      opacity: 1;
-    }
+.custom-accordion .accordion-button:not(.collapsed) {
+  background-color: #e2f0ff;
+  color: #084298;
+  font-weight: bold;
+  box-shadow: none;
+}
 
-    .logo-dots {
-      text-align: center;
-      margin-top: 20px;
-    }
+.custom-accordion .accordion-body {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+}
 
-    .logo-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background-color: #ccc;
-      border-radius: 50%;
-      margin: 5px;
-      cursor: pointer;
-    }
+/* List styling inside modules */
+.custom-list {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+}
 
-    .logo-dot.active {
-      background-color: #000;
-    }
+.custom-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  color: #333;
+}
+.module-badge {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
   </style>
   <section style="
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
@@ -838,28 +840,29 @@
             "></div>
             <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Our {{ course.title }} Course Curriculum encompasses all the course modules with a clear description and the concepts covered in each module. NIITF designs the syllabus in the learner's perspective to provide comprehensive knowledge.</p>
 
-            <div class="accordion" id="courseAccordion">
-              {% for module in course.modules.all %}
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
-                      Module {{ forloop.counter|stringformat:'02d' }} :
-                      {{ module.title }}
-                    </button>
-                  </h2>
-                  <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
-                    <div class="accordion-body ms-5">
-                      <ul style="padding-left: 1.2rem">
-                        {% for point in module.description.splitlines %}
-                          {% if point.strip %}
-                            <li>{{ point }}</li>
-                          {% endif %}
-                        {% endfor %}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
+      <div class="accordion custom-accordion" id="courseAccordion">
+  {% for module in course.modules.all %}
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
+          <span class="me-2 badge module-badge">Module {{ forloop.counter|stringformat:'02d' }}</span>
+          {{ module.title }}
+        </button>
+      </h2>
+      <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+        <div class="accordion-body">
+          <ul class="custom-list">
+            {% for point in module.description.splitlines %}
+              {% if point.strip %}
+                <li>{{ point }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
               <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">All the above concepts will be covered in Our {{ course.title }} Course. You will become a master in all the concepts of {{ course.title }} because our trainers will make you learn very effectively. Our main goal is to make students satisfied with the training and place them in the top companies.</p>
             </div>
 
@@ -1197,6 +1200,21 @@
           </div>
 
           {% comment %}col-lg-8{% endcomment %}
+          <div class="logo-showcase-container">
+  <div class="logo-showcase-track" id="logoTrack">
+    <div class="logo-item"><img src="logo1.png" alt="Logo 1"></div>
+    <div class="logo-item"><img src="logo2.png" alt="Logo 2"></div>
+    <div class="logo-item"><img src="logo3.png" alt="Logo 3"></div>
+    <div class="logo-item"><img src="logo4.png" alt="Logo 4"></div>
+  </div>
+
+  <div class="logo-dots" id="logoDots">
+    <span class="logo-dot active" onclick="moveLogo(0)"></span>
+    <span class="logo-dot" onclick="moveLogo(1)"></span>
+    <span class="logo-dot" onclick="moveLogo(2)"></span>
+    <span class="logo-dot" onclick="moveLogo(3)"></span>
+  </div>
+</div>
         </div>
         {% comment %}form{% endcomment %}
         <div class="col-lg-3 mt-2 px-4">
@@ -1224,23 +1242,7 @@
       </div>
     </div>
   </section>
-  <!-- Swiper JS CDN -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-  <script>
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      loop: true,
-      autoplay: {
-        delay: 2000,
-        disableOnInteraction: false
-      },
-      breakpoints: {
-        768: { slidesPerView: 4 },
-        576: { slidesPerView: 3 },
-        320: { slidesPerView: 2 }
-      }
-    })
-  </script>
+
+
 {% endblock %}
