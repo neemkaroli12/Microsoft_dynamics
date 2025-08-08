@@ -1,383 +1,268 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/swiper/swiper-bundle.min.css"
-/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
   <style>
-    h2,
-    h1,
-    h3,
-    h4,
-    h6 {
-      color: #6c2eb9;
-    }
-    i {
-      color: #6a11cb;
-    }
-    .accordion-body,
-    .list-unstyled li {
-      font-size: 1.1rem;
-      text-align: justify;
-    }
-    .accordion-button,
-    .accordion-body {
-      font-size: 1.2rem !important;
-    }
-    .navbar {
-      position: static;
-    }
-    .training-modes-section .card {
-      width: 180px !important;
-      height: 180px !important;
-      border-radius: 1.5rem !important;
-      border: 1px solid rgba(123, 78, 255, 0.3) !important;
-      transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-      background-color: white !important;
-      padding: 30px 20px !important;
-    }
-    
-    .training-modes-section .card i {
-      font-size: 2.5rem !important;
-      color: #7b4eff !important;
-      transition: transform 0.3s ease !important;
-    }
-    
-    .training-modes-section .card h5 {
-      margin-top: 15px !important;
-      font-weight: 500 !important;
-      color: #333 !important;
-    }
-    
-    .training-modes-section .card:hover {
-      transform: translateY(-8px) !important;
-      box-shadow: 0 8px 8px #6c2eb9 !important;
-    }
-    
-    .training-modes-section .card:hover i {
-      transform: scale(1.2) !important;
-    }
-    
-    .upcoming-batch-section {
-      padding: 40px 20px;
-      background-color: #fff;
-      text-align: center;
-    }
-    
-    .description {
-      max-width: 800px;
-      margin: auto;
-      font-size: 1rem;
-      color: black;
-    }
-    .batch-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-    }
-    
-    .batch-card {
-      background: #fff;
-      border: 1px solid #eee;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 350px;
-      height: 200px;
-      border-top: 5px solid #6c2eb9;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    
-    .batch-header-wrapper {
-      position: absolute;
-      top: -25px;
-      right: 0;
-      width: 130px;
-      height: 130px;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 10;
-    }
-    
-    .batch-header {
-      background-color: #6c2eb9;
-      color: #fff;
-      padding: 4px 10px;
-      font-size: 10px;
-      width: 160px;
-      text-align: center;
-      transform: rotate(45deg);
-      transform-origin: top right;
-      position: relative;
-      left: 2px;
-      top: 105px;
-    }
-    
-    .batch-date {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 5px;
-      text-align: start;
-    }
-    
-    .batch-info p {
-      font-size: 14px;
-      margin: 2px 0;
-    }
-    
-    .course-fees-btn {
-      display: flex;
-      margin-top: 15px;
-      padding: 5px 10px;
-      border: 1px solid #6c2eb9;
-      color: #6c2eb9;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: 0.3s;
-      align-items: flex-start;
-      width: 120px;
-      margin-top: auto;
-    }
-    
-    .course-fees-btn:hover {
-      background-color: #6c2eb9;
-      color: #fff;
-    }
-    
-    .sticky-form {
-      position: sticky;
-      top: 100px;
-      bottom: 100px;
-      background: white;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 10px 7px 20px #a8aed4ff !important;
-      width: 350px;
-      height: auto;
-    }
-    
-    .form-control {
-      margin-bottom: 20px;
-    }
-    .form-heading {
-      text-align: center;
-      color: #212529;
-      margin-bottom: 20px;
-    }
-    .phone-input-group {
-      display: flex;
-      gap: 10px;
-    }
-    select.country-code {
-      max-width: 100px;
-      margin-bottom: 10px;
-      height: 40px;
-    }
-    .hands-on-training {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      background-color: #ffffff;
-      padding: 20px 30px;
-      border-radius: 8px;
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-      gap: 10px;
-      text-align: left;
-      height: auto;
-    }
-    
-    .hands-on-training .heading h2 {
-      font-size: 25px;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    
-    .hands-on-training .heading h4 {
-      font-size: 25px;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    .hands-on-training .heading p {
-      font-size: 16px;
-      margin: 0;
-    }
-    
-    .hands-on-training .button button {
-      padding: 10px 20px;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: black;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-    }
-    
-    #testimonialCarousel .carousel-item {
-      height: 350px;
-      width: 700px;
-    }
-    #testimonialCarousel .carousel-item > div {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    @media (max-width: 1024px) {
-      .hands-on-training {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-      }
-    
-      .hands-on-training .heading,
-      .hands-on-training .button {
-        width: 100%;
-      }
-    
-      .hands-on-training .button {
-        margin-top: 10px;
-        text-align: center;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .hands-on-training .heading h2,
-      h4 {
-        font-size: 28px;
-      }
-    
-      .hands-on-training .heading p {
-        font-size: 15px;
-      }
-    
-      .hands-on-training .button button {
-        font-size: 15px;
-        padding: 10px 18px;
-      }
-      #testimonialCarousel .carousel-item {
-        width: 90%;
-        height: auto;
-      }
-    
-      #testimonialCarousel .carousel-item > div {
-        padding: 1.5rem;
-      }
-    
-      .carousel-control-prev-icon,
-      .carousel-control-next-icon {
-        width: 16px;
-        height: 16px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .hands-on-training .heading h2 {
-        font-size: 22px;
-      }
-    
-      .hands-on-training .heading p {
-        font-size: 14px;
-      }
-    
-      .hands-on-training .button button {
-        font-size: 14px;
-        padding: 10px 16px;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .training-modes-section .card {
-        margin: 0 auto;
-      }
-    
-      .training-buttons {
-        flex-direction: column !important;
-        align-items: center !important;
-      }
-    
-      .training-buttons a {
-        width: 80%;
-        margin-bottom: 10px;
-        text-align: center;
-      }
-      .sticky-form {
-        width: 281px !important;
-        margin-left: 0px !important;
-      }
-      #testimonialCarousel .carousel-item {
-        width: 95%;
-        height: auto;
-      }
-    
-      #testimonialCarousel .carousel-item > div {
-        padding: 1rem;
-      }
-    
-      p {
-        font-size: 1rem;
-      }
-    
-      h6 {
-        font-size: 0.95rem;
-      }
-    
-      small {
-        font-size: 0.85rem;
-      }
-    
-      .carousel-control-prev-icon,
-      .carousel-control-next-icon {
-        width: 14px;
-        height: 14px;
-      }
-    }
-    
-    @media (max-width: 1024px) {
-      .sticky-form {
-        width: 274px !important;
-      }
-    }
-    /* Custom accordion styling */
-.custom-accordion .accordion-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+h1, h2, h3, h4, h6 {
+  color: #6c2eb9;
 }
 
-.logo-showcase-container {
-  width: 100%;            /* full width inside page-wrapper */
-  padding: 40px 0;
+i {
+  color: #6a11cb;
+}
+
+p {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.95rem;
+}
+
+small {
+  font-size: 0.85rem;
+}
+
+.accordion-body,
+.list-unstyled li {
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
+.accordion-button,
+.accordion-body {
+  font-size: 1.2rem !important;
+}
+.navbar {
+  position: static;
+}
+.training-modes-section .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding: 10px 0;
+}
+
+.training-modes-section .card {
+  width: 180px !important;
+  height: 180px !important;
+  border-radius: 1.5rem !important;
+  border: 1px solid rgba(123, 78, 255, 0.3) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  background-color: white !important;
+  padding: 30px 20px !important;
+  text-align: center;
+}
+
+.training-modes-section .card i {
+  font-size: 2.5rem !important;
+  color: #7b4eff !important;
+  transition: transform 0.3s ease !important;
+}
+
+.training-modes-section .card h5 {
+  margin-top: 15px !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+}
+
+.training-modes-section .card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 8px 8px #6c2eb9 !important;
+}
+
+.training-modes-section .card:hover i {
+  transform: scale(1.2) !important;
+}
+
+.upcoming-batch-section {
+  padding: 40px 20px;
   background-color: #fff;
-  overflow: hidden;       /* prevents overflow */
+  text-align: center;
+}
+
+.description {
+  max-width: 800px;
+  margin: auto;
+  font-size: 1rem;
+  color: black;
+}
+
+.batch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 30px;
+}
+
+.batch-card {
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 350px;
+  height: 200px;
+  border-top: 5px solid #6c2eb9;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
 }
 
-.swiper-container {
-  width: 100%;
+.batch-header-wrapper {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  width: 130px;
+  height: 130px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
 }
 
-.swiper-wrapper {
+.batch-header {
+  background-color: #6c2eb9;
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 10px;
+  width: 160px;
+  text-align: center;
+  transform: rotate(45deg);
+  transform-origin: top right;
+  position: relative;
+  left: 2px;
+  top: 105px;
+}
+
+.batch-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: start;
+}
+
+.batch-info p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.course-fees-btn {
+  display: flex;
+  margin-top: auto;
+  padding: 5px 10px;
+  border: 1px solid #6c2eb9;
+  color: #6c2eb9;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  align-items: flex-start;
+  width: 120px;
+}
+
+.course-fees-btn:hover {
+  background-color: #6c2eb9;
+  color: #fff;
+}
+
+.sticky-form {
+  position: sticky;
+  top: 100px;
+  bottom: 100px;
+  background: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 10px 7px 20px #a8aed4ff !important;
+  width: 350px;
+  height: auto;
+}
+
+.form-control {
+  margin-bottom: 20px;
+}
+
+.form-heading {
+  text-align: center;
+  color: #212529;
+  margin-bottom: 20px;
+}
+
+.phone-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+select.country-code {
+  max-width: 100px;
+  margin-bottom: 10px;
+  height: 40px;
+}
+
+.hands-on-training {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  gap: 10px;
+  text-align: left;
+  height: auto;
+}
+
+.hands-on-training .heading h2,
+.hands-on-training .heading h4 {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.hands-on-training .heading p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.hands-on-training .button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#testimonialCarousel .carousel-item {
+  height: 350px;
+  width: 700px;
+}
+
+#testimonialCarousel .carousel-item > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+/* ========== SWIPER ========== */
+.swiper {
+  width: 100%;
+  padding: 20px 0;
+  height: 150px;
+}
+
+.swiper-pagination {
+  margin-top: 10px;
+  text-align: center;
 }
 
 .swiper-slide {
@@ -392,23 +277,11 @@
   max-width: 140px;
   max-height: 100px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.8;
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
 
-.swiper-slide img:hover {
-  transform: scale(1.1);
-  filter: grayscale(0%);
-  opacity: 1;
-}
-
-.logo-dots {
-  margin-top: 25px;
-  text-align: center;
-}
 .module-badge {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: #2575fc;
   color: white;
   font-weight: 500;
   padding: 0.5rem 0.75rem;
@@ -417,8 +290,184 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+.custom-accordion .accordion-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
 
-  </style>
+@media (max-width: 1024px) {
+  .hands-on-training {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .hands-on-training .heading,
+  .hands-on-training .button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sticky-form {
+    width: 350px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .batch-card {
+    max-width: 90vw;
+    height: auto;
+  }
+
+  .sticky-form {
+    position: static;
+    width: 60% !important;
+    margin-top: 30px;
+    
+  }
+
+  .training-modes-section .card {
+    width: 160px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  .training-modes-section .card {
+    width: 45%;
+    margin-bottom: 15px;
+    height: 150px !important;
+  }
+
+  .training-modes-section .card i {
+    font-size: 2rem !important;
+  }
+
+  .training-modes-section .card h5 {
+    font-size: 0.9rem !important;
+  }
+
+  .batch-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .swiper-slide {
+    width: 120px !important;
+    height: 80px !important;
+  }
+
+  .swiper-slide img {
+    max-width: 100px;
+    max-height: 80px;
+  }
+
+  .navbar {
+    position: relative;
+  }
+
+  .hands-on-training .heading h2,
+  .hands-on-training .heading h4 {
+    font-size: 28px;
+  }
+
+  .hands-on-training .heading p,
+  .hands-on-training .button button {
+    font-size: 15px;
+  }
+
+  #testimonialCarousel .carousel-item {
+    width: 90%;
+    height: auto;
+  }
+
+  #testimonialCarousel .carousel-item > div {
+    padding: 1.5rem;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .training-modes-section .card {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .training-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .training-buttons a {
+    width: 80%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .sticky-form {
+    width: 281px !important;
+    margin-left: 0 !important;
+  }
+
+  #testimonialCarousel .carousel-item {
+    width: 95%;
+  }
+
+  #testimonialCarousel .carousel-item > div {
+    padding: 1rem;
+  }
+
+  .accordion-button,
+  .accordion-body {
+    font-size: 1rem !important;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .module-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .hands-on-training .heading h2 {
+    font-size: 22px;
+  }
+
+  .hands-on-training .heading p,
+  .hands-on-training .button button {
+    font-size: 14px;
+  }
+
+  .hands-on-training .button button {
+    padding: 10px 16px;
+  }
+}
+</style>
+
   <section style="
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
@@ -580,7 +629,7 @@
 
   {% comment %}course details{% endcomment %}
 
-  <section id="course-details" class="py-5 bg-light">
+  <section id="course-details" class="py-5 ">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mt-5 px-4">
@@ -603,7 +652,7 @@
           </div>
 
           <ul class="list-unstyled">
-            {% comment %}1{% endcomment %}
+            {% comment %}1{% endcomment %} 
             <li class="d-flex align-items-start mb-3">
               <div class="me-2">
                 <i class="bi bi-check-circle-fill fs-5"></i>
@@ -788,28 +837,28 @@
             "></div>
             <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Our {{ course.title }} Course Curriculum encompasses all the course modules with a clear description and the concepts covered in each module. NIITF designs the syllabus in the learner's perspective to provide comprehensive knowledge.</p>
 
-      <div class="accordion custom-accordion" id="courseAccordion">
-  {% for module in course.modules.all %}
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
-          <span class="me-2 badge module-badge">Module {{ forloop.counter|stringformat:'02d' }}</span>
-          {{ module.title }}
-        </button>
-      </h2>
-      <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
-        <div class="accordion-body">
-          <ul class="custom-list">
-            {% for point in module.description.splitlines %}
-              {% if point.strip %}
-                <li>{{ point }}</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
+            <div class="accordion custom-accordion" id="courseAccordion">
+              {% for module in course.modules.all %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
+                      <span class="me-2 badge module-badge">Module {{ forloop.counter|stringformat:'02d' }}</span>
+                      {{ module.title }}
+                    </button>
+                  </h2>
+                  <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+                    <div class="accordion-body">
+                      <ul class="custom-list">
+                        {% for point in module.description.splitlines %}
+                          {% if point.strip %}
+                            <li>{{ point }}</li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
 
               <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">All the above concepts will be covered in Our {{ course.title }} Course. You will become a master in all the concepts of {{ course.title }} because our trainers will make you learn very effectively. Our main goal is to make students satisfied with the training and place them in the top companies.</p>
             </div>
@@ -1083,23 +1132,55 @@
           <div id="placements" class="placements mt-5">
             <h2 class="mb-1">{{ course.title }} Jobs & Placements</h2>
             <div class="line-decorator mb-4" style="
-    width: 200px;
-    height: 3px;
-    background-color: #6c2eb9;
-    border-radius: 5px;
-  "></div>
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;">
+            </div>
             <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF has tie-up with small, medium, and large scale corporations across the world. We provide you with the complete placement assistance by forwarding your resume to the companies we tie-up with.</p>
-            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-          <div class="page-wrapper">
-  <div class="logo-showcase-container">
-    <div class="swiper-container">
-      <div class="swiper-wrapper" id="logoTrack">
-        <!-- logos injected here -->
-      </div>
+           
+<div class="swiper mySwiper mt-4 mb-4">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="{% static 'images/logo1.png' %}" alt="Amazon" />
     </div>
-    <div class="logo-dots swiper-pagination" id="logoDots"></div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/logo2.png' %}" alt="IBM" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/logo3.png' %}" alt="TCS" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/acxiom.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/joshlogo.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/S3.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/akili-1.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/amazesoft.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/edhate.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/jrs.png' %}" alt="IntellectSoft" />
+    </div>
+    <div class="swiper-slide">
+      <img src="{% static 'images/logo.png' %}" alt="IntellectSoft" />
+    </div>
+  
   </div>
+
+  <div class="swiper-pagination"></div>
 </div>
+
+
 
 
             <div class="accordion" id="syllabusAccordion">
@@ -1179,7 +1260,29 @@
       </div>
     </div>
   </section>
+ <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
-
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        1024: { slidesPerView: 4 },
+        768: { slidesPerView: 2 },
+        480: { slidesPerView: 1 },
+      },
+    });
+  });
+</script>
 
 {% endblock %}
