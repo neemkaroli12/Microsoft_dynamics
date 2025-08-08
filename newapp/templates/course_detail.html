@@ -1,5 +1,10 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper/swiper-bundle.min.css"
+/>
+
   <style>
     h2,
     h1,
@@ -229,73 +234,7 @@
       flex-direction: column;
       justify-content: center;
     }
-    .logo-showcase-container {
-      overflow: hidden;
-      width: 100%;
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 20px 0;
-      position: relative;
-      background: dark;
-    }
     
-    .logo-showcase-track {
-      display: flex;
-      transition: transform 0.5s ease;
-      
-    }
-    
-    .logo-slide {
-      display: flex;
-      flex-direction: row; 
-      justify-content: space-around;
-      align-items: center; 
-      min-width: 100%; 
-      background-color: #610e0eff;
-    }
-    
-    .logo-item {
-      flex: 1; 
-      text-align: center;
-      padding: 10px;
-    }
-    
-    .logo-item img {
-      max-width: 120px;
-      height: auto;
-      transition: 0.3s;
-    }
-    
-    .logo-item img:hover {
-      
-      transform: scale(1.05);
-    }
-    
-    .logo-dots {
-      text-align: center;
-      margin-top: 15px;
-    }
-    
-    .logo-dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      background-color: #bbb;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    
-    .logo-dot.active {
-      background-color: #333;
-    }
-    
-    .logo-name {
-      margin-top: 8px;
-      font-size: 16px;
-      color: #333;
-    }
     @media (max-width: 1024px) {
       .hands-on-training {
         flex-direction: column;
@@ -412,63 +351,75 @@
         width: 274px !important;
       }
     }
-    /* Custom accordion styling */
-.custom-accordion .accordion-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+.page-wrapper {
+  max-width: 1100px;      /* limit width of entire page section */
+  margin: 0 auto;         /* center horizontally */
+  padding: 0 20px;        /* some side padding */
+  box-sizing: border-box;
 }
 
-.custom-accordion .accordion-item:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+.logo-showcase-container {
+  width: 100%;            /* full width inside page-wrapper */
+  padding: 40px 0;
+  background-color: #fff;
+  overflow: hidden;       /* prevents overflow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.custom-accordion .accordion-button {
-  background-color: #f8f9fa;
-  font-size: 1.1rem;
-  padding: 1rem 1.25rem;
+.swiper-container {
+  width: 100%;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.swiper-slide {
+  width: 160px !important;
+  height: 100px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 140px;
+  max-height: 100px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+}
+
+.swiper-slide img:hover {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.logo-dots {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  opacity: 1;
+  border-radius: 50%;
+  margin: 0 6px !important;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.custom-accordion .accordion-button:hover {
-  background-color: #e9ecef;
+.swiper-pagination-bullet-active {
+  background-color: #000;
 }
 
-.custom-accordion .accordion-button:not(.collapsed) {
-  background-color: #e2f0ff;
-  color: #084298;
-  font-weight: bold;
-  box-shadow: none;
-}
-
-.custom-accordion .accordion-body {
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-}
-
-/* List styling inside modules */
-.custom-list {
-  list-style-type: disc;
-  padding-left: 1.2rem;
-}
-
-.custom-list li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-  color: #333;
-}
-.module-badge {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
 
   </style>
   <section style="
@@ -840,29 +791,28 @@
             "></div>
             <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Our {{ course.title }} Course Curriculum encompasses all the course modules with a clear description and the concepts covered in each module. NIITF designs the syllabus in the learner's perspective to provide comprehensive knowledge.</p>
 
-      <div class="accordion custom-accordion" id="courseAccordion">
-  {% for module in course.modules.all %}
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
-          <span class="me-2 badge module-badge">Module {{ forloop.counter|stringformat:'02d' }}</span>
-          {{ module.title }}
-        </button>
-      </h2>
-      <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
-        <div class="accordion-body">
-          <ul class="custom-list">
-            {% for point in module.description.splitlines %}
-              {% if point.strip %}
-                <li>{{ point }}</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-
+            <div class="accordion" id="courseAccordion">
+              {% for module in course.modules.all %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
+                      Module {{ forloop.counter|stringformat:'02d' }} :
+                      {{ module.title }}
+                    </button>
+                  </h2>
+                  <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
+                    <div class="accordion-body ms-5">
+                      <ul style="padding-left: 1.2rem">
+                        {% for point in module.description.splitlines %}
+                          {% if point.strip %}
+                            <li>{{ point }}</li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
               <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">All the above concepts will be covered in Our {{ course.title }} Course. You will become a master in all the concepts of {{ course.title }} because our trainers will make you learn very effectively. Our main goal is to make students satisfied with the training and place them in the top companies.</p>
             </div>
 
@@ -928,38 +878,38 @@
               background-color: #6c2eb9;
               border-radius: 5px;"></div>
 
-              <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Get the Globally Recognized {{ course.title }} certification training from NIITF under the guidance of {{ course.title }} Experts. NIITF teaches you all the {{ course.title }} concepts with global standards.</p>
-              <img src="" alt="" />
-              <div class="accordion" id="syllabusAccordion">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Why do you need to Enroll in NIITF's {{ course.title }} Certification Program?</button></h2>
-                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
-                    <div class="accordion-body">
-                      <ul>
-                        <li>We at NIITF not only committed to providing you with the full-fledged {{ course.title }} training but also decided to help learners gain comprehensive knowledge of all the core concepts of {{ course.title }} to clear {{ course.title }} certification exams.</li>
-                        <li>We do take the utmost care to design the course curriculum to cover all the {{ course.title }} Certification concepts.</li>
-                        <li>Certification acts as a proof for your advanced {{ course.title }} skills and helps you secure your dream job.</li>
-                        <li>At NIITF our {{ course.title }} industry-expert professional trainers will provide you full assistance to clear multiple {{ course.title }} certification exams.</li>
-                        <li>Upon successful completion of this {{ course.title }} Certification course, you will receive course completion certification from NIITF.</li>
-                        <li>This certification shows your expertise, the amount of time, and the efforts you put in mastering this {{ course.title }} domain.</li>
-                        <li>As a professional acquiring all the {{ course.title }} certifications would benefit you to grow a career.</li>
-                      </ul>
-                    </div>
+            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Get the Globally Recognized {{ course.title }} certification training from NIITF under the guidance of {{ course.title }} Experts. NIITF teaches you all the {{ course.title }} concepts with global standards.</p>
+            <img src="" alt="" />
+            <div class="accordion" id="syllabusAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Why do you need to Enroll in NIITF's {{ course.title }} Certification Program?</button></h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
+                  <div class="accordion-body">
+                    <ul>
+                      <li>We at NIITF not only committed to providing you with the full-fledged {{ course.title }} training but also decided to help learners gain comprehensive knowledge of all the core concepts of {{ course.title }} to clear {{ course.title }} certification exams.</li>
+                      <li>We do take the utmost care to design the course curriculum to cover all the {{ course.title }} Certification concepts.</li>
+                      <li>Certification acts as a proof for your advanced {{ course.title }} skills and helps you secure your dream job.</li>
+                      <li>At NIITF our {{ course.title }} industry-expert professional trainers will provide you full assistance to clear multiple {{ course.title }} certification exams.</li>
+                      <li>Upon successful completion of this {{ course.title }} Certification course, you will receive course completion certification from NIITF.</li>
+                      <li>This certification shows your expertise, the amount of time, and the efforts you put in mastering this {{ course.title }} domain.</li>
+                      <li>As a professional acquiring all the {{ course.title }} certifications would benefit you to grow a career.</li>
+                    </ul>
                   </div>
                 </div>
+              </div>
 
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How is NIITF {{ course.title }} certification is awarded?</button></h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#syllabusAccordion">
-                    <div class="accordion-body">
-                      NIITF follows the learning path certification process. To get the globally recognized NIITF {{ course.title }} Course Certification, you must fulfill the below mentioned following criteria:<ol>
-                        <li>Successful completion of all the course modules presented in the {{ course.title }} course curriculum.</li>
-                        <li>Successful completion of all the tasks and projects which were assigned by the trainer.</li>
-                        <li>Scoring the minimum 60 percentage of marks in the quiz examination conducted by NIITF.</li>
-                      </ol>Above mentioned criteria are evaluated by our {{ course.title }} trainers. If you didn’t meet our criteria, No worries our trainers will coach you to achieve it.
-                    </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How is NIITF {{ course.title }} certification is awarded?</button></h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#syllabusAccordion">
+                  <div class="accordion-body">
+                    NIITF follows the learning path certification process. To get the globally recognized NIITF {{ course.title }} Course Certification, you must fulfill the below mentioned following criteria:<ol>
+                      <li>Successful completion of all the course modules presented in the {{ course.title }} course curriculum.</li>
+                      <li>Successful completion of all the tasks and projects which were assigned by the trainer.</li>
+                      <li>Scoring the minimum 60 percentage of marks in the quiz examination conducted by NIITF.</li>
+                    </ol>Above mentioned criteria are evaluated by our {{ course.title }} trainers. If you didn’t meet our criteria, No worries our trainers will coach you to achieve it.
                   </div>
                 </div>
+              </div>
 
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">NIITF {{ course.title }} certification is recognized globally or not?</button></h2>
@@ -1135,20 +1085,24 @@
           <div id="placements" class="placements mt-5">
             <h2 class="mb-1">{{ course.title }} Jobs & Placements</h2>
             <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;
-              "></div>
+    width: 200px;
+    height: 3px;
+    background-color: #6c2eb9;
+    border-radius: 5px;
+  "></div>
             <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF has tie-up with small, medium, and large scale corporations across the world. We provide you with the complete placement assistance by forwarding your resume to the companies we tie-up with.</p>
-            <div class="logo-showcase-container">
-              <div class="logo-showcase-track" id="logoTrack">
-                <!-- Logos will be injected by JS -->
-              </div>
-              <div class="logo-dots" id="logoDots">
-                <!-- Dots will be injected by JS -->
-              </div>
-            </div>
+            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+          <div class="page-wrapper">
+  <div class="logo-showcase-container">
+    <div class="swiper-container">
+      <div class="swiper-wrapper" id="logoTrack">
+        <!-- logos injected here -->
+      </div>
+    </div>
+    <div class="logo-dots swiper-pagination" id="logoDots"></div>
+  </div>
+</div>
+
 
             <div class="accordion" id="syllabusAccordion">
               <div class="accordion-item">
@@ -1200,21 +1154,6 @@
           </div>
 
           {% comment %}col-lg-8{% endcomment %}
-          <div class="logo-showcase-container">
-  <div class="logo-showcase-track" id="logoTrack">
-    <div class="logo-item"><img src="logo1.png" alt="Logo 1"></div>
-    <div class="logo-item"><img src="logo2.png" alt="Logo 2"></div>
-    <div class="logo-item"><img src="logo3.png" alt="Logo 3"></div>
-    <div class="logo-item"><img src="logo4.png" alt="Logo 4"></div>
-  </div>
-
-  <div class="logo-dots" id="logoDots">
-    <span class="logo-dot active" onclick="moveLogo(0)"></span>
-    <span class="logo-dot" onclick="moveLogo(1)"></span>
-    <span class="logo-dot" onclick="moveLogo(2)"></span>
-    <span class="logo-dot" onclick="moveLogo(3)"></span>
-  </div>
-</div>
         </div>
         {% comment %}form{% endcomment %}
         <div class="col-lg-3 mt-2 px-4">
@@ -1242,7 +1181,52 @@
       </div>
     </div>
   </section>
+   <!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+  // Array of logo image paths
+  const logos = [
+  "{% static 'images/logo1.jpg' %}",
+  "{% static 'images/logo2.png' %}",
+  "{% static 'images/logo3.jpg' %}",
+  "{% static 'images/S3.png' %}",
+  "{% static 'images/jrs.png' %}",
+  "{% static 'images/joshlogo.jpg' %}",
+  "{% static 'images/acxiom.jpg' %}",
+  "{% static 'images/amazesoft.png' %}",
+  "{% static 'images/akili.png' %}",
+  "{% static 'images/edhate.png' %}",
 
+];
 
+const logoTrack = document.getElementById("logoTrack");
 
+logos.forEach((src) => {
+  const div = document.createElement("div");
+  div.className = "swiper-slide";
+  div.innerHTML = `<img src="${src}" alt="Company Logo" />`;
+  logoTrack.appendChild(div);
+});
+var swiper = new Swiper(".swiper-container", {
+  slidesPerView: 4,
+  slidesPerGroup: 4,
+  spaceBetween: 30,
+  loop: true,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: "#logoDots",
+    clickable: true,
+  },
+  breakpoints: {
+    1024: { slidesPerView: 4, slidesPerGroup: 4 },
+    768: { slidesPerView: 3, slidesPerGroup: 3 },
+    576: { slidesPerView: 2, slidesPerGroup: 2 },
+    320: { slidesPerView: 1, slidesPerGroup: 1 },
+  },
+});
+
+</script>
 {% endblock %}
