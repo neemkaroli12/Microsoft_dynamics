@@ -412,6 +412,61 @@
         width: 274px !important;
       }
     }
+    .logo-showcase-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 40px 0;
+      background-color: #fff;
+      position: relative;
+    }
+
+    .logo-showcase-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: fit-content;
+    }
+
+    .logo-item {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo-item img {
+      width: 100px;
+      filter: grayscale(100%);
+      opacity: 0.8;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-item img:hover {
+      transform: scale(1.1);
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    .logo-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .logo-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #ccc;
+      border-radius: 50%;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .logo-dot.active {
+      background-color: #000;
+    }
     /* Custom accordion styling */
 .custom-accordion .accordion-item {
   border: 1px solid #ddd;
@@ -461,13 +516,38 @@
   color: #333;
 }
 .module-badge {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
+  background-color: #f0f8ff; /* light blue */
+  color: #0d6efd; /* Bootstrap primary blue */
+  border: 1px solid #cfe2ff;
+  border-radius: 20px;
+  padding: 0.4rem 0.75rem;
   font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 30px;
   font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.accordion-item{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.point-line {
+  margin-bottom: 0.5rem;
+  padding-left: 1.4rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.point-line::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #0d6efd;
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
   </style>
@@ -851,13 +931,11 @@
       </h2>
       <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
         <div class="accordion-body">
-          <ul class="custom-list">
-            {% for point in module.description.splitlines %}
-              {% if point.strip %}
-                <li>{{ point }}</li>
-              {% endif %}
-            {% endfor %}
-          </ul>
+          {% for point in module.description.splitlines %}
+            {% if point.strip %}
+              <p class="point-line">{{ point }}</p>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -1229,6 +1307,23 @@
     </div>
   </section>
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false
+      },
+      breakpoints: {
+        768: { slidesPerView: 4 },
+        576: { slidesPerView: 3 },
+        320: { slidesPerView: 2 }
+      }
+    })
+  </script>
 
 {% endblock %}
