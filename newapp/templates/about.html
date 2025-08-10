@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="about-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <div class="about-card p-4 p-md-5 shadow-sm rounded-3">
+
+                    <h2 class="mb-4 fw-bold text-gradient text-center">
+                     About Us
+                    </h2>
+
+                    <p class="lead mb-4 text-muted">
+                        We are a team of seasoned industry professionals, each with over two decades of expertise 
+                        across diverse domains — having worked with <strong>Ernst & Young (EY)</strong>, <strong>Fujitsu Consulting</strong>, 
+                        <strong>Trident</strong>, <strong>IBM</strong>, and more.
+                    </p>
+
+                    <p class="mb-4">
+                        Our unique <span class="highlight">“Earn While You Learn”</span> model immerses learners in 
+                        real-world projects from day one, building both technical mastery and an entrepreneurial mindset.
+                    </p>
+
+                    <p class="mb-4">
+                        With over <strong>90% hands-on learning</strong> on live assignments, our graduates enter the 
+                        industry not as freshers, but as confident professionals ready to deliver results from day one.
+                    </p>
+
+                    <blockquote class="blockquote text-center mt-4">
+                        “Empowering minds to become industry assets.”
+                    </blockquote>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Section background - subtle blue tint */
+    .about-section {
+        background: linear-gradient(135deg, #f5f8fc, #eef3fa);
+    }
+
+    /* Card styling */
+    .about-card {
+        background: #fff;
+        border-top: 5px solid #1d4e89; /* royal blue accent */
+        transition: all 0.3s ease;
+    }
+    .about-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+
+    /* Royal blue to gold gradient heading */
+    .text-gradient {
+        background: linear-gradient(90deg, #1d4e89);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Highlight tag */
+    .highlight {
+        background: #1d4e89;
+        color: white;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    /* Quote */
+    .blockquote {
+        font-style: italic;
+        color: #444;
+        border-left: 4px solid #1d4e89;
+        padding-left: 15px;
+    }
+</style>
+
+{% endblock %}
