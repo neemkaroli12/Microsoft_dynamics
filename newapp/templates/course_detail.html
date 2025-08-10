@@ -1,1270 +1,2054 @@
 {% extends 'layout.html' %} {% load static %} {% block content %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+/>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-  <style>
-h1, h2, h3, h4, h6 {
-  color: #6c2eb9;
-}
-
-i {
-  color: #6a11cb;
-}
-
-p {
-  font-size: 1rem;
-}
-
-h6 {
-  font-size: 0.95rem;
-}
-
-small {
-  font-size: 0.85rem;
-}
-
-.accordion-body,
-.list-unstyled li {
-  font-size: 1.1rem;
-  text-align: justify;
-}
-
-.accordion-button,
-.accordion-body {
-  font-size: 1.2rem !important;
-}
-.navbar {
-  position: static;
-}
-.training-modes-section .row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
-  padding: 10px 0;
-}
-
-.training-modes-section .card {
-  width: 180px !important;
-  height: 180px !important;
-  border-radius: 1.5rem !important;
-  border: 1px solid rgba(123, 78, 255, 0.3) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  background-color: white !important;
-  padding: 30px 20px !important;
-  text-align: center;
-}
-
-.training-modes-section .card i {
-  font-size: 2.5rem !important;
-  color: #7b4eff !important;
-  transition: transform 0.3s ease !important;
-}
-
-.training-modes-section .card h5 {
-  margin-top: 15px !important;
-  font-weight: 500 !important;
-  color: #333 !important;
-}
-
-.training-modes-section .card:hover {
-  transform: translateY(-8px) !important;
-  box-shadow: 0 8px 8px #6c2eb9 !important;
-}
-
-.training-modes-section .card:hover i {
-  transform: scale(1.2) !important;
-}
-
-.upcoming-batch-section {
-  padding: 40px 20px;
-  background-color: #fff;
-  text-align: center;
-}
-
-.description {
-  max-width: 800px;
-  margin: auto;
-  font-size: 1rem;
-  color: black;
-}
-
-.batch-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
-  margin-top: 30px;
-}
-
-.batch-card {
-  background: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 350px;
-  height: 200px;
-  border-top: 5px solid #6c2eb9;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.batch-header-wrapper {
-  position: absolute;
-  top: -25px;
-  right: 0;
-  width: 130px;
-  height: 130px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.batch-header {
-  background-color: #6c2eb9;
-  color: #fff;
-  padding: 4px 10px;
-  font-size: 10px;
-  width: 160px;
-  text-align: center;
-  transform: rotate(45deg);
-  transform-origin: top right;
-  position: relative;
-  left: 2px;
-  top: 105px;
-}
-
-.batch-date {
+<style>
+.accordion-button::after {
+  content: '+';
   font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: start;
-}
-
-.batch-info p {
-  font-size: 14px;
-  margin: 2px 0;
-}
-
-.course-fees-btn {
-  display: flex;
-  margin-top: auto;
-  padding: 5px 10px;
-  border: 1px solid #6c2eb9;
-  color: #6c2eb9;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.3s;
-  align-items: flex-start;
-  width: 120px;
-}
-
-.course-fees-btn:hover {
-  background-color: #6c2eb9;
-  color: #fff;
-}
-
-.sticky-form {
-  position: sticky;
-  top: 100px;
-  bottom: 100px;
-  background: white;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 10px 7px 20px #a8aed4ff !important;
-  width: 350px;
-  height: auto;
-}
-
-.form-control {
-  margin-bottom: 20px;
-}
-
-.form-heading {
-  text-align: center;
-  color: #212529;
-  margin-bottom: 20px;
-}
-
-.phone-input-group {
-  display: flex;
-  gap: 10px;
-}
-
-select.country-code {
-  max-width: 100px;
-  margin-bottom: 10px;
-  height: 40px;
-}
-
-.hands-on-training {
+  color: white;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  background-color: #ffffff;
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
-  gap: 10px;
-  text-align: left;
-  height: auto;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
-.hands-on-training .heading h2,
-.hands-on-training .heading h4 {
-  font-size: 25px;
-  font-weight: 600;
-  margin-bottom: 5px;
+.accordion-button:not(.collapsed)::after {
+  content: '−';
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  transform: rotate(180deg);
 }
 
-.hands-on-training .heading p {
-  font-size: 16px;
-  margin: 0;
+.accordion-button:hover::after {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.hands-on-training .button button {
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h6 {
+    color: #6c2eb9;
+  }
+
+  i {
+    color: #6a11cb;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.95rem;
+  }
+
+  small {
+    font-size: 0.85rem;
+  }
+
+  .accordion-body,
+  .list-unstyled li {
+    font-size: 1.1rem;
+    text-align: justify;
+  }
+
+  .accordion-button,
+  .accordion-body {
+    font-size: 1.2rem !important;
+  }
+  .navbar {
+    position: static;
+  }
+  .training-modes-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    padding: 10px 0;
+  }
+
+  .training-modes-section .card {
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 1.5rem !important;
+    border: 1px solid rgba(123, 78, 255, 0.3) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    background-color: white !important;
+    padding: 30px 20px !important;
+    text-align: center;
+  }
+
+  .training-modes-section .card i {
+    font-size: 2.5rem !important;
+    color: #7b4eff !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .training-modes-section .card h5 {
+    margin-top: 15px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+  }
+
+  .training-modes-section .card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 8px 8px #6c2eb9 !important;
+  }
+
+  .training-modes-section .card:hover i {
+    transform: scale(1.2) !important;
+  }
+
+  .upcoming-batch-section {
+    padding: 40px 20px;
+    background-color: #fff;
+    text-align: center;
+  }
+
+  .description {
+    max-width: 800px;
+    margin: auto;
+    font-size: 1rem;
+    color: black;
+  }
+
+  .batch-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 30px;
+  }
+
+  .batch-card {
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    height: 200px;
+    border-top: 5px solid #6c2eb9;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .batch-header-wrapper {
+    position: absolute;
+    top: -25px;
+    right: 0;
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .batch-header {
+    background-color: #6c2eb9;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 10px;
+    width: 160px;
+    text-align: center;
+    transform: rotate(45deg);
+    transform-origin: top right;
+    position: relative;
+    left: 2px;
+    top: 105px;
+  }
+
+  .batch-date {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: start;
+  }
+
+  .batch-info p {
+    font-size: 14px;
+    margin: 2px 0;
+  }
+
+  .course-fees-btn {
+    display: flex;
+    margin-top: auto;
+    padding: 5px 10px;
+    border: 1px solid #6c2eb9;
+    color: #6c2eb9;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    align-items: flex-start;
+    width: 120px;
+  }
+
+  .course-fees-btn:hover {
+    background-color: #6c2eb9;
+    color: #fff;
+  }
+
+  .sticky-form {
+    position: sticky;
+    top: 100px;
+    bottom: 100px;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 10px 7px 20px #a8aed4ff !important;
+    width: 350px;
+    height: auto;
+  }
+
+  .form-control {
+    margin-bottom: 20px;
+  }
+
+  .form-heading {
+    text-align: center;
+    color: #212529;
+    margin-bottom: 20px;
+  }
+
+  .phone-input-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  select.country-code {
+    max-width: 100px;
+    margin-bottom: 10px;
+    height: 40px;
+  }
+
+  .hands-on-training {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    gap: 10px;
+    text-align: left;
+    height: auto;
+  }
+
+  .hands-on-training .heading h2,
+  .hands-on-training .heading h4 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .hands-on-training .heading p {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .hands-on-training .button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+.hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-#testimonialCarousel .carousel-item {
-  height: 350px;
-  width: 700px;
+.carousel-inner .carousel-item {
+  transition: transform 0.6s ease-in-out;
 }
-
-#testimonialCarousel .carousel-item > div {
-  height: 100%;
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background-color: #6c2eb9;
+  border-radius: 50%;
+  z-index: 10;
+  opacity: 1;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: black;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  filter: invert(1);
+  width: 16px;
+  height: 16px;
+  background-size: 100% 100%;
 }
 
-.swiper {
-  width: 100%;
-  padding: 20px 0;
-  height: 150px;
+.carousel-control-prev {
+  left: -60px; /* moves left outside the content */
 }
 
-.swiper-pagination {
-  margin-top: 10px;
-  text-align: center;
+.carousel-control-next {
+  right: -60px; /* moves right outside the content */
 }
 
-.swiper-slide {
-  width: 160px !important;
-  height: 100px !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  max-width: 140px;
-  max-height: 100px;
-  object-fit: contain;
-  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-}
-
-.module-badge {
-  background: #2575fc;
-  color: white;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 30px;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.custom-accordion .accordion-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
-}
-
-@media (max-width: 1024px) {
-  .hands-on-training {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-  }
-
-  .hands-on-training .heading,
-  .hands-on-training .button {
-    width: 100%;
-    text-align: center;
-  }
-
-  .sticky-form {
-    width: 350px !important;
-  }
-}
-
-@media (max-width: 992px) {
-  .batch-card {
-    max-width: 90vw;
-    height: auto;
-  }
-
-  .sticky-form {
-    position: static;
-    width: 60% !important;
-    margin-top: 30px;
-    
-  }
-
-  .training-modes-section .card {
-    width: 160px;
-    height: auto;
-  }
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: #5a23a0;
+  transform: translateY(-50%) scale(1.1);
 }
 
 @media (max-width: 768px) {
-  body {
-    font-size: 15px;
+  .carousel-control-prev {
+    left: -40px; /* less negative value to stay visible */
   }
 
-  .training-modes-section .card {
-    width: 45%;
-    margin-bottom: 15px;
-    height: 150px !important;
-  }
-
-  .training-modes-section .card i {
-    font-size: 2rem !important;
-  }
-
-  .training-modes-section .card h5 {
-    font-size: 0.9rem !important;
-  }
-
-  .batch-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .swiper-slide {
-    width: 120px !important;
-    height: 80px !important;
-  }
-
-  .swiper-slide img {
-    max-width: 100px;
-    max-height: 80px;
-  }
-
-  .navbar {
-    position: relative;
-  }
-
-  .hands-on-training .heading h2,
-  .hands-on-training .heading h4 {
-    font-size: 28px;
-  }
-
-  .hands-on-training .heading p,
-  .hands-on-training .button button {
-    font-size: 15px;
-  }
-
-  #testimonialCarousel .carousel-item {
-    width: 90%;
-    height: auto;
-  }
-
-  #testimonialCarousel .carousel-item > div {
-    padding: 1.5rem;
-  }
-
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    width: 16px;
-    height: 16px;
+  .carousel-control-next {
+    right: -40px;
   }
 }
 
 @media (max-width: 576px) {
-  .training-modes-section .card {
-    width: 80%;
-    margin: 0 auto;
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 35px;
+    height: 35px;
   }
 
-  .training-buttons {
-    flex-direction: column !important;
-    align-items: center !important;
+  .carousel-control-prev {
+    left: -20px;
   }
 
-  .training-buttons a {
-    width: 80%;
-    margin-bottom: 10px;
+  .carousel-control-next {
+    right: -2px;
+  }
+}
+  .swiper {
+    width: 100%;
+    padding: 20px 0;
+    height: 150px;
+  }
+
+  .swiper-pagination {
+    margin-top: 10px;
     text-align: center;
   }
 
-  .sticky-form {
-    width: 281px !important;
-    margin-left: 0 !important;
+  .swiper-slide {
+    width: 160px !important;
+    height: 100px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  #testimonialCarousel .carousel-item {
-    width: 95%;
-  }
-
-  #testimonialCarousel .carousel-item > div {
-    padding: 1rem;
-  }
-
-  .accordion-button,
-  .accordion-body {
-    font-size: 1rem !important;
-  }
-
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    width: 14px;
-    height: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    font-size: 14px;
+  .swiper-slide img {
+    max-width: 140px;
+    max-height: 100px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
   }
 
   .module-badge {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.6rem;
+    background: #2575fc;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
-  .hands-on-training .heading h2 {
-    font-size: 22px;
+  .custom-accordion .accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
   }
 
-  .hands-on-training .heading p,
-  .hands-on-training .button button {
-    font-size: 14px;
+  @media (max-width: 1024px) {
+    .hands-on-training {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hands-on-training .heading,
+    .hands-on-training .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    .sticky-form {
+      width: 350px !important;
+    }
   }
 
-  .hands-on-training .button button {
-    padding: 10px 16px;
+  @media (max-width: 992px) {
+    .batch-card {
+      max-width: 70vw;
+      height: auto;
+    }
+
+    .sticky-form {
+      position: static;
+      width: 60% !important;
+      margin-top: 30px;
+    }
+
+    .training-modes-section .card {
+      width: 160px;
+      height: auto;
+    }
   }
-}
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 15px;
+    }
+
+    .training-modes-section .card {
+      width: 45%;
+      margin-bottom: 15px;
+      height: 150px !important;
+    }
+
+    .training-modes-section .card i {
+      font-size: 2rem !important;
+    }
+
+    .training-modes-section .card h5 {
+      font-size: 0.9rem !important;
+    }
+
+    .batch-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .swiper-slide {
+      width: 120px !important;
+      height: 80px !important;
+    }
+
+    .swiper-slide img {
+      max-width: 100px;
+      max-height: 80px;
+    }
+
+    .navbar {
+      position: relative;
+    }
+
+    .hands-on-training .heading h2,
+    .hands-on-training .heading h4 {
+      font-size: 28px;
+    }
+
+    .hands-on-training .heading p,
+    .hands-on-training .button button {
+      font-size: 15px;
+    }
+
+    #testimonialCarousel .carousel-item {
+      width: 90%;
+      height: auto;
+    }
+
+    #testimonialCarousel .carousel-item > div {
+      padding: 1.5rem;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .training-modes-section .card {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .training-buttons {
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+
+    .training-buttons a {
+      width: 80%;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .sticky-form {
+      width: 281px !important;
+      margin-left: 0 !important;
+    }
+
+    #testimonialCarousel .carousel-item {
+      width: 95%;
+    }
+
+    #testimonialCarousel .carousel-item > div {
+      padding: 1rem;
+    }
+
+    .accordion-button,
+    .accordion-body {
+      font-size: 1rem !important;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      font-size: 14px;
+    }
+
+    .module-badge {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.6rem;
+    }
+
+    .hands-on-training .heading h2 {
+      font-size: 22px;
+    }
+
+    .hands-on-training .heading p,
+    .hands-on-training .button button {
+      font-size: 14px;
+    }
+
+    .hands-on-training .button button {
+      padding: 10px 16px;
+    }
+  }
+  .module-badge {
+    background-color: #f0f8ff; /* light blue */
+    color: #0d6efd; /* Bootstrap primary blue */
+    border: 1px solid #cfe2ff;
+    border-radius: 20px;
+    padding: 0.4rem 0.75rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  .point-line {
+    margin-bottom: 0.5rem;
+    padding-left: 1.4rem;
+    position: relative;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .point-line::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0d6efd;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
 </style>
 
-  <section style="
+<section
+  style="
     background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
     color: white;
-  ">
-    <div class="container py-5" style="text-align: justify">
-      <div class="row g-4">
-        <div class="col-md-7 pe-lg-5">
-          <h1 class="mb-4 text-white" style="
+  "
+>
+  <div class="container py-5" style="text-align: justify">
+    <div class="row g-4">
+      <div class="col-md-7 pe-lg-5">
+        <h1
+          class="mb-4 text-white"
+          style="
             word-break: break-word;
             white-space: normal;
             text-align: left;
             text-justify: none;
-          ">{{ course.title }}</h1>
-          <p class="mt-3">⭐ {{ course.rating }} - {{ course.review_count }} reviews</p>
-          <p>{{ course.full_description }}</p>
+          "
+        >
+          {{ course.title }}
+        </h1>
+        <p class="mt-3">
+          ⭐ {{ course.rating }} - {{ course.review_count }} reviews
+        </p>
+        <p>{{ course.full_description }}</p>
 
-          <div class="row mt-4">
-            <div class="col-6 col-md-3">
-              👩‍🎓 <strong>{{ course.total_learners }}+</strong><br />Total Learners
-            </div>
-            <div class="col-6 col-md-3">
-              ⏳ <strong>{{ course.course_duration }}</strong><br />Course Duration
-            </div>
-            <div class="col-6 col-md-3">
-              📚 <strong>{{ course.assignments_duration }}</strong><br />Assignments
-            </div>
-            <div class="col-6 col-md-3">
-              💼{% if course.job_oriented_training %}100%{% endif %}<br />Job Oriented
-            </div>
+        <div class="row mt-4">
+          <div class="col-6 col-md-3">
+            👩‍🎓 <strong>{{ course.total_learners }}+</strong><br />Total Learners
           </div>
-
-          <div class="mt-4">
-            <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
-            <a href="#curriculum" class="btn btn-light text-danger">📄 View Syllabus</a>
+          <div class="col-6 col-md-3">
+            ⏳ <strong>{{ course.course_duration }}</strong><br />Course
+            Duration
+          </div>
+          <div class="col-6 col-md-3">
+            📚 <strong>{{ course.assignments_duration }}</strong
+            ><br />Assignments
+          </div>
+          <div class="col-6 col-md-3">
+            💼{% if course.job_oriented_training %}100%{% endif %}<br />Job
+            Oriented
           </div>
         </div>
-        <div class="col-md-5 d-flex align-items-center justify-content-center">
-          <div class="w-100" style="max-width: 400px">
-            <div class="ratio ratio-16x9">
-              {% if course.video %}
-                <video width="100%" controls style="border: 5px solid white">
-                  <source src="{{ course.video.url }}" type="video/mp4" />
-                </video>
-              {% endif %}
-            </div>
+
+        <div class="mt-4">
+          <a href="https://wa.me/" class="btn btn-success me-2">Contact us</a>
+          <a href="#curriculum" class="btn btn-light text-danger"
+            >📄 View Syllabus</a
+          >
+        </div>
+      </div>
+      <div class="col-md-5 d-flex align-items-center justify-content-center">
+        <div class="w-100" style="max-width: 400px">
+          <div class="ratio ratio-16x9">
+            {% if course.video %}
+            <video width="100%" controls style="border: 5px solid white">
+              <source src="{{ course.video.url }}" type="video/mp4" />
+            </video>
+            {% endif %}
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="training-modes-section py-5 bg-white text-center">
-    <div class="container">
-      <h1 class="text-purple mb-3">NIITF's Training Modes</h1>
-      <div class="line-decorator mx-auto mb-4" style="
+<section class="training-modes-section py-5 bg-white text-center">
+  <div class="container">
+    <h1 class="text-purple mb-3">NIITF's Training Modes</h1>
+    <div
+      class="line-decorator mx-auto mb-4"
+      style="
         width: 80px;
         height: 3px;
         background-color: #6c2eb9;
         border-radius: 5px;
-      "></div>
-      <p class="mb-5 fs-5">Learn From World’s Top {{ course.title }} Certified Faculty And Industry Leaders</p>
+      "
+    ></div>
+    <p class="mb-5 fs-5">
+      Learn From World’s Top {{ course.title }} Certified Faculty And Industry
+      Leaders
+    </p>
 
-      <div class="row g-4 justify-content-center">
-        {% comment %}Card 1{% endcomment %}
-        <div class="col-md-4 col-lg-2">
-          <div class="card">
-            <i class="bi bi-people-fill"></i>
-            <h5>Online Batch Training</h5>
-          </div>
-        </div>
-        {% comment %}Card 2{% endcomment %}
-        <div class="col-md-4 col-lg-2">
-          <div class="card">
-            <i class="bi bi-person-lines-fill"></i>
-            <h5>One To One Training</h5>
-          </div>
-        </div>
-        {% comment %}Card 3{% endcomment %}
-        <div class="col-md-4 col-lg-2">
-          <div class="card">
-            <i class="bi bi-gear-fill"></i>
-            <h5>Customized Training</h5>
-          </div>
-        </div>
-        {% comment %}Card 4{% endcomment %}
-        <div class="col-md-4 col-lg-2">
-          <div class="card">
-            <i class="bi bi-clock-fill"></i>
-            <h5>Fast Track Training</h5>
-          </div>
-        </div>
-        {% comment %}Card 5{% endcomment %}
-        <div class="col-md-4 col-lg-2">
-          <div class="card">
-            <i class="bi bi-person-badge-fill"></i>
-            <h5>Corporate Training</h5>
-          </div>
+    <div class="row g-4 justify-content-center">
+      {% comment %}Card 1{% endcomment %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card">
+          <i class="bi bi-people-fill"></i>
+          <h5>Online Batch Training</h5>
         </div>
       </div>
-      <div class="row">
-        <div class="mt-5 d-flex justify-content-center training-buttons flex-wrap gap-3">
-          <a href="#" style="
-            background-color: #6c2eb9;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            color: white;
-            font-size: 1.4rem;
-            text-decoration: none;
-          ">Enroll Now</a>
-          <a href="#" style="
-            background-color: #6c2eb9;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            color: white;
-            font-size: 1.4rem;
-            text-decoration: none;
-          ">Free Demo</a>
+      {% comment %}Card 2{% endcomment %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card">
+          <i class="bi bi-person-lines-fill"></i>
+          <h5>One To One Training</h5>
+        </div>
+      </div>
+      {% comment %}Card 3{% endcomment %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card">
+          <i class="bi bi-gear-fill"></i>
+          <h5>Customized Training</h5>
+        </div>
+      </div>
+      {% comment %}Card 4{% endcomment %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card">
+          <i class="bi bi-clock-fill"></i>
+          <h5>Fast Track Training</h5>
+        </div>
+      </div>
+      {% comment %}Card 5{% endcomment %}
+      <div class="col-md-4 col-lg-2">
+        <div class="card">
+          <i class="bi bi-person-badge-fill"></i>
+          <h5>Corporate Training</h5>
         </div>
       </div>
     </div>
-  </section>
-  {% comment %}navbar{% endcomment %} {% include 'includes/custom_navbar.html' %}
-  {% comment %}upcoming batches{% endcomment %}
-  <section id="upcoming-batches" class="upcoming-batch-section">
-    <div class="container">
-      <h1>Upcoming Batch Schedule</h1>
-      <div class="line-decorator mx-auto mb-4" style="
+    <div class="row">
+      <div
+        class="mt-5 d-flex justify-content-center training-buttons flex-wrap gap-3"
+      >
+        <a
+          href="#"
+          style="
+            background-color: #6c2eb9;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            text-decoration: none;
+          "
+          >Enroll Now</a
+        >
+        <a
+          href="#"
+          style="
+            background-color: #6c2eb9;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            text-decoration: none;
+          "
+          >Free Demo</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+{% comment %}navbar{% endcomment %} {% include 'includes/custom_navbar.html' %}
+{% comment %}upcoming batches{% endcomment %}
+<section id="upcoming-batches" class="upcoming-batch-section">
+  <div class="container">
+    <h1>Upcoming Batch Schedule</h1>
+    <div
+      class="line-decorator mx-auto mb-4"
+      style="
         width: 120px;
         height: 3px;
         background-color: #6c2eb9;
         border-radius: 5px;
-      "></div>
-      <p class="description">Check Out Our Microsoft Dynamics Online Certification Batch Timings. Does This Batch Not Suit Your Timings? No Worries, We Will Customize And Arrange The Batch Timings That Match You Perfectly To Your Interest.</p>
-      <div class="row d-flex">
-        <div class="batch-grid">
-          {% for batch in upcoming_batches %}
-            <div class="batch-card">
-              <div class="batch-header-wrapper">
-                <div class="batch-header">{{ batch.batch_type|upper }}</div>
-              </div>
-              <div class="batch-date">{{ batch.start_date|date:'d-m-Y' }}</div>
-              <div class="batch-info">
-                <p style="text-align: start">{{ batch.title }}</p>
-                <p style="text-align: start">{{ batch.schedule_details }}</p>
-              </div>
-              {% if batch.course_fees %}
-                <a href="{{ batch.course_fees }}" class="course-fees-btn">Course Fees</a>
-              {% endif %}
-            </div>
-          {% empty %}
-            <p>No upcoming batches available.</p>
-          {% endfor %}
+      "
+    ></div>
+    <p class="description">
+      Check Out Our Microsoft Dynamics Online Certification Batch Timings. Does
+      This Batch Not Suit Your Timings? No Worries, We Will Customize And
+      Arrange The Batch Timings That Match You Perfectly To Your Interest.
+    </p>
+    <div class="row d-flex">
+      <div class="batch-grid">
+        {% for batch in upcoming_batches %}
+        <div class="batch-card">
+          <div class="batch-header-wrapper">
+            <div class="batch-header">{{ batch.batch_type|upper }}</div>
+          </div>
+          <div class="batch-date">{{ batch.start_date|date:'d-m-Y' }}</div>
+          <div class="batch-info">
+            <p style="text-align: start">{{ batch.title }}</p>
+            <p style="text-align: start">{{ batch.schedule_details }}</p>
+          </div>
+          {% if batch.course_fees %}
+          <a href="{{ batch.course_fees }}" class="course-fees-btn"
+            >Course Fees</a
+          >
+          {% endif %}
         </div>
+        {% empty %}
+        <p>No upcoming batches available.</p>
+        {% endfor %}
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {% comment %}course details{% endcomment %}
+{% comment %}course details{% endcomment %}
 
-  <section id="course-details" class="py-5 ">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mt-5 px-4">
-          <h2 class="mb-4">Best {{ course.title }} Certification Online Course</h2>
-          <div class="line-decorator mb-4" style="
+<section id="course-details" class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mt-5 px-4">
+        <h2 class="mb-4">
+          Best {{ course.title }} Certification Online Course
+        </h2>
+        <div
+          class="line-decorator mb-4"
+          style="
             width: 200px;
             height: 3px;
             background-color: #6c2eb9;
             border-radius: 5px;
-          "></div>
-          <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Are you in search of the Best Online Training institute for
-            {{ course.title }} Training, NIITF is one of the top {{ course.title }}
-            Online Training institutes! They provide the best {{ course.title }}
-            training for the aspirants by the industry experts.</p>
-          <div class="d-flex align-items-start mb-3">
+          "
+        ></div>
+        <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">
+          Are you in search of the Best Online Training institute for {{
+          course.title }} Training, NIITF is one of the top {{ course.title }}
+          Online Training institutes! They provide the best {{ course.title }}
+          training for the aspirants by the industry experts.
+        </p>
+        <div class="d-flex align-items-start mb-3">
+          <div class="me-2">
+            <i class="fas fa-plane-departure fs-5"></i>
+          </div>
+          <div style="text-align: justify; line-height: 1.3; font-size: 1.3rem">
+            Benefits of Learning {{ course.category }} at NIITF.
+          </div>
+        </div>
+
+        <ul class="list-unstyled">
+          {% comment %}1{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
             <div class="me-2">
-              <i class="fas fa-plane-departure fs-5"></i>
+              <i class="bi bi-check-circle-fill fs-5"></i>
             </div>
-            <div style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Benefits of Learning {{ course.category }} at NIITF.</div>
+            <div>
+              NIITF provides fully hands-on training for the learners to gain
+              practical experience in all the core concepts of {{ course.title}} course.
+            </div>
+          </li>
+          {% comment %}2{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              {{ course.title }} course curriculum is designed with the utmost
+              care at NIITF by well-experienced professionals in {{ course.title}}.
+            </div>
+          </li>
+          {% comment %}3{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i
+                class="bi bi-check-circle-fill fs-5"
+                style="color: #6a11cb"
+              ></i>
+            </div>
+            <div>
+              Our trainers at NIITF cover all the concepts of {{ course.title }}
+              from basic level to advance level to make learners get a clear
+              idea about every small aspect of a concept.
+            </div>
+          </li>
+          {% comment %}4{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              We make learners work on case studies and real-life use cases to
+              gain hands-on experience in a particular field of {{ course.title}} 
+              and make students remember each concept with real-time
+              examples.
+            </div>
+          </li>
+          {% comment %}5{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              We provide {{ course.title }} video recordings of the sessions for
+              the students who want to listen again and also our trainers make
+              sure that they recap the previous session topics before they start
+              any fresh concept.
+            </div>
+          </li>
+          {% comment %}6{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              We at NIITF are very glad to tell you that our {{ course.title }}
+              trainers will be available for the students 24/7 to clarify their
+              doubts.
+            </div>
+          </li>
+          {% comment %}7{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              NIITF provides 100% job-oriented {{ course.title }} training.
+            </div>
+          </li>
+          {% comment %}8{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              Certification Guidance is also provided for the learners at NIITF.
+            </div>
+          </li>
+          {% comment %}9{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>At NIITF you will find the affordable fee structure.</div>
+          </li>
+          {% comment %}10{% endcomment %}
+          <li class="d-flex align-items-start mb-3">
+            <div class="me-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+            </div>
+            <div>
+              NIITF offers more than 250+ IT training courses all over with 10+
+              years of experienced trainers.
+            </div>
+          </li>
+        </ul>
+
+        <div
+          class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+        >
+          <div class="heading mb-3 col-lg-8 col-md-12">
+            <h2 class="mb-1">Looking for Hands-On Training?</h2>
+            <p class="mb-0" style="font-size: 1.2rem">
+              Get Practical Assignments and Real-time Projects
+            </p>
+          </div>
+          <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+            <button class="btn btn-primary">
+              Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+            </button>
+          </div>
+        </div>
+
+        {% comment %}2 col{% endcomment %}
+
+        <div class="About mt-5">
+          <h2 class="mb-4">About {{ course.title }}</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+          <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">
+            {{ course.short_description|safe }}
+          </p>
+
+          <div class="accordion" id="syllabusAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  What are the main course objectives of {{ course.title }}?
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  Upon successful completion of this training, you will gain
+                  expertise in the following areas:
+                  <ul>
+                    <li>
+                      Master both the basics and advanced concepts of {{course.title }}.
+                    </li>
+                    <li>
+                      Become proficient in practical and competitive tasks
+                      related to {{ course.title }}.
+                    </li>
+                    <li>
+                      Gain job-readiness for various roles in {{ course.title}}.
+                    </li>
+                    <li>
+                      Work on real-world applications and scenarios in {{course.title }} projects.
+                    </li>
+                    <li>Get hands-on experience through live projects.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  How will learning {{ course.title }} help you grow in your
+                  career?
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  The {{ course.title }} course is one of the most sought-after
+                  skills in today’s IT job market:
+                  <ul>
+                    <li>
+                      Top MNCs and IT companies are actively hiring {{course.title }} 
+                      certified professionals.
+                    </li>
+                    <li>
+                      Average salary of a {{ course.title }} certified
+                      professional is around $115,500 per annum in the United
+                      States.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Who should learn this {{ course.title }}?
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  This course is ideal for anyone aiming to build a career in
+                  the IT industry, including:
+                  <ul>
+                    <li>Freshers</li>
+                    <li>Working Professionals</li>
+                    <li>Job Seekers</li>
+                    <li>Project Managers</li>
+                    <li>
+                      Anyone interested in starting or advancing their career in
+                      {{ course.title }}
+                    </li>
+                    <li>
+                      Those looking to upgrade their skills in {{ course.title}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                >
+                  Are there any prerequisites for enrolling in {{ course.title}}?
+                </button>
+              </h2>
+              <div
+                id="collapseFour"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFour"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  There are no specific prerequisites for this {{ course.title}} course. 
+                  A basic interest and willingness to learn is all
+                  that’s needed to get started.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive"
+                  aria-expanded="false"
+                  aria-controls="collapseFive"
+                >
+                  What will be the batch size for the {{ course.title }} course
+                  at NIITF?
+                </button>
+              </h2>
+              <div
+                id="collapseFive"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingFive"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  NIITF ensures individual attention by limiting each {{course.title }} batch to 5–6 students. This enables
+                  personalized doubt clearing and focused learning.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+        >
+          <div class="heading mb-3 col-lg-8 col-md-12">
+            <h2 class="mb-1">Launch your dream career Now!</h2>
+            <p class="mb-0" style="font-size: 1.2rem">
+              Get personalized career coaching & mentors from industry
+            </p>
+          </div>
+          <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+            <button class="btn btn-primary">
+              Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+            </button>
+          </div>
+        </div>
+
+        {% comment %}3 col{% endcomment %}
+
+        <div id="curriculum" class="curriculum mt-5">
+          <h2 class="mb-4">{{ course.title }} Course Curriculum</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+          <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">
+            Our {{ course.title }} Course Curriculum encompasses all the course
+            modules with a clear description and the concepts covered in each
+            module. NIITF designs the syllabus in the learner's perspective to
+            provide comprehensive knowledge.
+          </p>
+
+          <div class="accordion custom-accordion" id="courseAccordion">
+            {% for module in course.modules.all %}
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed fw-semibold"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#module{{ module.pk }}"
+                >
+                  <span class="me-2 badge module-badge"
+                    >Module {{ forloop.counter|stringformat:'02d' }}</span
+                  >
+                  {{ module.title }}
+                </button>
+              </h2>
+              <div
+                id="module{{ module.pk }}"
+                class="accordion-collapse collapse"
+                data-bs-parent="#courseAccordion"
+              >
+                <div class="accordion-body">
+                  <ul class="custom-list">
+                    {% for point in module.description.splitlines %} {% if point.strip %}
+                    <li>{{ point }}</li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+            <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">
+              All the above concepts will be covered in Our {{ course.title }}
+              Course. You will become a master in all the concepts of {{course.title }} 
+              because our trainers will make you learn very
+              effectively. Our main goal is to make students satisfied with the
+              training and place them in the top companies.
+            </p>
           </div>
 
-          <ul class="list-unstyled">
-            {% comment %}1{% endcomment %} 
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>NIITF provides fully hands-on training for the learners to gain practical experience in all the core concepts of {{ course.title }} course.</div>
-            </li>
-            {% comment %}2{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>{{ course.title }} course curriculum is designed with the utmost care at NIITF by well-experienced professionals in
-                {{ course.title }}.</div>
-            </li>
-            {% comment %}3{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5" style="color: #6a11cb"></i>
-              </div>
-              <div>Our trainers at NIITF cover all the concepts of {{ course.title }}
-                from basic level to advance level to make learners get a clear idea about every small aspect of a concept.</div>
-            </li>
-            {% comment %}4{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>We make learners work on case studies and real-life use cases to gain hands-on experience in a particular field of {{ course.title }} and make students remember each concept with real-time examples.</div>
-            </li>
-            {% comment %}5{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>We provide {{ course.title }} video recordings of the sessions for the students who want to listen again and also our trainers make sure that they recap the previous session topics before they start any fresh concept.</div>
-            </li>
-            {% comment %}6{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>We at NIITF are very glad to tell you that our {{ course.title }}
-                trainers will be available for the students 24/7 to clarify their doubts.</div>
-            </li>
-            {% comment %}7{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>NIITF provides 100% job-oriented {{ course.title }} training.</div>
-            </li>
-            {% comment %}8{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>Certification Guidance is also provided for the learners at NIITF.</div>
-            </li>
-            {% comment %}9{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>At NIITF you will find the affordable fee structure.</div>
-            </li>
-            {% comment %}10{% endcomment %}
-            <li class="d-flex align-items-start mb-3">
-              <div class="me-2">
-                <i class="bi bi-check-circle-fill fs-5"></i>
-              </div>
-              <div>NIITF offers more than 250+ IT training courses all over with 10+ years of experienced trainers.</div>
-            </li>
-          </ul>
-
-          <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
+          <div
+            class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+          >
             <div class="heading mb-3 col-lg-8 col-md-12">
-              <h2 class="mb-1">Looking for Hands-On Training?</h2>
-              <p class="mb-0" style="font-size: 1.2rem">Get Practical Assignments and Real-time Projects</p>
+              <h2 class="mb-1">Like the Course Curriculum?</h2>
+              <p class="mb-0" style="font-size: 1.2rem">
+                Or need customized syllabus? Enroll Now & personalized it!
+              </p>
             </div>
             <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-              <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-            </div>
-          </div>
-
-          {% comment %}2 col{% endcomment %}
-
-          <div class="About mt-5">
-            <h2 class="mb-4">About {{ course.title }}</h2>
-            <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;
-            "></div>
-            <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">{{ course.short_description|safe }}</p>
-
-            <div class="accordion" id="syllabusAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">What are the main course objectives of {{ course.title }}?</button></h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    Upon successful completion of this training, you will gain expertise in the following areas:<ul>
-                      <li>Master both the basics and advanced concepts of
-                        {{ course.title }}.</li>
-                      <li>Become proficient in practical and competitive tasks related to {{ course.title }}.</li>
-                      <li>Gain job-readiness for various roles in {{ course.title }}.</li>
-                      <li>Work on real-world applications and scenarios in
-                        {{ course.title }} projects.</li>
-                      <li>Get hands-on experience through live projects.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How will learning {{ course.title }} help you grow in your career?</button></h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    The {{ course.title }} course is one of the most sought-after skills in today’s IT job market:<ul>
-                      <li>Top MNCs and IT companies are actively hiring
-                        {{ course.title }} certified professionals.</li>
-                      <li>Average salary of a {{ course.title }} certified professional is around $115,500 per annum in the United States.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Who should learn this {{ course.title }}?</button></h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    This course is ideal for anyone aiming to build a career in the IT industry, including:<ul>
-                      <li>Freshers</li>
-                      <li>Working Professionals</li>
-                      <li>Job Seekers</li>
-                      <li>Project Managers</li>
-                      <li>Anyone interested in starting or advancing their career in
-                        {{ course.title }}</li>
-                      <li>Those looking to upgrade their skills in {{ course.title }}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFour"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Are there any prerequisites for enrolling in {{ course.title }}?</button></h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">There are no specific prerequisites for this {{ course.title }}
-                    course. A basic interest and willingness to learn is all that’s needed to get started.</div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFive"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">What will be the batch size for the {{ course.title }} course at NIITF?</button></h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">NIITF ensures individual attention by limiting each
-                    {{ course.title }} batch to 5–6 students. This enables personalized doubt clearing and focused learning.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-            <div class="heading mb-3 col-lg-8 col-md-12">
-              <h2 class="mb-1">Launch your dream career Now!</h2>
-              <p class="mb-0" style="font-size: 1.2rem">Get personalized career coaching & mentors from industry</p>
-            </div>
-            <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-              <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-            </div>
-          </div>
-
-          {% comment %}3 col{% endcomment %}
-
-          <div id="curriculum" class="curriculum mt-5">
-            <h2 class="mb-4">{{ course.title }} Course Curriculum</h2>
-            <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;
-            "></div>
-            <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Our {{ course.title }} Course Curriculum encompasses all the course modules with a clear description and the concepts covered in each module. NIITF designs the syllabus in the learner's perspective to provide comprehensive knowledge.</p>
-
-            <div class="accordion custom-accordion" id="courseAccordion">
-              {% for module in course.modules.all %}
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#module{{ module.pk }}">
-                      <span class="me-2 badge module-badge">Module {{ forloop.counter|stringformat:'02d' }}</span>
-                      {{ module.title }}
-                    </button>
-                  </h2>
-                  <div id="module{{ module.pk }}" class="accordion-collapse collapse" data-bs-parent="#courseAccordion">
-                    <div class="accordion-body">
-                      <ul class="custom-list">
-                        {% for point in module.description.splitlines %}
-                          {% if point.strip %}
-                            <li>{{ point }}</li>
-                          {% endif %}
-                        {% endfor %}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-
-              <p style="text-align: justify; line-height: 1.3; font-size: 1.3rem">All the above concepts will be covered in Our {{ course.title }} Course. You will become a master in all the concepts of {{ course.title }} because our trainers will make you learn very effectively. Our main goal is to make students satisfied with the training and place them in the top companies.</p>
-            </div>
-
-            <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-              <div class="heading mb-3 col-lg-8 col-md-12">
-                <h2 class="mb-1">Like the Course Curriculum?</h2>
-                <p class="mb-0" style="font-size: 1.2rem">Or need customized syllabus? Enroll Now & personalized it!</p>
-              </div>
-              <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-              </div>
-            </div>
-          </div>
-
-          {% comment %}4 col{% endcomment %}
-
-          <div id="features" class="features mt-5">
-            <h2 class="mb-1">{{ course.title }} Course Features</h2>
-            <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;
-             "></div>
-
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF offers the best{{ course.title }} online training with advanced features. Our world-class features will provide zeal for the learners to enroll for top training courses.</p>
-
-            <div class="row text-start mt-4">
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-desktop text-primary me-3"></i><strong>Instructor-Led Sessions</strong></h5>
-                <p style=" font-size: 1.1rem">30 to 45 Hrs of {{ course.title }} Online Live Instructor-Led Classes.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-briefcase text-primary me-3"></i><strong>100% Job Oriented Training</strong></h5>
-                <p style=" font-size: 1.1rem">{{ course.title }} Live project based on any real-time scenarios.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-users text-primary me-3"></i><strong>Expertise Faculties</strong></h5>
-                <p style=" font-size: 1.1rem">Our Faculties are working {{ course.title }} Professionals in MNC Companies.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-infinity text-primary me-3"></i><strong>Lifetime Access</strong></h5>
-                <p style=" font-size: 1.1rem">You get lifetime access which includes {{ course.title }} class recordings and materials.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-certificate text-primary me-3"></i><strong>Certification & Job Assistance</strong></h5>
-                <p style=" font-size: 1.1rem">After successful completion, you’ll receive a globally recognized NIITF Certificate.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h5><i class="fas fa-calendar-alt text-primary me-3"></i><strong>Flexible Schedule</strong></h5>
-                <p style=" font-size: 1.1rem">We provide convenient class batches with 24x7 online support access.</p>
-              </div>
-            </div>
-          </div>
-
-          {% comment %}5col{% endcomment %}
-
-          <div id="certification" class="certification mt-5">
-            <h2 class="mb-1">{{ course.title }} Certification Training</h2>
-            <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;"></div>
-
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Get the Globally Recognized {{ course.title }} certification training from NIITF under the guidance of {{ course.title }} Experts. NIITF teaches you all the {{ course.title }} concepts with global standards.</p>
-            <img src="" alt="" />
-            <div class="accordion" id="syllabusAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Why do you need to Enroll in NIITF's {{ course.title }} Certification Program?</button></h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    <ul>
-                      <li>We at NIITF not only committed to providing you with the full-fledged {{ course.title }} training but also decided to help learners gain comprehensive knowledge of all the core concepts of {{ course.title }} to clear {{ course.title }} certification exams.</li>
-                      <li>We do take the utmost care to design the course curriculum to cover all the {{ course.title }} Certification concepts.</li>
-                      <li>Certification acts as a proof for your advanced {{ course.title }} skills and helps you secure your dream job.</li>
-                      <li>At NIITF our {{ course.title }} industry-expert professional trainers will provide you full assistance to clear multiple {{ course.title }} certification exams.</li>
-                      <li>Upon successful completion of this {{ course.title }} Certification course, you will receive course completion certification from NIITF.</li>
-                      <li>This certification shows your expertise, the amount of time, and the efforts you put in mastering this {{ course.title }} domain.</li>
-                      <li>As a professional acquiring all the {{ course.title }} certifications would benefit you to grow a career.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How is NIITF {{ course.title }} certification is awarded?</button></h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    NIITF follows the learning path certification process. To get the globally recognized NIITF {{ course.title }} Course Certification, you must fulfill the below mentioned following criteria:<ol>
-                      <li>Successful completion of all the course modules presented in the {{ course.title }} course curriculum.</li>
-                      <li>Successful completion of all the tasks and projects which were assigned by the trainer.</li>
-                      <li>Scoring the minimum 60 percentage of marks in the quiz examination conducted by NIITF.</li>
-                    </ol>Above mentioned criteria are evaluated by our {{ course.title }} trainers. If you didn’t meet our criteria, No worries our trainers will coach you to achieve it.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">NIITF {{ course.title }} certification is recognized globally or not?</button></h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">NIITF’s {{ course.title }} certification is recognized in the top 100+ MNCs like TCS, Ericsson, Cisco, Cognizant, Hexaware, HP, Standard Chartered, etc. Our Students are already got the job in MNCs with NIITF Certification.</div>
-                </div>
-              </div>
-              <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-                <div class="heading mb-3 col-lg-8 col-md-12">
-                  <h4 class="mb-1">Get personalized 1-1 course consultation</h4>
-                  <p class="mb-0" style="font-size: 1.2rem">Career-Focused Course Material and Personal Coaching to get Job.</p>
-                </div>
-                <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                  <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% comment %}6col{% endcomment %}
-          <div id="projects" class="projects mt-5">
-            <h2 class="mb-1">{{ course.title }} Projects</h2>
-            <div class="line-decorator mb-4" style="
-                       width: 200px;
-                       height: 3px;
-                        background-color: #6c2eb9;
-                       border-radius: 5px;"></div>
-
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF not only provides you with the best {{ course.title }} training but also makes you work with real-world projects and case studies to help you gain practical knowledge.</p>
-            <img src="" alt="" />
-            <div class="accordion" id="syllabusAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">{{ course.title }} Real-time Project Details</button></h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    <ul>
-                      <li>Practical knowledge is very important to understand how things actually work. To put your all learning into action, you will be required to work on two industry-based live projects that will discuss the real-time use cases.</li>
-                      <li>NIITF {{ course.title }} Training will help you gain in-depth knowledge of all the essential concepts of {{ course.title }} through real-world examples and hands-on projects.</li>
-                      <li>We make each and every individual work on {{ course.title }} real-time projects to face challenges during the learning period so it will be very helpful to solve problems arising in organization while in the job.</li>
-                      <li>Working with real-time projects will make more efficient and you will get more doubts. This type of working procedure will help you achieve a lot more things in your career.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-                <div class="heading mb-3 col-lg-8 col-md-12">
-                  <h4 class="mb-1">Develop a professional portfolio Now!</h4>
-                  <p class="mb-0" style="font-size: 1.2rem">Complete real-time projects, to showcase your skills to employers.</p>
-                </div>
-                <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                  <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {% comment %}7col{% endcomment %}
-          <div id="trainer-profile" class="trainer-profile mt-5">
-            <h2 class="mb-1">{{ course.title }} Trainer Profile</h2>
-            <div class="line-decorator mb-4" style="
-              width: 200px;
-              height: 3px;
-              background-color: #6c2eb9;
-              border-radius: 5px;"></div>
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">You will learn the {{ course.title }} essentials from the expert’s trainers who hold 10+ years of real-time experience in handling diversified projects.</p>
-            <div class="row text-start mt-4">
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">10+ Years Experienced</h4>
-                <p style=" font-size: 1.1rem">Our {{ course.title }} Trainers are more than 10+ Years of experience.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">Trained 2000+ Students</h4>
-                <p style=" font-size: 1.1rem">Our {{ course.title }} Trainers are Trained more than 2000+ Students in {{ course.title }} Courses.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">Certification Guidance</h4>
-                <p style=" font-size: 1.1rem">Our {{ course.title }} Trainers will help you in getting International Certification if available.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">Working in Top MNCs</h4>
-                <p style=" font-size: 1.1rem">Our {{ course.title }} Trainers are Working in a top MNC company around the globe.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">Certified Professionals</h4>
-                <p style=" font-size: 1.1rem">Our {{ course.title }} Trainers are certified {{ course.title }} Professionals with Strong Practical Knowledge.</p>
-              </div>
-              <div class="col-md-6 mb-4">
-                <h4 style="border-left: 5px solid blue;" class="text-center text-primary">Completed 700+ Batches</h4>
-                <p style=" font-size: 1.1rem">In NIITF, we already finished many batches successfully with certifications.</p>
-              </div>
-            </div>
-            <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-              <div class="heading mb-3 col-lg-8 col-md-12">
-                <h4 class="mb-1">Talk to our course Trainer now</h4>
-                <p class="mb-0" style="font-size: 1.2rem">Enroll now and get a free consultation with the trainer.</p>
-              </div>
-              <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-              </div>
-            </div>
-          </div>
-
-          {% comment %}8 col{% endcomment %}
-          <div id="reviews" class="reviews mt-5">
-            <h2 class="mb-1">{{ course.title }} Training Reviews</h2>
-            <div class="line-decorator mb-4" style="
-             width: 200px;
-              height: 3px;
-            background-color: #6c2eb9;
-             border-radius: 5px;"></div>
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">Our Best {{ course.title }} Teaching methodology has acquired millions of students around the globe and they shared their success stories in the form of reviews.</p>
-            <div class="row text-center g-4">
-              <div class="col-lg-4">
-                <div class="card shadow p-4">
-                  <h5 class="text-primary fs-3">✎ 2359</h5>
-                  <p class="mb-0">Total Reviews</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="card shadow p-4">
-                  <h5 class="text-primary fs-3">★ 4.9</h5>
-                  <p class="mb-0">Review Score</p>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="card shadow p-4">
-                  <h5 class="text-primary fs-3">✉ 99%</h5>
-                  <p class="mb-0">Course Completions</p>
-                </div>
-              </div>
-            </div>
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 900px; margin: auto;">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="position-relative p-4 rounded shadow-sm mb-4 mt-4 bg-white">
-                    <p class="mb-3 text-justify" style="font-size: 1.1rem; line-height: 1.6;">I enrolled in NIITF through a recommendation from a friend. After joining, I must say the experience was excellent. The sessions were well-planned, and the trainer was highly knowledgeable, explaining every topic in detail with practical examples.</p>
-                    <div class="d-flex align-items-center justify-content-center mt-5">
-                      <div class="me-3">
-                        <i class="fas fa-user-circle fa-2x"></i>
-                      </div>
-                      <div>
-                        <h6 class="mb-0 fw-bold">WILLIAM</h6>
-                        <small class="text-muted">Programmer</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="position-relative p-4 rounded shadow-sm mb-4 mt-4 bg-white">
-                    <p class="mb-3 text-justify" style="font-size: 1.1rem; line-height: 1.6;">NIITF exceeded my expectations! The practical training and real-time examples made learning easier. The trainer ensured every concept was crystal clear. The support team was amazing and responded quickly to every query.</p>
-                    <div class="d-flex align-items-center justify-content-center mt-5">
-                      <div class="me-3">
-                        <i class="fas fa-user-circle fa-2x"></i>
-                      </div>
-                      <div>
-                        <h6 class="mb-0 fw-bold">SOPHIA</h6>
-                        <small class="text-muted">Data Analyst</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+              <button class="btn btn-primary">
+                Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
               </button>
             </div>
           </div>
-          {% comment %}9col{% endcomment %}
-          <div id="placements" class="placements mt-5">
-            <h2 class="mb-1">{{ course.title }} Jobs & Placements</h2>
-            <div class="line-decorator mb-4" style="
+        </div>
+
+        {% comment %}4 col{% endcomment %}
+
+        <div id="features" class="features mt-5">
+          <h2 class="mb-1">{{ course.title }} Course Features</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
               width: 200px;
               height: 3px;
               background-color: #6c2eb9;
-              border-radius: 5px;">
+              border-radius: 5px;
+            "
+          ></div>
+
+          <p
+            class="description"
+            style="text-align: justify; line-height: 1.3; font-size: 1.3rem"
+          >
+            NIITF offers the best{{ course.title }} online training with
+            advanced features. Our world-class features will provide zeal for
+            the learners to enroll for top training courses.
+          </p>
+
+          <div class="row text-start mt-4">
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-desktop text-primary me-3"></i
+                ><strong>Instructor-Led Sessions</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                30 to 45 Hrs of {{ course.title }} Online Live Instructor-Led
+                Classes.
+              </p>
             </div>
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF has tie-up with small, medium, and large scale corporations across the world. We provide you with the complete placement assistance by forwarding your resume to the companies we tie-up with.</p>
-           
-<div class="swiper mySwiper mt-4 mb-4">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <img src="{% static 'images/logo1.png' %}" alt="Amazon" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/logo2.png' %}" alt="IBM" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/logo3.png' %}" alt="TCS" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/acxiom.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/joshlogo.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/S3.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/akili-1.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/amazesoft.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/edhate.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/jrs.png' %}" alt="IntellectSoft" />
-    </div>
-    <div class="swiper-slide">
-      <img src="{% static 'images/logo.png' %}" alt="IntellectSoft" />
-    </div>
-  
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-briefcase text-primary me-3"></i
+                ><strong>100% Job Oriented Training</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                {{ course.title }} Live project based on any real-time
+                scenarios.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-users text-primary me-3"></i
+                ><strong>Expertise Faculties</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                Our Faculties are working {{ course.title }} Professionals in
+                MNC Companies.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-infinity text-primary me-3"></i
+                ><strong>Lifetime Access</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                You get lifetime access which includes {{ course.title }} class
+                recordings and materials.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-certificate text-primary me-3"></i
+                ><strong>Certification & Job Assistance</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                After successful completion, you’ll receive a globally
+                recognized NIITF Certificate.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h5>
+                <i class="fas fa-calendar-alt text-primary me-3"></i
+                ><strong>Flexible Schedule</strong>
+              </h5>
+              <p style="font-size: 1.1rem">
+                We provide convenient class batches with 24x7 online support
+                access.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}5col{% endcomment %}
+
+        <div id="certification" class="certification mt-5">
+          <h2 class="mb-1">{{ course.title }} Certification Training</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+
+          <p
+            class="description"
+            style="text-align: justify; line-height: 1.3; font-size: 1.3rem"
+          >
+            Get the Globally Recognized {{ course.title }} certification
+            training from NIITF under the guidance of {{ course.title }}
+            Experts. NIITF teaches you all the {{ course.title }} concepts with
+            global standards.
+          </p>
+          <img src="" alt="" />
+          <div class="accordion" id="syllabusAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  Why do you need to Enroll in NIITF's {{ course.title }}
+                  Certification Program?
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  <ul>
+                    <li>
+                      We at NIITF not only committed to providing you with the
+                      full-fledged {{ course.title }} training but also decided
+                      to help learners gain comprehensive knowledge of all the
+                      core concepts of {{ course.title }} to clear {{course.title }} certification exams.
+                    </li>
+                    <li>
+                      We do take the utmost care to design the course curriculum
+                      to cover all the {{ course.title }} Certification
+                      concepts.
+                    </li>
+                    <li>
+                      Certification acts as a proof for your advanced {{ course.title }} skills and helps you secure your dream
+                      job.
+                    </li>
+                    <li>
+                      At NIITF our {{ course.title }} industry-expert
+                      professional trainers will provide you full assistance to
+                      clear multiple {{ course.title }} certification exams.
+                    </li>
+                    <li>
+                      Upon successful completion of this {{ course.title }}
+                      Certification course, you will receive course completion
+                      certification from NIITF.
+                    </li>
+                    <li>
+                      This certification shows your expertise, the amount of
+                      time, and the efforts you put in mastering this {{course.title }} domain.
+                    </li>
+                    <li>
+                      As a professional acquiring all the {{ course.title }}
+                      certifications would benefit you to grow a career.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  How is NIITF {{ course.title }} certification is awarded?
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  NIITF follows the learning path certification process. To get
+                  the globally recognized NIITF {{ course.title }} Course
+                  Certification, you must fulfill the below mentioned following
+                  criteria:
+                  <ol>
+                    <li>
+                      Successful completion of all the course modules presented
+                      in the {{ course.title }} course curriculum.
+                    </li>
+                    <li>
+                      Successful completion of all the tasks and projects which
+                      were assigned by the trainer.
+                    </li>
+                    <li>
+                      Scoring the minimum 60 percentage of marks in the quiz
+                      examination conducted by NIITF.
+                    </li>
+                  </ol>
+                  Above mentioned criteria are evaluated by our {{ course.title}} trainers. 
+                  If you didn’t meet our criteria, No worries our
+                  trainers will coach you to achieve it.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  NIITF {{ course.title }} certification is recognized globally
+                  or not?
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  NIITF’s {{ course.title }} certification is recognized in the
+                  top 100+ MNCs like TCS, Ericsson, Cisco, Cognizant, Hexaware,
+                  HP, Standard Chartered, etc. Our Students are already got the
+                  job in MNCs with NIITF Certification.
+                </div>
+              </div>
+            </div>
+            <div
+              class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+            >
+              <div class="heading mb-3 col-lg-8 col-md-12">
+                <h4 class="mb-1">Get personalized 1-1 course consultation</h4>
+                <p class="mb-0" style="font-size: 1.2rem">
+                  Career-Focused Course Material and Personal Coaching to get
+                  Job.
+                </p>
+              </div>
+              <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+                <button class="btn btn-primary">
+                  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% comment %}6col{% endcomment %}
+        <div id="projects" class="projects mt-5">
+          <h2 class="mb-1">{{ course.title }} Projects</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+
+          <p
+            class="description"
+            style="text-align: justify; line-height: 1.3; font-size: 1.3rem"
+          >
+            NIITF not only provides you with the best {{ course.title }}
+            training but also makes you work with real-world projects and case
+            studies to help you gain practical knowledge.
+          </p>
+          <img src="" alt="" />
+          <div class="accordion" id="syllabusAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  {{ course.title }} Real-time Project Details
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  <ul>
+                    <li>
+                      Practical knowledge is very important to understand how
+                      things actually work. To put your all learning into
+                      action, you will be required to work on two industry-based
+                      live projects that will discuss the real-time use cases.
+                    </li>
+                    <li>
+                      NIITF {{ course.title }} Training will help you gain
+                      in-depth knowledge of all the essential concepts of {{
+                      course.title }} through real-world examples and hands-on
+                      projects.
+                    </li>
+                    <li>
+                      We make each and every individual work on {{ course.title}} 
+                      real-time projects to face challenges during the
+                      learning period so it will be very helpful to solve
+                      problems arising in organization while in the job.
+                    </li>
+                    <li>
+                      Working with real-time projects will make more efficient
+                      and you will get more doubts. This type of working
+                      procedure will help you achieve a lot more things in your
+                      career.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div
+              class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+            >
+              <div class="heading mb-3 col-lg-8 col-md-12">
+                <h4 class="mb-1">Develop a professional portfolio Now!</h4>
+                <p class="mb-0" style="font-size: 1.2rem">
+                  Complete real-time projects, to showcase your skills to
+                  employers.
+                </p>
+              </div>
+              <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+                <button class="btn btn-primary">
+                  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}7col{% endcomment %}
+        <div id="trainer-profile" class="trainer-profile mt-5">
+          <h2 class="mb-1">{{ course.title }} Trainer Profile</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+          <p
+            class="description"
+            style="text-align: justify; line-height: 1.3; font-size: 1.3rem"
+          >
+            You will learn the {{ course.title }} essentials from the expert’s
+            trainers who hold 10+ years of real-time experience in handling
+            diversified projects.
+          </p>
+          <div class="row text-start mt-4">
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                10+ Years Experienced
+              </h4>
+              <p style="font-size: 1.1rem">
+                Our {{ course.title }} Trainers are more than 10+ Years of
+                experience.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                Trained 2000+ Students
+              </h4>
+              <p style="font-size: 1.1rem">
+                Our {{ course.title }} Trainers are Trained more than 2000+
+                Students in {{ course.title }} Courses.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                Certification Guidance
+              </h4>
+              <p style="font-size: 1.1rem">
+                Our {{ course.title }} Trainers will help you in getting
+                International Certification if available.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                Working in Top MNCs
+              </h4>
+              <p style="font-size: 1.1rem">
+                Our {{ course.title }} Trainers are Working in a top MNC company
+                around the globe.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                Certified Professionals
+              </h4>
+              <p style="font-size: 1.1rem">
+                Our {{ course.title }} Trainers are certified {{ course.title }}
+                Professionals with Strong Practical Knowledge.
+              </p>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h4
+                style="border-left: 5px solid blue"
+                class="text-center text-primary"
+              >
+                Completed 700+ Batches
+              </h4>
+              <p style="font-size: 1.1rem">
+                In NIITF, we already finished many batches successfully with
+                certifications.
+              </p>
+            </div>
+          </div>
+          <div
+            class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+          >
+            <div class="heading mb-3 col-lg-8 col-md-12">
+              <h4 class="mb-1">Talk to our course Trainer now</h4>
+              <p class="mb-0" style="font-size: 1.2rem">
+                Enroll now and get a free consultation with the trainer.
+              </p>
+            </div>
+            <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+              <button class="btn btn-primary">
+                Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}8 col{% endcomment %}
+        <div id="reviews" class="reviews mt-5">
+  <h2 class="mb-2 text-center" style="font-weight: 700; font-size: 2.5rem;">
+    {{ course.title }} Training Reviews
+  </h2>
+  <div class="line-decorator mb-4 mx-auto" style="
+    width: 200px;
+    height: 4px;
+    background: linear-gradient(90deg, #6c2eb9, #9b59b6);
+    border-radius: 5px;">
   </div>
 
-  <div class="swiper-pagination"></div>
-</div>
+  <p class="description mt-4 px-3 text-center" style="font-size: 1.2rem; color: #444; max-width: 800px; margin: auto;">
+    Our best-in-class <strong>{{ course.title }}</strong> teaching methodology has impacted millions of students worldwide.
+    Here’s what they say about their learning experience.
+  </p>
 
+  <div class="row text-center g-4 mt-5">
+    <div class="col-lg-4 col-md-6">
+      <div class="card shadow p-4 h-100 hover-effect">
+        <h5 class="text-primary fs-3">✎ 2359</h5>
+        <p class="mb-0 text-muted">Total Reviews</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="card shadow p-4 h-100 hover-effect">
+        <h5 class="text-primary fs-3">★ 4.9</h5>
+        <p class="mb-0 text-muted">Review Score</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+      <div class="card shadow p-4 h-100 hover-effect">
+        <h5 class="text-primary fs-3">✉ 99%</h5>
+        <p class="mb-0 text-muted">Course Completions</p>
+      </div>
+    </div>
+  </div>
 
+  <div id="testimonialCarousel" class="carousel slide mt-5" data-bs-ride="carousel" style="max-width: 900px; margin: auto;">
+    <div class="carousel-inner">
 
-
-            <div class="accordion" id="syllabusAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Do I get placement support at the end of this course?</button></h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    Yes, NIITF is having a separate team for placement assistance from the beginning of the {{ course.title }} course.<ul>
-                      <li>Our {{ course.title }} Trainer will help you to build a proper resume for applying for jobs</li>
-                      <li>Our {{ course.title }} Trainers will provide top {{ course.title }} Interview Questions and necessary software installation guides.</li>
-                      <li>We have a separate job portal, it will give a lifetime {{ course.title }} related jobs notifications for free.</li>
-                      <li>Our {{ course.title }} trainers are working in MNCs, they will refer you to their company’s internal jobs.</li>
-                      <li>Our NIITF Alumni groups also providing many referring jobs to you.</li>
-                      <li>We will work hard to provide you the job placements.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Can I get a job after learning {{ course.title }}?</button></h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">
-                    <ul>
-                      <li>Yes, NIITF will provide you 100% Job Assistance.</li>
-                      <li>NIITF has already trained more than 3500+ students on the {{ course.title }} course.</li>
-                      <li>We have a 90% percent placement record and 1000+ {{ course.title }} Job Interviews Organized in Last Year.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">What is the Average salary for {{ course.title }} Certified Professionals?</button></h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#syllabusAccordion">
-                  <div class="accordion-body">According to surveys like Glassdoor and PayScale’s latest reports, {{ course.title }} Certified Professionals are earning an average of $215,457/- per year in the United States. It varies based on countries, total years of experience, performance, and more. Our {{ course.title }} Training leads you to get more salary than the average salary as mentioned above.</div>
-                </div>
-              </div>
+      <div class="carousel-item active">
+        <div class="position-relative p-4 rounded shadow-sm bg-white">
+          <p class="mb-4 text-justify" style="font-size: 1.1rem; line-height: 1.7; color: #555;">
+            “I enrolled in NIITF through a recommendation from a friend. After joining, I must say the experience was excellent. The sessions were well-planned, and the trainer was highly knowledgeable, explaining every topic in detail with practical examples.”
+          </p>
+          <div class="d-flex align-items-center justify-content-center mt-4">
+            <i class="fas fa-user-circle fa-2x text-secondary me-3"></i>
+            <div>
+              <h6 class="mb-0 fw-bold">WILLIAM</h6>
+              <small class="text-muted">Programmer</small>
             </div>
-
-            <div class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white">
-              <div class="heading mb-3 col-lg-8 col-md-12">
-                <h4 class="mb-1">Get your dream job in a month</h4>
-                <p class="mb-0" style="font-size: 1.2rem">Join the program to meet the Industries recruitment process
-</p>
-              </div>
-              <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
-              </div>
-            </div>
-          </div>
-
-          {% comment %}col-lg-8{% endcomment %}
-        </div>
-        {% comment %}form{% endcomment %}
-        <div class="col-lg-3 mt-2 px-4">
-          <div class="sticky-form p-4 bg-white shadow rounded ms-5">
-            <h4 class="form-heading">Drop Us A Query</h4>
-            <form>
-              <input type="text" class="form-control" placeholder="Full Name" required />
-              <div class="phone-input-group">
-                <select class="form-select country-code" required>
-                  <option value="+91" selected>+91 (IN)</option>
-                  <option value="+1">+1 (US)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+61">+61 (AU)</option>
-                  <option value="+81">+81 (JP)</option>
-                  <option value="+971">+971 (UAE)</option>
-                </select>
-                <input type="tel" class="form-control" placeholder="Mobile Number" required />
-              </div>
-              <input type="email" class="form-control" placeholder="Email" required />
-              <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-              <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
-            </form>
           </div>
         </div>
       </div>
+
+      <div class="carousel-item">
+        <div class="position-relative p-4 rounded shadow-sm bg-white">
+          <p class="mb-4 text-justify" style="font-size: 1.1rem; line-height: 1.7; color: #555;">
+            “NIITF exceeded my expectations! The practical training and real-time examples made learning easier. The trainer ensured every concept was crystal clear. The support team was amazing and responded quickly to every query.”
+          </p>
+          <div class="d-flex align-items-center justify-content-center mt-4">
+            <i class="fas fa-user-circle fa-2x text-secondary me-3"></i>
+            <div>
+              <h6 class="mb-0 fw-bold">SOPHIA</h6>
+              <small class="text-muted">Data Analyst</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
- <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+        {% comment %}9col{% endcomment %}
+        <div id="placements" class="placements mt-5">
+          <h2 class="mb-1">{{ course.title }} Jobs & Placements</h2>
+          <div
+            class="line-decorator mb-4"
+            style="
+              width: 200px;
+              height: 3px;
+              background-color: #6c2eb9;
+              border-radius: 5px;
+            "
+          ></div>
+          <p
+            class="description"
+            style="text-align: justify; line-height: 1.3; font-size: 1.3rem"
+          >
+            NIITF has tie-up with small, medium, and large scale corporations
+            across the world. We provide you with the complete placement
+            assistance by forwarding your resume to the companies we tie-up
+            with.
+          </p>
+
+          <div class="swiper mySwiper mt-4 mb-4">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="{% static 'images/logo1.png' %}" alt="Amazon" />
+              </div>
+              <div class="swiper-slide">
+                <img src="{% static 'images/logo2.png' %}" alt="IBM" />
+              </div>
+              <div class="swiper-slide">
+                <img src="{% static 'images/logo3.png' %}" alt="TCS" />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="{% static 'images/acxiom.png' %}"
+                  alt="IntellectSoft"
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="{% static 'images/joshlogo.png' %}"
+                  alt="IntellectSoft"
+                />
+              </div>
+              <div class="swiper-slide">
+                <img src="{% static 'images/S3.png' %}" alt="IntellectSoft" />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="{% static 'images/akili-1.png' %}"
+                  alt="IntellectSoft"
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="{% static 'images/amazesoft.png' %}"
+                  alt="IntellectSoft"
+                />
+              </div>
+              <div class="swiper-slide">
+                <img
+                  src="{% static 'images/edhate.png' %}"
+                  alt="IntellectSoft"
+                />
+              </div>
+              <div class="swiper-slide">
+                <img src="{% static 'images/jrs.png' %}" alt="IntellectSoft" />
+              </div>
+              <div class="swiper-slide">
+                <img src="{% static 'images/logo.png' %}" alt="IntellectSoft" />
+              </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <div class="accordion" id="syllabusAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  Do I get placement support at the end of this course?
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  Yes, NIITF is having a separate team for placement assistance
+                  from the beginning of the {{ course.title }} course.
+                  <ul>
+                    <li>
+                      Our {{ course.title }} Trainer will help you to build a
+                      proper resume for applying for jobs
+                    </li>
+                    <li>
+                      Our {{ course.title }} Trainers will provide top {{
+                      course.title }} Interview Questions and necessary software
+                      installation guides.
+                    </li>
+                    <li>
+                      We have a separate job portal, it will give a lifetime {{
+                      course.title }} related jobs notifications for free.
+                    </li>
+                    <li>
+                      Our {{ course.title }} trainers are working in MNCs, they
+                      will refer you to their company’s internal jobs.
+                    </li>
+                    <li>
+                      Our NIITF Alumni groups also providing many referring jobs
+                      to you.
+                    </li>
+                    <li>
+                      We will work hard to provide you the job placements.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Can I get a job after learning {{ course.title }}?
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  <ul>
+                    <li>Yes, NIITF will provide you 100% Job Assistance.</li>
+                    <li>
+                      NIITF has already trained more than 3500+ students on the
+                      {{ course.title }} course.
+                    </li>
+                    <li>
+                      We have a 90% percent placement record and 1000+ {{
+                      course.title }} Job Interviews Organized in Last Year.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  What is the Average salary for {{ course.title }} Certified
+                  Professionals?
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#syllabusAccordion"
+              >
+                <div class="accordion-body">
+                  According to surveys like Glassdoor and PayScale’s latest
+                  reports, {{ course.title }} Certified Professionals are
+                  earning an average of $215,457/- per year in the United
+                  States. It varies based on countries, total years of
+                  experience, performance, and more. Our {{ course.title }}
+                  Training leads you to get more salary than the average salary
+                  as mentioned above.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="hands-on-training mt-5 py-4 px-3 d-flex flex-wrap align-items-center justify-content-between bg-white"
+          >
+            <div class="heading mb-3 col-lg-8 col-md-12">
+              <h4 class="mb-1">Get your dream job in a month</h4>
+              <p class="mb-0" style="font-size: 1.2rem">
+                Join the program to meet the Industries recruitment process
+              </p>
+            </div>
+            <div class="button col-lg-3 col-md-12 text-lg-end text-center">
+              <button class="btn btn-primary">
+                Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {% comment %}col-lg-8{% endcomment %}
+      </div>
+      {% comment %}form{% endcomment %}
+      <div class="col-lg-3 mt-2 px-4">
+        <div class="sticky-form p-4 bg-white shadow rounded ms-5">
+          <h4 class="form-heading">Drop Us A Query</h4>
+          <form>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Full Name"
+              required
+            />
+            <div class="phone-input-group">
+              <select class="form-select country-code" required>
+                <option value="+91" selected>+91 (IN)</option>
+                <option value="+1">+1 (US)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+61">+61 (AU)</option>
+                <option value="+81">+81 (JP)</option>
+                <option value="+971">+971 (UAE)</option>
+              </select>
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="Mobile Number"
+                required
+              />
+            </div>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              required
+            />
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Message"
+            ></textarea>
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const swiper = new Swiper('.mySwiper', {
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper(".mySwiper", {
       slidesPerView: 4,
       spaceBetween: 30,
       loop: true,
@@ -1273,7 +2057,7 @@ select.country-code {
         disableOnInteraction: false,
       },
       pagination: {
-        el: '.swiper-pagination',
+        el: ".swiper-pagination",
         clickable: true,
       },
       breakpoints: {
@@ -1284,5 +2068,6 @@ select.country-code {
     });
   });
 </script>
+
 
 {% endblock %}
