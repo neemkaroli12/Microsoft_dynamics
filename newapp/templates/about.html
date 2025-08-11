@@ -1,83 +1,157 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<section class="about-section py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-                <div class="about-card p-4 p-md-5 shadow-sm rounded-3">
+<section class="about-3d-unique py-5">
+  <div class="container position-relative">
+    <!-- Background layered skewed shapes -->
+    <div class="bg-layer layer1"></div>
+    <div class="bg-layer layer2"></div>
 
-                    <h2 class="mb-4 fw-bold text-gradient text-center">
-                     About Us
-                    </h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-glass-card" data-aos="fade-up" data-aos-duration="1200">
+          <h2 class="text-gradient mb-4 text-center">About Us</h2>
 
-                    <p class="lead mb-4 text-muted">
-                        We are a team of seasoned industry professionals, each with over two decades of expertise 
-                        across diverse domains — having worked with <strong>Ernst & Young (EY)</strong>, <strong>Fujitsu Consulting</strong>, 
-                        <strong>Trident</strong>, <strong>IBM</strong>, and more.
-                    </p>
+          <p class="lead mb-4 text-muted">
+            We are a team of seasoned industry professionals, each with over two decades of expertise 
+            across diverse domains — having worked with <strong>Ernst & Young (EY)</strong>, 
+            <strong>Fujitsu Consulting</strong>, <strong>Trident</strong>, <strong>IBM</strong>, and more.
+          </p>
 
-                    <p class="mb-4">
-                        Our unique <span class="highlight">“Earn While You Learn”</span> model immerses learners in 
-                        real-world projects from day one, building both technical mastery and an entrepreneurial mindset.
-                    </p>
+          <p class="mb-4 highlight-animated">
+            Our unique <span class="highlight">“Earn While You Learn”</span> model immerses learners in 
+            real-world projects from day one, building both technical mastery and an entrepreneurial mindset.
+          </p>
 
-                    <p class="mb-4">
-                        With over <strong>90% hands-on learning</strong> on live assignments, our graduates enter the 
-                        industry not as freshers, but as confident professionals ready to deliver results from day one.
-                    </p>
+          <p class="mb-4">
+            With over <strong>90% hands-on learning</strong> on live assignments, our graduates enter the 
+            industry not as freshers, but as confident professionals ready to deliver results from day one.
+          </p>
 
-                    <blockquote class="blockquote text-center mt-4">
-                        “Empowering minds to become industry assets.”
-                    </blockquote>
-                </div>
-
-            </div>
+          <blockquote class="blockquote-3d text-center mt-5">
+            “Empowering minds to become industry assets.”
+          </blockquote>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ once: true });</script>
+
 <style>
-    /* Section background - subtle blue tint */
-    .about-section {
-        background: linear-gradient(135deg, #f5f8fc, #eef3fa);
-    }
 
-    /* Card styling */
-    .about-card {
-        background: #fff;
-        border-top: 5px solid #1d4e89; /* royal blue accent */
-        transition: all 0.3s ease;
-    }
-    .about-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-    }
+.about-3d-unique {
+  position: relative;
+  background: linear-gradient(120deg, #e3f2fd, #dbeaff);
+  overflow: hidden;
+}
 
-    /* Royal blue to gold gradient heading */
-    .text-gradient {
-        background: linear-gradient(90deg, #1d4e89);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+.bg-layer {
+  position: absolute;
+  width: 120%;
+  height: 300px;
+  left: -10%;
+  transform: skewY(-6deg);
+  z-index: 0;
+  opacity: 0.15;
+}
 
-    /* Highlight tag */
-    .highlight {
-        background: #1d4e89;
-        color: white;
-        padding: 3px 10px;
-        border-radius: 4px;
-        font-weight: 600;
-    }
+.layer1 {
+  top: -100px;
+  background: linear-gradient(to right, #4f83cc, #1d4e89);
+}
 
-    /* Quote */
-    .blockquote {
-        font-style: italic;
-        color: #444;
-        border-left: 4px solid #1d4e89;
-        padding-left: 15px;
-    }
+.layer2 {
+  top: 100px;
+  background: linear-gradient(to right, #a5b9e3, #4f83cc);
+}
+
+.about-glass-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  border-radius: 24px;
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  padding: 3rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.about-glass-card:hover {
+  transform: translateY(-10px) scale(1.015);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.text-gradient {
+  background: linear-gradient(270deg, #1d4e89, #4f83cc, #a5b9e3, #1d4e89);
+  background-size: 800% 800%;
+  animation: gradientShift 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+
+.highlight {
+  background: #1d4e89;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(29, 78, 137, 0.3);
+}
+
+.blockquote-3d {
+  background: #f0f8ff;
+  padding: 24px 24px 24px 44px;
+  border-left: 6px solid #1d4e89;
+  border-radius: 12px;
+  font-style: italic;
+  color: #1d3557;
+  font-size: 1.25rem;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.blockquote-3d::before {
+  content: "“";
+  font-size: 72px;
+  position: absolute;
+  left: 12px;
+  top: 0;
+  color: #1d4e89;
+  opacity: 0.1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+  .about-glass-card {
+    padding: 2rem;
+  }
+
+  .text-gradient {
+    font-size: 2rem;
+  }
+
+  .blockquote-3d {
+    font-size: 1.1rem;
+    padding-left: 36px;
+  }
+}
 </style>
 
 {% endblock %}
