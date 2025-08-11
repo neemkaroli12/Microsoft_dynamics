@@ -55,15 +55,28 @@ class Module(models.Model):
         return f"{self.course.title} - {self.title}"
     
     
-class InstructorApplication(models.Model):
-    full_name = models.CharField(max_length=200)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20, blank=True)
-    expertise = models.CharField(max_length=300)
-    bio = models.TextField(blank=True)
-    previous_work_link = models.URLField(blank=True)
 
+
+class InstructorApplication(models.Model):
+    full_name = models.CharField(max_length=150)
+    country_code = models.CharField(max_length=20, default='+91 India')
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
+    current_city = models.CharField(max_length=100)
+    course_topic = models.CharField(max_length=150)
+    linkedin_url = models.URLField()
+    about_yourself = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.full_name} - {self.email}"
+        return f"{self.full_name} - {self.course_topic}"
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.subject}"

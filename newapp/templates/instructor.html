@@ -170,7 +170,11 @@
       background-color: #ffffff;
     }
   </style>
-
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success text-center">{{ message }}</div>
+  {% endfor %}
+{% endif %}
   <div class="container py-5">
     <div class="row g-5 align-items-start justify-content-center">
       <div class="col-lg-6">

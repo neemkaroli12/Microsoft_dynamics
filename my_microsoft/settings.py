@@ -135,3 +135,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+# Email backend
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# # Gmail SMTP settings
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'tumharaemail@gmail.com'  # apna Gmail id
+# EMAIL_HOST_PASSWORD = 'tumhara-app-password'  # Gmail App password
+# EMAIL_USE_TLS = True
+
+# # Default sender email
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

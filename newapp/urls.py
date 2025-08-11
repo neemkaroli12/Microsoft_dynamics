@@ -12,5 +12,6 @@ urlpatterns=[
     path('courses/<slug:slug>/', views.course_detail, name='course_detail'),
     path('about/', views.about, name='about'),
     path('become-instructor/', views.instructor, name='become_instructor'),
+    path('contact/', views.contact_view, name='contact'),
 ]
 
