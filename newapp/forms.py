@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
+from .models import InstructorApplication
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
@@ -41,3 +42,8 @@ class LoginForm(AuthenticationForm):
         'class': 'form-control',
         'placeholder': 'Password'
     }))
+    
+class InstructorApplicationForm(forms.ModelForm):
+     class Meta:
+        model = InstructorApplication
+        fields = ['full_name', 'email', 'phone', 'expertise', 'bio', 'previous_work_link']

@@ -53,3 +53,17 @@ class Module(models.Model):
 
     def _str_(self):
         return f"{self.course.title} - {self.title}"
+    
+    
+class InstructorApplication(models.Model):
+    full_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    expertise = models.CharField(max_length=300)
+    bio = models.TextField(blank=True)
+    previous_work_link = models.URLField(blank=True)
+
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.email}"

@@ -10,7 +10,7 @@ def home(request):
     # courses = DynamicsCourse.objects.all()
     return render(request, 'index.html', {'courses': courses })
 
- # <-- apna custom form import
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -56,3 +56,6 @@ def course_detail(request, slug):
    
 def about(request):
     return render(request, "about.html")
+
+def instructor(request):
+    return render(request, "instructor.html")
