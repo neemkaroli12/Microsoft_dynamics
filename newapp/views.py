@@ -75,17 +75,16 @@ def instructor(request):
             about_yourself = form.cleaned_data['about_yourself']
             cv_file = form.cleaned_data.get('cv')
 
-            # Handle CV upload if exists
+          
             if cv_file:
                 fs = FileSystemStorage()
                 filename = fs.save(cv_file.name, cv_file)
                 uploaded_file_url = fs.url(filename)
-                # Save or process the URL as needed
+               
 
-            # Save other form data or send email etc.
 
             success = True
-            form = InstructorApplicationForm()  # clear the form after success
+            form = InstructorApplicationForm() 
     else:
         form = InstructorApplicationForm()
 
