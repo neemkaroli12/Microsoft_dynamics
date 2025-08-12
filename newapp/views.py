@@ -125,19 +125,22 @@ def contact_view(request):
 
 
 def blog_view(request):
-    # Sirf approved blogs dikhao
-    blogs = Blog.objects.filter(is_approved=True).order_by('-created_at')
+    if request.user.is_staff:
+        # Admin ko sab posts dikhaye
+        blogs = Blog.objects.all().order_by('-created_at')
+    else:
+        # Normal user ko sirf approved dikhaye
+        blogs = Blog.objects.filter(is_approved=True).order_by('-created_at')
 
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
-            # Agar user logged in hai to author set karo
             if request.user.is_authenticated:
                 blog.author = request.user.get_full_name() or request.user.username
-            blog.is_approved = False  # Naya blog approve hone ke liye pending rahega
+            blog.is_approved = False  # pending approval
             blog.save()
-            return redirect('blog_list')  # Redirect to blog list page
+            return redirect('blog_list')
     else:
         initial_data = {}
         if request.user.is_authenticated:
