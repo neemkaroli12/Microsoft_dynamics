@@ -129,7 +129,7 @@ def blog_view(request):
         blogs = Blog.objects.all().order_by('-created_at')
     else:
         # Normal user ko sirf approved dikhaye
-        blogs = Blog.objects.filter(is_approved=True).order_by('-created_at')
+        blogs = Blog.objects.filter(is_approved=True, status='approved').order_by('-created_at')
 
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES)
@@ -138,6 +138,7 @@ def blog_view(request):
             if request.user.is_authenticated:
                 blog.author = request.user.get_full_name() or request.user.username
             blog.is_approved = False  # pending approval
+            blog.status = 'pending'   # set status explicitly
             blog.save()
             return redirect('blog_list')
     else:
