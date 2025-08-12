@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course, UpcomingBatch
-from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm
+from .models import Course, UpcomingBatch,Blog
+from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm ,BlogForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -121,3 +121,31 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
+
+def blog_view(request):
+    # Sirf approved blogs dikhao
+    blogs = Blog.objects.filter(is_approved=True).order_by('-created_at')
+
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            # Agar user logged in hai to author set karo
+            if request.user.is_authenticated:
+                blog.author = request.user.get_full_name() or request.user.username
+            blog.is_approved = False  # Naya blog approve hone ke liye pending rahega
+            blog.save()
+            return redirect('blog_list')  # Redirect to blog list page
+    else:
+        initial_data = {}
+        if request.user.is_authenticated:
+            initial_data['author'] = request.user.get_full_name() or request.user.username
+        form = BlogForm(initial=initial_data)
+
+    context = {
+        'blogs': blogs,
+        'form': form,
+        'is_admin': request.user.is_staff,
+    }
+    return render(request, 'blog.html', context)
