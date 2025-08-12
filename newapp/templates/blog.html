@@ -247,9 +247,9 @@ form button[type="submit"]:hover {
   </div>
 </section>
 <div class="container mb-5">
-  <div class="masonry">
+  <div class="row g-4">
     {% for post in blogs %}
-    <article class="masonry-item" style="animation-delay: {{ forloop.counter0|floatformat:1|add:'0.1' }}s;">
+    <article class="col-md-4 col-sm-6">
       <div class="card-article">
         <div class="card-thumb">
           {% if post.image %}
