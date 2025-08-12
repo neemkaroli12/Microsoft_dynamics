@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import EmailMessage
 def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
@@ -59,12 +60,11 @@ def course_detail(request, slug):
 def about(request):
     return render(request, "about.html")
 def instructor(request):
-    success = False  # initialize here
+    success = False
 
     if request.method == 'POST':
-        form = InstructorApplicationForm(request.POST or None, request.FILES or None)
+        form = InstructorApplicationForm(request.POST, request.FILES)
         if form.is_valid():
-            # Access form data
             full_name = form.cleaned_data['full_name']
             country_code = form.cleaned_data['country_code']
             phone_number = form.cleaned_data['phone_number']
@@ -75,21 +75,21 @@ def instructor(request):
             about_yourself = form.cleaned_data['about_yourself']
             cv_file = form.cleaned_data.get('cv')
 
-          
+            # Handle CV upload if exists
             if cv_file:
                 fs = FileSystemStorage()
                 filename = fs.save(cv_file.name, cv_file)
                 uploaded_file_url = fs.url(filename)
-               
+                # Save or process the URL as needed
 
+            # Save other form data or send email etc.
 
             success = True
-            form = InstructorApplicationForm() 
+            form = InstructorApplicationForm()  # clear the form after success
     else:
         form = InstructorApplicationForm()
 
     return render(request, 'instructor.html', {'form': form, 'success': success})
-
 
 def contact_view(request):
     if request.method == 'POST':
