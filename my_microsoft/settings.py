@@ -150,14 +150,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # # Default sender email
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-# settings.py
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.zoho.in'       # For Zoho India (use 'smtp.zoho.com' for global)
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'info@niitf.com'     # Your Zoho email
-EMAIL_HOST_PASSWORD = 'mVS1cEbi2SY5'         # Generate app password from Zoho
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
