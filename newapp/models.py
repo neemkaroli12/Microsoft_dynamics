@@ -97,6 +97,5 @@ class Blog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     is_approved = models.BooleanField(default=False) 
-
     def _str_(self):
         return self.title
