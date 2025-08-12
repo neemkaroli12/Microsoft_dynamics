@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.core.files.storage import FileSystemStorage
 def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
@@ -58,39 +58,38 @@ def course_detail(request, slug):
    
 def about(request):
     return render(request, "about.html")
-
 def instructor(request):
+    success = False  # initialize here
+
     if request.method == 'POST':
-        form = InstructorApplicationForm(request.POST)
+        form = InstructorApplicationForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            application = form.save()
+            # Access form data
+            full_name = form.cleaned_data['full_name']
+            country_code = form.cleaned_data['country_code']
+            phone_number = form.cleaned_data['phone_number']
+            email = form.cleaned_data['email']
+            current_city = form.cleaned_data['current_city']
+            course_topic = form.cleaned_data['course_topic']
+            linkedin_url = form.cleaned_data['linkedin_url']
+            about_yourself = form.cleaned_data['about_yourself']
+            cv_file = form.cleaned_data.get('cv')
 
-            # Email
-            subject = f"New Instructor Application - {application.full_name}"
-            message = (
-                f"Full Name: {application.full_name}\n"
-                f"Country Code: {application.country_code}\n"
-                f"Phone Number: {application.phone_number}\n"
-                f"Email: {application.email}\n"
-                f"Current City: {application.current_city}\n"
-                f"Course Topic: {application.course_topic}\n"
-                f"LinkedIn URL: {application.linkedin_url}\n"
-                f"About Yourself:\n{application.about_yourself}\n"
-            )
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ['info@niitf.com'],
-                fail_silently=False
-            )
+            # Handle CV upload if exists
+            if cv_file:
+                fs = FileSystemStorage()
+                filename = fs.save(cv_file.name, cv_file)
+                uploaded_file_url = fs.url(filename)
+                # Save or process the URL as needed
 
-            messages.success(request, "✅ Your application has been submitted successfully!")
-            form = InstructorApplicationForm()  # empty form after submit
+            # Save other form data or send email etc.
+
+            success = True
+            form = InstructorApplicationForm()  # clear the form after success
     else:
         form = InstructorApplicationForm()
 
-    return render(request, 'instructor.html', {'form': form})
+    return render(request, 'instructor.html', {'form': form, 'success': success})
 
 
 def contact_view(request):

@@ -53,8 +53,13 @@ class InstructorApplicationForm(forms.ModelForm):
             'current_city',
             'course_topic',
             'linkedin_url',
-            'about_yourself'
+            'about_yourself',
+            'cv',
         ]
+        labels = {
+            'cv': 'Upload Your CV (PDF, DOC, DOCX)',
+        }
+         
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name*', 'required': True}),
             'country_code': forms.Select(attrs={'class': 'form-select', 'required': True}, choices=[('+91 India', '+91 India')]),
@@ -64,6 +69,7 @@ class InstructorApplicationForm(forms.ModelForm):
             'course_topic': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Course Topic*', 'required': True}),
             'linkedin_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'LinkedIn Profile URL*', 'required': True}),
             'about_yourself': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Tell us about yourself*', 'required': True}),
+            'cv': forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': '.pdf,.doc,.docx'}),
         }
 
 class ContactForm(forms.ModelForm):
