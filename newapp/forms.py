@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
-from .models import InstructorApplication, ContactMessage, Blog
+from .models import InstructorApplication, ContactMessage
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={
@@ -78,12 +78,3 @@ class ContactForm(forms.ModelForm):
         }
 
 
-class BlogForm(forms.ModelForm):
-    class Meta:
-        model = Blog
-        fields = ['title', 'content', 'image', 'author']
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
-            'author': forms.TextInput(attrs={'class': 'form-control'}),
-        }
