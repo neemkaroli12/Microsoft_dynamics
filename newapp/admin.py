@@ -4,8 +4,8 @@ from .models import Course, UpcomingBatch, Module
 
 class ModuleInline(admin.TabularInline):
     model = Module
-    extra = 1  # Number of empty modules to show by default
-    fields = ('title', 'description')  # this is my code
+    extra = 1  
+    fields = ('title', 'description') 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -19,3 +19,4 @@ class UpcomingBatchAdmin(admin.ModelAdmin):
     list_display = ('start_date', 'batch_type', 'title')
     list_filter = ('batch_type', 'start_date')
     search_fields = ('title', 'schedule_details')
+
