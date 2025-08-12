@@ -119,74 +119,51 @@
         border-radius: 5px;"></div>
   </div>
 
-{% if success %}
-  <div class="alert alert-success text-center" role="alert">
-    Application Submitted Successfully! Thank you for applying.
-  </div>
-{% endif %}
-<div class="container py-5">
-  <div class="row g-5 align-items-start justify-content-center">
-    <div class="col-lg-6">
-      <div class="form-section shadow-sm">
-        <h3 class="text-center mb-4 fw-semibold">Instructor / Content Writer Application</h3>
-        <form method="post" enctype="multipart/form-data" novalidate>
-          {% csrf_token %}
-          {{ form.non_field_errors }}
+  {% if success %}
+    <div class="alert alert-success text-center" role="alert">Application Submitted Successfully! Thank you for applying.</div>
+  {% endif %}
+  <div class="container py-5">
+    <div class="row g-5 align-items-start justify-content-center">
+      <div class="col-lg-6">
+        <div class="form-section shadow-sm">
+          <h3 class="text-center mb-4 fw-semibold">Instructor / Content Writer Application</h3>
+          <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-          <div class="mb-3">
-           
-            {{ form.full_name }}
-            {{ form.full_name.errors }}
-          </div>
+            <div class="mb-3">{{ form.full_name }}
+              {{ form.full_name.errors }}</div>
 
-          <div class="mb-3 row g-2">
-            <div class="col-4">
-             
-              {{ form.country_code }}
-              {{ form.country_code.errors }}
+            <div class="mb-3 row g-2">
+              <div class="col-4">{{ form.country_code }}
+                {{ form.country_code.errors }}</div>
+              <div class="col-8">{{ form.phone_number }}
+                {{ form.phone_number.errors }}</div>
             </div>
-            <div class="col-8">
-              {{ form.phone_number }}
-              {{ form.phone_number.errors }}
-            </div>
-          </div>
 
-          <div class="mb-3">
-            {{ form.email }}
-            {{ form.email.errors }}
-          </div>
+            <div class="mb-3">{{ form.email }}
+              {{ form.email.errors }}</div>
 
-          <div class="mb-3">
-            {{ form.current_city }}
-            {{ form.current_city.errors }}
-          </div>
+            <div class="mb-3">{{ form.current_city }}
+              {{ form.current_city.errors }}</div>
 
-          <div class="mb-3">
-            {{ form.course_topic }}
-            {{ form.course_topic.errors }}
-          </div>
+            <div class="mb-3">{{ form.course_topic }}
+              {{ form.course_topic.errors }}</div>
 
-          <div class="mb-3">
-            {{ form.linkedin_url }}
-            {{ form.linkedin_url.errors }}
-          </div>
+            <div class="mb-3">{{ form.linkedin_url }}
+              {{ form.linkedin_url.errors }}</div>
 
-          <div class="mb-3">
-            {{ form.about_yourself }}
-            {{ form.about_yourself.errors }}
-          </div>
+            <div class="mb-3">{{ form.about_yourself }}
+              {{ form.about_yourself.errors }}</div>
 
-          <div class="mb-4">
-           {{ form.cv.label_tag }}
-          {{ form.cv }}
-          {{ form.cv.errors }}
+            <div class="mb-4">{{ form.cv.label_tag }}
+              {{ form.cv }}
+              {{ form.cv.errors }}</div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+          </form>
         </div>
-
-          <button type="submit" class="btn btn-primary w-100">Submit</button>
-        </form>
       </div>
-    </div>
- 
 
       <div class="col-lg-6">
         <h2 class="section-title mb-2">Complete the Form to Become a NIITF Instructor or Content Writer</h2>
