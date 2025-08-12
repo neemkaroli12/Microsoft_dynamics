@@ -68,7 +68,7 @@ class InstructorApplication(models.Model):
     linkedin_url = models.URLField()
     about_yourself = models.TextField()
     submitted_at = models.DateTimeField(auto_now_add=True)
-
+    cv = models.FileField(upload_to='cvs/', blank=True, null=True)
     def __str__(self):
         return f"{self.full_name} - {self.course_topic}"
     
