@@ -1,6 +1,51 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
+  <style>
+    .form-section {
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 40px;
+    }
+    
+    .section-title {
+      color: #2c0d58;
+      font-weight: 600;
+    }
+    
+    .highlight-bar {
+      width: 50px;
+      height: 4px;
+      background-color: #d6336c;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    
+    .form-control,
+    .form-select {
+      border-radius: 6px;
+    }
+    
+    .info-box {
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 20px;
+      background-color: #fefefe;
+    }
+    
+    .btn-primary {
+      background-color: #2c0d58;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background-color: #220946;
+    }
+  </style>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <div class="instructor-banner text-white text-center py-5" style="background: linear-gradient(90deg, #6e48aa, #9d50bb);">
     <div class="container">
       <h1 class="display-4">Become a Course Instructor</h1>
@@ -73,103 +118,7 @@
         background-color: blue;
         border-radius: 5px;"></div>
   </div>
-  <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    
-    .form-section {
-      background-color: #ffffff;
-      border: 1px solid #dee2e6;
-      border-radius: 8px;
-      padding: 40px;
-    }
-    
-    .section-title {
-      color: #2c0d58;
-      font-weight: 600;
-    }
-    
-    .highlight-bar {
-      width: 50px;
-      height: 4px;
-      background-color: #d6336c;
-      border-radius: 2px;
-      margin-bottom: 20px;
-    }
-    
-    .form-control,
-    .form-select {
-      border-radius: 6px;
-    }
-    
-    .info-box {
-      border: 1px solid #dee2e6;
-      border-radius: 6px;
-      padding: 20px;
-      background-color: #fefefe;
-    }
-    
-    .btn-primary {
-      background-color: #2c0d58;
-      border: none;
-    }
-    
-    .btn-primary:hover {
-      background-color: #220946;
-    }
-  </style>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    
-    .form-section {
-      background-color: #fff;
-      border: 1px solid #dee2e6;
-      border-radius: 10px;
-      padding: 40px;
-    }
-    
-    .form-control,
-    .form-select,
-    textarea {
-      border-radius: 8px;
-    }
-    
-    .btn-primary {
-      background-color: #2c0d58;
-      border: none;
-    }
-    
-    .btn-primary:hover {
-      background-color: #23094a;
-    }
-    
-    .section-title {
-      color: #2c0d58;
-      font-weight: 600;
-    }
-    
-    .highlight-bar {
-      width: 60px;
-      height: 4px;
-      background-color: #d6336c;
-      margin-bottom: 20px;
-      border-radius: 2px;
-    }
-    
-    .info-box {
-      border: 1px solid #dee2e6;
-      border-radius: 10px;
-      padding: 20px;
-      background-color: #ffffff;
-    }
-  </style>
 {% if messages %}
   {% for message in messages %}
     <div class="alert alert-success text-center">{{ message }}</div>
@@ -180,44 +129,47 @@
       <div class="col-lg-6">
         <div class="form-section shadow-sm">
           <h3 class="text-center mb-4 fw-semibold">Instructor / Content Writer Application</h3>
-          <form>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Full Name*" required />
-            </div>
+          <form method="post" novalidate>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
 
-            <div class="mb-3 row g-2">
-              <div class="col-4">
-                <select class="form-select" required>
-                  <option selected>+91 India</option>
-                </select>
-              </div>
-              <div class="col-8">
-                <input type="tel" class="form-control" placeholder="Phone Number*" required />
-              </div>
-            </div>
+  <div class="mb-3">
+    {{ form.full_name }}
+  </div>
 
-            <div class="mb-3">
-              <input type="email" class="form-control" placeholder="Email Address*" required />
-            </div>
+  <div class="mb-3 row g-2">
+    <div class="col-4">
+      {{ form.country_code }}
+    </div>
+    <div class="col-8">
+      {{ form.phone_number }}
+    </div>
+  </div>
 
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Current City*" required />
-            </div>
+  <div class="mb-3">
+    {{ form.email }}
+  </div>
 
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Course Topic*" required />
-            </div>
+  <div class="mb-3">
+    {{ form.current_city }}
+  </div>
 
-            <div class="mb-3">
-              <input type="url" class="form-control" placeholder="LinkedIn Profile URL*" required />
-            </div>
+  <div class="mb-3">
+    {{ form.course_topic }}
+  </div>
 
-            <div class="mb-4">
-              <textarea class="form-control" rows="4" placeholder="Tell us about yourself*" required></textarea>
-            </div>
+  <div class="mb-3">
+    {{ form.linkedin_url }}
+  </div>
 
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
-          </form>
+  <div class="mb-4">
+    {{ form.about_yourself }}
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Submit</button>
+</form>
+
+
         </div>
       </div>
 

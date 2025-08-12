@@ -71,6 +71,7 @@ class InstructorApplication(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.course_topic}"
+    
 
 class ContactMessage(models.Model):
     name = models.CharField(max_length=100)

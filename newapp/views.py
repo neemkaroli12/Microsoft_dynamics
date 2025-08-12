@@ -5,6 +5,7 @@ from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.conf import settings
 
 def home(request):
     courses = Course.objects.all()
