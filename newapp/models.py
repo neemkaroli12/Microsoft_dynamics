@@ -83,3 +83,20 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"{self.name} - {self.subject}"
 
+class Blog(models.Model):
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('pending', 'Pending Approval'),
+        ('approved', 'Approved'),
+    ]
+
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    image = models.ImageField(upload_to='blogs/', blank=True, null=True)
+    author = models.CharField(max_length=100, default='Anonymous')  # for outside user
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    is_approved = models.BooleanField(default=False) 
+
+    def _str_(self):
+        return self.title

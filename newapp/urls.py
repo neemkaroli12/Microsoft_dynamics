@@ -13,5 +13,5 @@ urlpatterns=[
     path('about/', views.about, name='about'),
     path('become-instructor/', views.instructor, name='become_instructor'),
     path('contact/', views.contact_view, name='contact'),
-    
+    path('blogs/', views.blog_view, name='blog_list'),
 ]

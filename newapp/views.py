@@ -1,13 +1,14 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course, UpcomingBatch
-from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm 
+from .models import Course, UpcomingBatch, Blog
+from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm ,BlogForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import EmailMessage
+from django.contrib.auth.decorators import login_required
 def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
@@ -122,3 +123,32 @@ def contact_view(request):
     return render(request, 'contact.html', {'form': form})
 
 
+def blog_view(request):
+    if request.user.is_staff:
+        # Admin ko sab posts dikhaye
+        blogs = Blog.objects.all().order_by('-created_at')
+    else:
+        # Normal user ko sirf approved dikhaye
+        blogs = Blog.objects.filter(is_approved=True).order_by('-created_at')
+
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            if request.user.is_authenticated:
+                blog.author = request.user.get_full_name() or request.user.username
+            blog.is_approved = False  # pending approval
+            blog.save()
+            return redirect('blog_list')
+    else:
+        initial_data = {}
+        if request.user.is_authenticated:
+            initial_data['author'] = request.user.get_full_name() or request.user.username
+        form = BlogForm(initial=initial_data)
+
+    context = {
+        'blogs': blogs,
+        'form': form,
+        'is_admin': request.user.is_staff,
+    }
+    return render(request, 'blog.html', context)
