@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import EmailMessage
 def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
@@ -59,12 +60,11 @@ def course_detail(request, slug):
 def about(request):
     return render(request, "about.html")
 def instructor(request):
-    success = False  # initialize here
+    success = False
 
     if request.method == 'POST':
-        form = InstructorApplicationForm(request.POST or None, request.FILES or None)
+        form = InstructorApplicationForm(request.POST, request.FILES)
         if form.is_valid():
-            # Access form data
             full_name = form.cleaned_data['full_name']
             country_code = form.cleaned_data['country_code']
             phone_number = form.cleaned_data['phone_number']
@@ -75,22 +75,38 @@ def instructor(request):
             about_yourself = form.cleaned_data['about_yourself']
             cv_file = form.cleaned_data.get('cv')
 
-            # Handle CV upload if exists
-            if cv_file:
-                fs = FileSystemStorage()
-                filename = fs.save(cv_file.name, cv_file)
-                uploaded_file_url = fs.url(filename)
-                # Save or process the URL as needed
+            subject = 'New Instructor Application from ' + full_name
+            message = f"""
+            Full Name: {full_name}
+            Country Code: {country_code}
+            Phone Number: {phone_number}
+            Email: {email}
+            Current City: {current_city}
+            Course Topic: {course_topic}
+            LinkedIn URL: {linkedin_url}
+            About Yourself: {about_yourself}
+            """
 
-            # Save other form data or send email etc.
+            email_message = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email='info@niitf.com',  # <-- direct string here
+                to=['info@niitf.com'],    # Make sure ADMIN_EMAIL is defined in settings.py
+                reply_to=[email],
+            )
+
+            if cv_file:
+                email_message.attach(cv_file.name, cv_file.read(), cv_file.content_type)
+
+            email_message.send()
 
             success = True
-            form = InstructorApplicationForm()  # clear the form after success
+            form = InstructorApplicationForm()
+
     else:
         form = InstructorApplicationForm()
 
     return render(request, 'instructor.html', {'form': form, 'success': success})
-
 
 def contact_view(request):
     if request.method == 'POST':
