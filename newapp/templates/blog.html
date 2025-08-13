@@ -4,115 +4,7 @@
 
 {% block content %}
 <style>
-
-.fab-create {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #6c2eb9; /* Purple shade */
-  color: white;
-  font-size: 2.5rem;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 60px;
-  box-shadow: 0 4px 12px rgba(108, 46, 185, 0.6);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
-  z-index: 9999;
-}
-
-.fab-create:hover {
-  background: #51248f;
-  box-shadow: 0 6px 20px rgba(81, 36, 143, 0.8);
-}
-
-.fab-create:active {
-  background: #3d1f75;
-  box-shadow: 0 2px 8px rgba(61, 31, 117, 0.7);
-  transform: scale(0.95);
-}
-
-.card-thumb img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
- 
-}
-
-form {
-  max-width: 700px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 30px 35px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-form label {
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 6px;
-  display: block;
-}
-
-form input[type="text"],
-form input[type="file"],
-form textarea {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1.8px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: inherit;
-  color: #334155;
-  resize: vertical;
-  transition: border-color 0.3s ease;
-}
-
-form input[type="text"]:focus,
-form input[type="file"]:focus,
-form textarea:focus {
-  border-color: #6366f1;
-  outline: none;
-  box-shadow: 0 0 8px rgba(99,102,241,0.3);
-}
-
-form textarea {
-  min-height: 120px;
-}
-
-form .text-danger {
-  margin-top: 5px;
-  font-size: 0.875rem;
-  color: #dc2626;
-}
-
-form button[type="submit"] {
-  background: linear-gradient(135deg, #6366f1, #ec4899);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  font-weight: 700;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 8px 22px rgba(99,102,241,0.4);
-  transition: background 0.3s ease;
-  margin-top: 10px;
-}
-
-form button[type="submit"]:hover {
-  background: linear-gradient(135deg, #5b52f4, #db367a);
-}
-
-#blogForm{
-  display: none;
-}
-/* ===== HERO ===== */
-.hero {
+  .hero {
   min-height: 250px;
   display: flex;
   align-items: center;
@@ -384,8 +276,9 @@ form button[type="submit"]:hover {
 </div>
 <div class="container mb-5">
   <hr>
-  <h2 class="mb-3 text-center">Submit Your Blog</h2>
-  <form method="POST" enctype="multipart/form-data" novalidate>
+
+  <form id="blogForm" method="POST" enctype="multipart/form-data" novalidate>
+      <h2 class="mb-3 text-center">Write Your Blog</h2>
     {% csrf_token %}
     <div class="mb-3">
       <label for="{{ form.title.id_for_label }}">Title</label>
@@ -441,7 +334,7 @@ form button[type="submit"]:hover {
   </div>
 </div>
 {% if user.is_authenticated %}
-  <a href="#" class="fab-create" title="Create new post">✚</a>
+  <a href="javascript:void(0);" class="fab-create" id="showFormBtn" title="Create new post">✚</a>
 {% endif %}
 <script>
 AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
@@ -455,5 +348,18 @@ modalEl.addEventListener('show.bs.modal', function (event) {
   document.getElementById('modalContent').innerHTML = btn.dataset.content;
  
 });
+</script>
+<script>
+  const form = document.getElementById('blogForm');
+  const showFormBtn = document.getElementById('showFormBtn');
+
+  showFormBtn.addEventListener('click', function () {
+    if (form.style.display === "none" || form.style.display === "") {
+      form.style.display = "block";
+      form.scrollIntoView({ behavior: "smooth" });
+    } else {
+      form.style.display = "none";
+    }
+  });
 </script>
 {% endblock %}
