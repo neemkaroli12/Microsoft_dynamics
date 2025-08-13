@@ -49,7 +49,7 @@
                 <li class="dropdown-submenu">
                   <a class="dropdown-item" href="#">Odoo</a>
                   <ul class="dropdown-menu sub-dropdown">
-                    {% for course in courses %}
+                    {% for course in courses %}5
                       {% if course.category == 'Odoo' and course.slug and course.title %}
                         <li><a class="dropdown-item" href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></li>
                         <div class="custom-divider"></div>
