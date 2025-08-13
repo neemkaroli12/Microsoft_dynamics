@@ -1,0 +1,365 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<style>
+  .hero {
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  
+  margin-bottom: 35px;
+  color: white;
+  background: 
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.08), transparent 50%),
+    linear-gradient(135deg, #1e293b 0%, #6366f1 40%, #ec4899 100%),
+    url("{% static 'images/blog-hero.jpg' %}") center/cover no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+}
+
+.hero .content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-weight: 800;
+  font-size: 2.8rem;
+}
+
+.hero p {
+  opacity: 0.9;
+  font-size: 1.15rem;
+}
+
+.card-article {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.article-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 1rem 1.25rem 0.5rem 1.25rem;
+  color: #333;
+}
+
+.article-excerpt {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 1.25rem 1.25rem 1.25rem;
+  flex-grow: 1; 
+}
+
+.d-flex {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  align-items: center;
+}
+
+.read-more-fab {
+  background: linear-gradient(45deg, #7b5fff, #ff4081);
+  border: none;
+  color: white;
+  padding: 0.4rem 1.2rem;
+  font-weight: 700;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.read-more-fab:hover {
+  background: linear-gradient(45deg, #ff4081, #7b5fff);
+}
+
+.text-muted {
+  font-size: 0.85rem;
+  color: #888;
+  margin-right: auto;
+}
+.masonry {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+@media (max-width: 992px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .masonry {
+    column-count: 1;
+  }
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.fab-create {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #6c2eb9; /* Purple shade */
+  color: white;
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0 4px 12px rgba(108, 46, 185, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+.fab-create:hover {
+  background: #51248f;
+  box-shadow: 0 6px 20px rgba(81, 36, 143, 0.8);
+}
+
+.fab-create:active {
+  background: #3d1f75;
+  box-shadow: 0 2px 8px rgba(61, 31, 117, 0.7);
+  transform: scale(0.95);
+}
+
+.card-thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+ 
+}
+
+form {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+form label {
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+  display: block;
+}
+
+form input[type="text"],
+form input[type="file"],
+form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #334155;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="file"]:focus,
+form textarea:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 8px rgba(99,102,241,0.3);
+}
+
+form textarea {
+  min-height: 120px;
+}
+
+form .text-danger {
+  margin-top: 5px;
+  font-size: 0.875rem;
+  color: #dc2626;
+}
+
+form button[type="submit"] {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 700;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(99,102,241,0.4);
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+form button[type="submit"]:hover {
+  background: linear-gradient(135deg, #5b52f4, #db367a);
+}
+
+#blogForm{
+  display: none;
+}
+
+</style>
+<section class="hero container-fluid">
+  <div class="content" data-aos="fade-up">
+    <h1>Fresh Perspectives & Crisp Reads</h1>
+    <p>In-depth articles, guides, and stories curated for you.</p>
+  </div>
+</section>
+<div class="container mb-5">
+  <div class="row g-4">
+    {% for post in blogs %}
+    <article class="col-md-4 col-sm-6">
+      <div class="card-article">
+        <div class="card-thumb">
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+          {% else %}
+            <img src="{% static 'images/default-blog.jpg' %}" alt="default">
+          {% endif %}
+        </div>
+  <div class="article-title">{{ post.title }}</div>
+        <div class="article-excerpt">{{ post.content|truncatewords:28 }}</div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+          <small class="text-muted">{{ post.created_at|date:"M d, Y" }} • {{ post.author|default:"Team" }}</small>
+          <button class="read-more-fab" data-bs-toggle="modal" data-bs-target="#modalArticle"
+            data-id="{{ post.id }}"
+            data-title="{{ post.title|escapejs }}"
+            data-image="{% if post.image %}{{ post.image.url }}{% else %}{% static 'images/default-blog.jpg' %}{% endif %}"
+            data-author="{{ post.author|default:'Team' }}"
+            data-date="{{ post.created_at|date:'F j, Y' }}"
+            data-content="{{ post.content|escapejs }}">
+            Read
+          </button>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+<div class="container mb-5">
+  <hr>
+
+  <form id="blogForm" method="POST" enctype="multipart/form-data" novalidate>
+      <h2 class="mb-3 text-center">Write Your Blog</h2>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="{{ form.title.id_for_label }}">Title</label>
+      {{ form.title }}
+      {% if form.title.errors %}
+        <div class="text-danger">{{ form.title.errors }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.content.id_for_label }}">Content</label>
+      {{ form.content }}
+      {% if form.content.errors %}
+        <div class="text-danger">{{ form.content.errors }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.image.id_for_label }}">Image (optional)</label>
+      {{ form.image }}
+      {% if form.image.errors %}
+        <div class="text-danger">{{ form.image.errors }}</div>
+      {% endif %}
+    </div>
+    <div class="mb-3">
+      <label for="{{ form.author.id_for_label }}">Your Name</label>
+      {{ form.author}}
+      {% if form.author.errors %}
+        <div class="text-danger">{{ form.author.errors }}</div>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Blog</button>
+  </form>
+</div>
+<div class="modal fade modal-article" id="modalArticle" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modalTitle" class="modal-title">Title</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body d-flex flex-wrap">
+        <div class="modal-image me-4 flex-shrink-0" style="max-width: 40%; min-width: 280px;">
+          <img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 420px; object-fit: cover; width: 100%;">
+        </div>
+        <div class="modal-text flex-grow-1">
+          <div class="small text-muted mb-3" id="modalMeta"></div>
+          <div id="modalContent"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% if user.is_authenticated %}
+  <a href="javascript:void(0);" class="fab-create" id="showFormBtn" title="Create new post">✚</a>
+{% endif %}
+<script>
+AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+
+const modalEl = document.getElementById('modalArticle');
+modalEl.addEventListener('show.bs.modal', function (event) {
+  const btn = event.relatedTarget;
+  document.getElementById('modalTitle').innerText = btn.dataset.title;
+  document.getElementById('modalImage').src = btn.dataset.image;
+  document.getElementById('modalMeta').innerText = btn.dataset.date + ' • ' + btn.dataset.author;
+  document.getElementById('modalContent').innerHTML = btn.dataset.content;
+ 
+});
+</script>
+<script>
+  const form = document.getElementById('blogForm');
+  const showFormBtn = document.getElementById('showFormBtn');
+
+  showFormBtn.addEventListener('click', function () {
+    if (form.style.display === "none" || form.style.display === "") {
+      form.style.display = "block";
+      form.scrollIntoView({ behavior: "smooth" });
+    } else {
+      form.style.display = "none";
+    }
+  });
+</script>
+{% endblock %}
