@@ -100,21 +100,7 @@
   {% endif %}
 </script>
 
-    <script>
-      {% if messages %}
-        {% for message in messages %}
-          Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% else %}info{% endif %}',
-            title: "{{ message|escapejs }}",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-          });
-        {% endfor %}
-      {% endif %}
-    </script>
+   
 
     <!-- Page Content -->
     {% block content %}{% endblock %}
