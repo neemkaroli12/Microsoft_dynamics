@@ -69,7 +69,7 @@
           <img src="{{ course.image.url }}" alt="{{ course.title }}" />
           <h3>{{ course.title }}</h3>
           <p>{{ course.description }}</p>
-           <a href="#" class="" style="  background: linear-gradient(135deg, #0078D7, #00B294); padding: 10px; border-radius: 20px; border: none; color: white;font-size:1.4rem; text-decoration:none;">View Details</a>
+           <a href="{% url 'course_detail' course.slug %}" class="" style="  background: linear-gradient(135deg, #0078D7, #00B294); padding: 10px; border-radius: 20px; border: none; color: white;font-size:1.4rem; text-decoration:none;">View Details</a>
         </div>
       {% endfor %}
       
