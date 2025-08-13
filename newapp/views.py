@@ -23,6 +23,7 @@ def course_detail(request, slug):
    
 def about(request):
     return render(request, "about.html")
+
 def instructor(request):
     success = False
 
@@ -73,9 +74,8 @@ def contact_view(request):
                 fail_silently=False
             )
 
-            messages.success(request, "✅ Your message has been sent successfully!")
-            form = ContactForm()  # Clear form
-    else:
+            messages.success(request, " Your message has been sent successfully!")
+            form = ContactForm()  
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
