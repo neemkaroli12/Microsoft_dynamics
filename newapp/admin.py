@@ -31,3 +31,38 @@ class BlogAdmin(admin.ModelAdmin):
     def approve_blogs(self, request, queryset):
         queryset.update(status='approved')
     approve_blogs.short_description = "Mark selected blogs as approved"
+    
+    
+# newapp/admin.py
+from django.contrib.admin import AdminSite
+from django.contrib.auth.views import LoginView
+from django.urls import path
+
+class CustomAdminLoginView(LoginView):
+    template_name = 'admin/login.html'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # Admin ke liye alag cookie set karo
+        response.set_cookie(
+            key="admin_sessionid",
+            value=self.request.session.session_key,
+            httponly=True,
+            samesite='Lax'
+        )
+        return response
+
+class MyAdminSite(AdminSite):
+    site_header = "My Custom Admin"
+    site_title = "Custom Admin"
+    index_title = "Welcome to Custom Admin Panel"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('login/', CustomAdminLoginView.as_view(), name='login'),
+        ]
+        return custom_urls + urls
+
+# Instance
+admin_site = MyAdminSite(name='myadmin')

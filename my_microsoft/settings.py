@@ -42,8 +42,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # right after SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'newapp.middleware.AdminSessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,3 +145,5 @@ EMAIL_HOST_USER = 'info@niitf.com'     # Your Zoho email
 EMAIL_HOST_PASSWORD = 'f6frfVE4Wr7m'         # Generate app password from Zoho
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SESSION_COOKIE_NAME = "frontend_sessionid"
