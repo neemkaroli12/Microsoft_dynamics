@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Course, UpcomingBatch, Blog
-from .forms import RegisterForm,LoginForm,InstructorApplicationForm,ContactForm ,BlogForm
+from .forms import InstructorApplicationForm,ContactForm ,BlogForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -13,44 +13,6 @@ def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
     return render(request, 'index.html', {'courses': courses })
-
-
-
-def register_view(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # optional: auto login
-            messages.success(request, "Account created successfully!")
-            return redirect('login')  # home page ka url name
-        else:
-            messages.error(request, "Please fix the errors below.")
-    else:
-        form = RegisterForm()
-
-    return render(request, 'register.html', {'form': form})
-
-    
-def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            messages.success(request, "Logged in successfully!")
-            return redirect('index')  
-        else:
-            messages.error(request, "Invalid username or password.")
-    else:
-        form = LoginForm()
-
-    return render(request, 'login.html', {'form': form})
-
-def logout_view(request):
-    logout(request)
-    messages.success(request, "You have been logged out.")
-    return redirect('login')
 
 
 def course_detail(request, slug):
@@ -76,17 +38,14 @@ def instructor(request):
             about_yourself = form.cleaned_data['about_yourself']
             cv_file = form.cleaned_data.get('cv')
 
-            # Handle CV upload if exists
+           
             if cv_file:
                 fs = FileSystemStorage()
                 filename = fs.save(cv_file.name, cv_file)
                 uploaded_file_url = fs.url(filename)
-                # Save or process the URL as needed
-
-            # Save other form data or send email etc.
 
             success = True
-            form = InstructorApplicationForm()  # clear the form after success
+            form = InstructorApplicationForm()  
     else:
         form = InstructorApplicationForm()
 
@@ -97,8 +56,6 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             contact = form.save()
-
-            # Send email
             subject = f"New Contact Message from {contact.name}"
             body = f"""
             Name: {contact.name}
