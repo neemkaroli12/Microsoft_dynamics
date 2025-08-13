@@ -41,6 +41,15 @@ body{
   font-size: 18px;
 }
 
+.navbar .dropdown-menu {
+  position: absolute !important;
+  overflow: visible !important;
+}
+.dropdown-menu {
+  z-index: 1060 !important; /* above everything */
+}
+
+
 /* Manual toggle class on mobile */
 @media (max-width: 991px) {
   .sub-dropdown {

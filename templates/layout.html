@@ -181,6 +181,23 @@
     <!-- Navbar Scroll Lock Script -->
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+  const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item');
+  dropdownToggles.forEach(function (toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const currentSubmenu = this.nextElementSibling;
+      document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
+        if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
+      });
+      if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
+        currentSubmenu.classList.toggle('show-sub');
+      }
+    });
+  });
+});
+
+      document.addEventListener('DOMContentLoaded', function () {
         const navbarCollapse = document.getElementById('mainNavbar');
         navbarCollapse.addEventListener('shown.bs.collapse', function () {
           document.body.classList.add('scroll-lock');
