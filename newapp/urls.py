@@ -11,4 +11,7 @@ urlpatterns=[
     path('become-instructor/', views.instructor, name='become_instructor'),
     path('contact/', views.contact_view, name='contact'),
     path('blogs/', views.blog_view, name='blog_list'),
+    path('signup/', views.signup, name='signup'),
+    path('user-login/', views.user_login, name='user-login'),
+    path('user-logout/', views.user_logout, name='user-logout'),
 ]

@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Course, UpcomingBatch, Blog
-from .forms import InstructorApplicationForm,ContactForm ,BlogForm
+from .forms import InstructorApplicationForm,ContactForm ,BlogForm,CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -9,6 +9,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
+
 def home(request):
     courses = Course.objects.all()
     # courses = DynamicsCourse.objects.all()
@@ -110,3 +111,34 @@ def blog_view(request):
         'is_admin': request.user.is_staff,
     }
     return render(request, 'blog.html', context)
+
+
+# Authentication 
+
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully Signed up')
+            return redirect('user-login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
+# login
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Successfully logged in')
+            return redirect('index')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')
+# logout
+def user_logout(request):
+    logout(request)
+    return redirect('user-login')

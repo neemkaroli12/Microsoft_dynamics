@@ -1,7 +1,7 @@
 from django import forms 
 from django.contrib.auth.models import User
 from .models import InstructorApplication, ContactMessage, Blog
-
+from django.contrib.auth.forms import UserCreationForm
 
 class InstructorApplicationForm(forms.ModelForm):
     class Meta:
@@ -53,3 +53,17 @@ class BlogForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control'}),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }   
+        
