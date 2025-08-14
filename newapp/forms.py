@@ -1,7 +1,8 @@
 from django import forms 
 from django.contrib.auth.models import User
-from .models import InstructorApplication, ContactMessage, Blog
+from .models import InstructorApplication, ContactMessage, Blog, Enrollment
 from django.contrib.auth.forms import UserCreationForm
+import re
 
 class InstructorApplicationForm(forms.ModelForm):
     class Meta:
@@ -20,7 +21,6 @@ class InstructorApplicationForm(forms.ModelForm):
         labels = {
             'cv': 'Upload Your CV (PDF, DOC, DOCX)',
         }
-         
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name*', 'required': True}),
             'country_code': forms.Select(attrs={'class': 'form-select', 'required': True}, choices=[('+91 India', '+91 India')]),
@@ -32,6 +32,16 @@ class InstructorApplicationForm(forms.ModelForm):
             'about_yourself': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Tell us about yourself*', 'required': True}),
             'cv': forms.ClearableFileInput(attrs={'class': 'form-control', 'accept': '.pdf,.doc,.docx'}),
         }
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+
+        # Allow only 10 digits (India standard)
+        if not re.match(r'^\d{10}$', phone_number):
+            raise forms.ValidationError("Phone number must be exactly 10 digits without spaces or symbols.")
+
+        return phone_number
+
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -66,4 +76,14 @@ class CustomUserCreationForm(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
         }   
-        
+class EnrollmentForm(forms.ModelForm):
+    class Meta:
+        model = Enrollment
+        fields = ['name', 'email', 'phone', 'course', 'fees']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Your Email', 'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}),
+            'course': forms.TextInput(attrs={'placeholder': 'Course Name', 'class': 'form-control'}),
+            'fees': forms.NumberInput(attrs={'placeholder': 'Fees', 'class': 'form-control'}),
+        }        

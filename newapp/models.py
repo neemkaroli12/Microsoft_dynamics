@@ -9,7 +9,7 @@ class Course(models.Model):
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)  # <-- New field
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     short_description = models.TextField()
     full_description = models.TextField()
     rating = models.FloatField(default=0.0)
@@ -21,11 +21,11 @@ class Course(models.Model):
     support_available = models.BooleanField(default=False)
     image = models.ImageField(upload_to='courses/', blank=True, null=True)
     video = models.FileField(upload_to='courses/videos/', blank=True, null=True)
-    syllabus_link = models.CharField(max_length=255, blank=True, null=True) 
+    syllabus_link = models.CharField(max_length=255, blank=True, null=True)
+    course_fees = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.title
-
 
 class UpcomingBatch(models.Model):
     BATCH_TYPE_CHOICES = [
@@ -99,3 +99,16 @@ class Blog(models.Model):
     is_approved = models.BooleanField(default=False) 
     def _str_(self):
         return self.title
+
+from django.db import models
+
+class Enrollment(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=10)
+    course = models.CharField(max_length=100)
+    fees = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.course}"

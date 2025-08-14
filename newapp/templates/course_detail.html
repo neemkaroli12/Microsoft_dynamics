@@ -114,7 +114,6 @@
     
     .description {
       max-width: 800px;
-      margin: auto;
       font-size: 1rem;
       color: black;
     }
@@ -584,6 +583,113 @@
       font-size: 1.2rem;
       line-height: 1;
     }
+  
+#enrollModal .modal-dialog {
+    transform: scale(0.95);
+    transition: all 0.3s ease-in-out;
+}
+
+#enrollModal.show .modal-dialog {
+    transform: scale(1);
+}
+
+#enrollModal .modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.2);
+    border: none;
+    overflow: hidden;
+}
+#enrollModal .modal-header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+}
+
+#enrollModal .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+#enrollModal .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+#enrollModal .form-control {
+    border-radius: 10px;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+#enrollModal .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0px 0px 8px rgba(106, 17, 203, 0.3);
+}
+
+#enrollModal label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#enrollModal .input-group-text {
+    background: transparent;
+    border: none;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6a11cb;
+    font-size: 1.1rem;
+}
+
+
+#enrollModal .btn-primary {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+#enrollModal .btn-primary:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: translateY(-2px);
+}
+
+#enrollModal #successMessage {
+    animation: fadeIn 0.5s ease-in-out;
+}
+#enrollModal .modal-dialog {
+    max-width: 420px;  
+    margin: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.table {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table th {
+    background: #6c2eb9;
+    color: #fff;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+}
   </style>
 
   <section style="
@@ -687,15 +793,24 @@
       </div>
       <div class="row">
         <div class="mt-5 d-flex justify-content-center training-buttons flex-wrap gap-3">
-          <a href="#" style="
-            background-color: #6c2eb9;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            color: white;
-            font-size: 1.4rem;
-            text-decoration: none;
-          ">Enroll Now</a>
+          <a href="#"
+    style="
+        background-color: #6c2eb9;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        color: white;
+        font-size: 1.4rem;
+        text-decoration: none;
+    "
+    class="enroll-btn"
+    data-course="{{course.title}}"
+    data-fees="{{course.course_fees}}"
+    data-bs-toggle="modal"
+    data-bs-target="#enrollModal"
+>
+    Enroll Now
+</a>
           <a href="#" style="
             background-color: #6c2eb9;
             padding: 10px 20px;
@@ -734,7 +849,9 @@
                 <p style="text-align: start">{{ batch.schedule_details }}</p>
               </div>
               {% if batch.course_fees %}
-                <a href="{{ batch.course_fees }}" class="course-fees-btn">Course Fees</a>
+                <a href="#" class="course-fees-btn" data-bs-toggle="modal" data-bs-target="#feesModal">
+    Course Fees
+</a>
               {% endif %}
             </div>
           {% empty %}
@@ -745,12 +862,19 @@
     </div>
   </section>
 
+
+
+
+
+
+
+
   {% comment %}course details{% endcomment %}
 
   <section id="course-details" class="py-5">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 mt-5 px-4">
+        <div class="col-lg-12 mt-5 px-4">
           <h2 class="mb-4">Best {{ course.title }} Certification Online Course</h2>
           <div class="line-decorator mb-4" style="
   width: 200px;
@@ -835,7 +959,13 @@
               <p class="mb-0" style="font-size: 1.2rem">Gain practical skills through assignments and live projects tailored for {{ course.title }} learners.</p>
             </div>
             <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-              <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+              <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
             </div>
           </div>
 
@@ -913,7 +1043,13 @@
               <p class="mb-0" style="font-size: 1.2rem">Get personalized career coaching and mentorship from industry experts to accelerate your growth.</p>
             </div>
             <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-              <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+              <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
             </div>
           </div>
 
@@ -963,7 +1099,13 @@
                 <p class="mb-0" style="font-size: 1.2rem">Or need customized syllabus? Enroll Now & personalized it!</p>
               </div>
               <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
               </div>
             </div>
           </div>
@@ -979,7 +1121,7 @@
     border-radius: 5px;
   "></div>
 
-            <p class="description" style="text-align: justify; line-height: 1.3; font-size: 1.3rem">NIITF delivers top-notch {{ course.title }} online training packed with cutting-edge features designed to accelerate your learning and career growth.</p>
+            <p class="description" style=" line-height: 1.3; font-size: 1.3rem">NIITF delivers top-notch {{ course.title }} online training packed with cutting-edge features designed to accelerate your learning and career growth.</p>
 
             <div class="row text-start mt-4">
               <div class="col-md-6 mb-4">
@@ -1066,7 +1208,15 @@
                   <p class="mb-0" style="font-size: 1.2rem">Benefit from career-focused course content and dedicated coaching designed to help you land your dream job.</p>
                 </div>
                 <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                  <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                
+<button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
+
                 </div>
               </div>
             </div>
@@ -1106,7 +1256,13 @@
                   <p class="mb-0" style="font-size: 1.2rem">Complete real-time projects, to showcase your skills to employers.</p>
                 </div>
                 <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                  <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                  <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
                 </div>
               </div>
             </div>
@@ -1154,7 +1310,13 @@
                 <p class="mb-0" style="font-size: 1.2rem">Enroll now to get a free consultation session with our expert trainer.</p>
               </div>
               <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
               </div>
             </div>
           </div>
@@ -1328,7 +1490,13 @@
                 <p class="mb-0" style="font-size: 1.2rem">Enroll now and get guided through the industry's recruitment process.</p>
               </div>
               <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
               </div>
             </div>
           </div>
@@ -1449,39 +1617,104 @@
                 <p class="mb-0" style="font-size: 1.2rem">Register now and save up to 30% with our group enrollment offers.</p>
               </div>
               <div class="button col-lg-3 col-md-12 text-lg-end text-center">
-                <button class="btn btn-primary">Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i></button>
+                <button class="btn btn-primary enroll-btn"
+        data-course="{{course.title}}"
+        data-fees="{{course.course_fees}}"
+        data-bs-toggle="modal"
+        data-bs-target="#enrollModal">
+  Enroll Now <i class="fas fa-fighter-jet ms-2 text-white"></i>
+</button>
               </div>
             </div>
           </div>
 
           {% comment %}col-lg-8{% endcomment %}
         </div>
-        {% comment %}form{% endcomment %}
-        <div class="col-lg-3 mt-2 px-4">
-          <div class="sticky-form p-4 bg-white shadow rounded ms-5">
-            <h4 class="form-heading">Drop Us A Query</h4>
-            <form>
-              <input type="text" class="form-control" placeholder="Full Name" required />
-              <div class="phone-input-group">
-                <select class="form-select country-code" required>
-                  <option value="+91" selected>+91 (IN)</option>
-                  <option value="+1">+1 (US)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+61">+61 (AU)</option>
-                  <option value="+81">+81 (JP)</option>
-                  <option value="+971">+971 (UAE)</option>
-                </select>
-                <input type="tel" class="form-control" placeholder="Mobile Number" required />
-              </div>
-              <input type="email" class="form-control" placeholder="Email" required />
-              <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-              <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </section>
+
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enroll Now</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="enrollForm">
+          <div class="mb-3">
+            <label>Full Name</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+          <div class="mb-3">
+  <label>Phone</label>
+  <input type="tel"
+         class="form-control"
+         name="phone"
+         pattern="[0-9]{10}"
+         maxlength="10"
+         placeholder="Enter 10-digit phone number"
+         required>
+</div>
+
+          <div class="mb-3">
+            <label>Course</label>
+            <input type="text" class="form-control" name="course" id="courseName" readonly>
+          </div>
+          <div class="mb-3">
+            <label>Course Fees</label>
+            <input type="text" class="form-control" name="fees" id="courseFees" readonly>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+        <div id="successMessage" class="text-center" style="display:none;">
+          <h5 class="text-success">✅ Thank you for enrolling!</h5>
+          <p>You have enrolled for <strong id="finalCourse"></strong> with fees <strong id="finalFees"></strong>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Course Fees Modal -->
+<div class="modal fade" id="feesModal" tabindex="-1" aria-labelledby="feesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="feesModalLabel">Course Fees & Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Duration</th>
+              <th>Fees</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in courses %}
+            <tr>
+              <td>{{ course.title }}</td>
+              <td>{{ course.duration }}</td>
+              <td>{{course.course_fees}}</td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1505,4 +1738,55 @@
       })
     })
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const enrollButtons = document.querySelectorAll('.enroll-btn');
+  const courseNameField = document.getElementById('courseName');
+  const courseFeesField = document.getElementById('courseFees');
+  const enrollForm = document.getElementById('enrollForm');
+  const successMessage = document.getElementById('successMessage');
+  const finalCourse = document.getElementById('finalCourse');
+  const finalFees = document.getElementById('finalFees');
+
+  enrollButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const course = this.getAttribute('data-course');
+      const fees = this.getAttribute('data-fees');
+      courseNameField.value = course;
+      courseFeesField.value = fees;
+
+      enrollForm.style.display = 'block';
+      successMessage.style.display = 'none';
+    });
+  });
+
+  $(enrollForm).submit(function(e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+
+    $.ajax({
+      url: "{% url 'enroll_course' %}",
+      type: "POST",
+      data: formData,
+      headers: {'X-CSRFToken': '{{ csrf_token }}'},
+      success: function(response) {
+        if(response.success){
+          enrollForm.style.display = 'none';
+          finalCourse.textContent = courseNameField.value;
+          finalFees.textContent = courseFeesField.value;
+          successMessage.style.display = 'block';
+        } else {
+          alert("Error: " + JSON.stringify(response.errors));
+        }
+      },
+      error: function(xhr, status, error){
+        alert("Something went wrong: " + error);
+      }
+    });
+  });
+});
+</script>
+
+
 {% endblock %}

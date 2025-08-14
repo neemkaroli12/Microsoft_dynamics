@@ -10,7 +10,7 @@ class ModuleInline(admin.TabularInline):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'course_duration', 'assignments_duration')
+    list_display = ('title', 'course_duration', 'assignments_duration','course_fees')
     inlines = [ModuleInline]  # Defined after ModuleInline
 
 
