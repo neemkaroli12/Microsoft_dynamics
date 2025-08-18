@@ -182,20 +182,31 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
   const dropdownToggles = document.querySelectorAll('.dropdown-submenu > .dropdown-item');
+
   dropdownToggles.forEach(function (toggle) {
     toggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const currentSubmenu = this.nextElementSibling;
-      document.querySelectorAll('.sub-dropdown').forEach(function (submenu) {
-        if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
-      });
-      if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
-        currentSubmenu.classList.toggle('show-sub');
+      // Only trigger on mobile view
+      if (window.innerWidth <= 991) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const parent = this.parentElement;
+        const currentSubmenu = this.nextElementSibling;
+
+        // Close all other submenus
+        document.querySelectorAll('.dropdown-submenu .sub-dropdown').forEach(function (submenu) {
+          if (submenu !== currentSubmenu) submenu.classList.remove('show-sub');
+        });
+
+        // Toggle current submenu
+        if (currentSubmenu && currentSubmenu.classList.contains('sub-dropdown')) {
+          currentSubmenu.classList.toggle('show-sub');
+        }
       }
     });
   });
 });
+
 
       document.addEventListener('DOMContentLoaded', function () {
         const navbarCollapse = document.getElementById('mainNavbar');
