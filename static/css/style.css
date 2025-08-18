@@ -40,28 +40,70 @@ body{
   font-weight: 600;
   font-size: 18px;
 }
-
-.navbar .dropdown-menu {
+.navbar .dropdown-menu,
+.dropdown-menu {
   position: absolute !important;
   overflow: visible !important;
+  z-index: 1060 !important;
 }
-.dropdown-menu {
-  z-index: 1060 !important; /* above everything */
+.dropdown-menu.mega-dropdown {
+  width: 200px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu > .sub-dropdown {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+  border-radius: 8px;
+  min-width: 240px;
+  white-space: normal;
+  word-break: break-word;
+  display: none;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  z-index: 1001;
+  font-size: 17px;
+}
+.dropdown-submenu:hover > .sub-dropdown {
+  display: block;
+}
+.dropdown-item {
+  white-space: normal;
+  font-weight: 500;
+  color: #333;
+}
+.dropdown-item:hover {
+  background-color: #e6f0ff;
+  color: #007bff;
+}
+.dropdown-submenu > .dropdown-item::after {
+  content: "›";
+  float: right;
+  font-size: 16px;
+  margin-right: 5px;
 }
 
-
-/* Manual toggle class on mobile */
+/* ------------------ Responsive Dropdown ------------------ */
 @media (max-width: 991px) {
-  .sub-dropdown {
-    position: static !important;
-    display: none;
-    box-shadow: none;
-    padding-left: 10px;
-    background-color: #f9f9f9;
-    margin-top: 5px;
+  .dropdown-submenu {
+    position: static;
   }
 
-  .sub-dropdown.show-sub {
+  .dropdown-submenu > .sub-dropdown {
+    position: static !important;
+    display: none;
+    margin-left: 1rem;
+    padding-left: 10px;
+    background-color: #f9f9f9;
+    box-shadow: none;
+  }
+
+  .dropdown-submenu.show-sub > .sub-dropdown {
     display: block !important;
   }
 
@@ -69,14 +111,14 @@ body{
     content: "▼";
     float: right;
     font-size: 12px;
-    transform: rotate(0deg);
     transition: transform 0.2s;
   }
 
-  .sub-dropdown.show-sub + .dropdown-item::after {
+  .dropdown-submenu.show-sub > .dropdown-item::after {
     transform: rotate(180deg);
   }
 }
+
 body.no-scroll {
   overflow: hidden;
 }
@@ -241,56 +283,6 @@ body.no-scroll {
       height: auto;
     }
   }
- /* {% comment %} course section {% endcomment %} */
-.dynamics-section {
-    padding: 40px;
-    background: linear-gradient(135deg, #0078D7, #00B294);
-    color: white;
-    text-align: center;
-}
-
-.section-title-courses {
-  text-align: center;
-  font-size: 32px;
-  color: white;
-  margin-bottom: 40px;
-  font-weight: bold;
-}
-
-
-.course-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-}
-
-.course-card {
-    background: white;
-    color: #333;
-    border-radius: 15px;
-    width: 300px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-
-.course-card:hover {
-    transform: translateY(-10px);
-}
-
-.course-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.course-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
 /* {% comment %} why choose section {% endcomment %} */
 .why-choose-us {
   background: #f9f9fb;
@@ -449,3 +441,4 @@ body.no-scroll {
   border-top: 1px solid #ccc;
   margin-top: 20px;
 }
+
