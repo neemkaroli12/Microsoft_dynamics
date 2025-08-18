@@ -874,15 +874,6 @@
 >
     Enroll Now
 </a>
-          <a href="#" style="
-            background-color: #6c2eb9;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            color: white;
-            font-size: 1.4rem;
-            text-decoration: none;
-          ">Free Demo</a>
         </div>
       </div>
     </div>
@@ -1697,44 +1688,72 @@
     </div>
   </section>
 
+
+<!-- Enroll Modal -->
 <div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Enroll Now</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
+
+        <!-- Enroll Form -->
         <form id="enrollForm">
           <div class="mb-3">
             <label>Full Name</label>
             <input type="text" class="form-control" name="name" required>
           </div>
+
           <div class="mb-3">
             <label>Email</label>
             <input type="email" class="form-control" name="email" required>
           </div>
-          <div class="mb-3">
-  <label>Phone</label>
-  <input type="tel"
-         class="form-control"
-         name="phone"
-         pattern="[0-9]{10}"
-         maxlength="10"
-         placeholder="Enter 10-digit phone number"
-         required>
-</div>
 
           <div class="mb-3">
-            <label>Course</label>
-            <input type="text" class="form-control" name="course" id="courseName" readonly>
+            <label>Phone</label>
+            <input type="tel" class="form-control" name="phone" 
+                   pattern="[0-9]{10}" maxlength="10"
+                   placeholder="Enter 10-digit phone number" required>
           </div>
+
+          <!-- Category Dropdown -->
+          <div class="mb-3">
+            <label>Category</label>
+            <select class="form-control" id="courseCategory" required>
+              <option value="" disabled selected>Select Category</option>
+              {% for cat in categories %}
+                <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Course Dropdown -->
+          <div class="mb-3">
+            <label>Course</label>
+            <select class="form-control" id="courseName" required>
+              <option value="" disabled selected>Select Course</option>
+              {% for c in courses %}
+                <option value="{{ c.title }}" 
+                        data-category="{{ c.category }}" 
+                        data-fees="{{ c.course_fees }}">
+                  {{ c.title }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Fees -->
           <div class="mb-3">
             <label>Course Fees</label>
-            <input type="text" class="form-control" name="fees" id="courseFees" readonly>
+            <input type="text" class="form-control" id="courseFees" readonly>
           </div>
+
           <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
+
+        <!-- Success Message -->
         <div id="successMessage" class="text-center" style="display:none;">
           <h5 class="text-success">✅ Thank you for enrolling!</h5>
           <p>You have enrolled for <strong id="finalCourse"></strong> with fees <strong id="finalFees"></strong>.</p>
@@ -1744,6 +1763,54 @@
     </div>
   </div>
 </div>
+
+<!-- Script -->
+<script>
+  const categorySelect = document.getElementById("courseCategory");
+  const courseSelect = document.getElementById("courseName");
+  const feesInput = document.getElementById("courseFees");
+
+  // Filter courses based on category
+  categorySelect.addEventListener("change", function() {
+    let selectedCategory = this.value;
+
+    // Reset course dropdown
+    for (let option of courseSelect.options) {
+      if (option.value === "") continue; // skip default
+      option.style.display = (option.getAttribute("data-category") === selectedCategory) 
+                              ? "block" 
+                              : "none";
+    }
+    courseSelect.value = ""; 
+    feesInput.value = "";
+  });
+
+  // Auto fill fees on course select
+  courseSelect.addEventListener("change", function() {
+    let selectedOption = this.options[this.selectedIndex];
+    let fees = selectedOption.getAttribute("data-fees");
+    feesInput.value = fees ? fees + " INR" : "";
+  });
+
+  // Handle form submit
+  document.getElementById("enrollForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Get values
+    let course = courseSelect.value;
+    let fees = feesInput.value;
+
+    // Hide form & show success message
+    this.style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+
+    // Fill success message
+    document.getElementById("finalCourse").innerText = course;
+    document.getElementById("finalFees").innerText = fees;
+  });
+</script>
+
+
 
 <!-- Course Fees Modal -->
 <div class="modal fade" id="feesModal" tabindex="-1" aria-labelledby="feesModalLabel" aria-hidden="true">
@@ -1800,54 +1867,7 @@
     })
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const enrollButtons = document.querySelectorAll('.enroll-btn');
-  const courseNameField = document.getElementById('courseName');
-  const courseFeesField = document.getElementById('courseFees');
-  const enrollForm = document.getElementById('enrollForm');
-  const successMessage = document.getElementById('successMessage');
-  const finalCourse = document.getElementById('finalCourse');
-  const finalFees = document.getElementById('finalFees');
 
-  enrollButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const course = this.getAttribute('data-course');
-      const fees = this.getAttribute('data-fees');
-      courseNameField.value = course;
-      courseFeesField.value = fees;
-
-      enrollForm.style.display = 'block';
-      successMessage.style.display = 'none';
-    });
-  });
-
-  $(enrollForm).submit(function(e) {
-    e.preventDefault();
-    const formData = $(this).serialize();
-
-    $.ajax({
-      url: "{% url 'enroll_course' %}",
-      type: "POST",
-      data: formData,
-      headers: {'X-CSRFToken': '{{ csrf_token }}'},
-      success: function(response) {
-        if(response.success){
-          enrollForm.style.display = 'none';
-          finalCourse.textContent = courseNameField.value;
-          finalFees.textContent = courseFeesField.value;
-          successMessage.style.display = 'block';
-        } else {
-          alert("Error: " + JSON.stringify(response.errors));
-        }
-      },
-      error: function(xhr, status, error){
-        alert("Something went wrong: " + error);
-      }
-    });
-  });
-});
-</script>
 
 
 {% endblock %}
