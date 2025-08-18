@@ -49,7 +49,7 @@ NIITF Team
                 subject,
                 message,
                 settings.DEFAULT_FROM_EMAIL,
-                ['info@niitf.com'],
+                [enrollment.email,'info@niitf.com'],
                 fail_silently=False
             )
 
