@@ -20,12 +20,12 @@ def enroll_course(request):
     if request.method == "POST":
         form = EnrollmentForm(request.POST)
         if form.is_valid():
-            enrollment = form.save()  # saves to DB
+            enrollment = form.save()
 
-            # Send email to user + admin
-            subject = f"Enrollment Confirmation: {enrollment.course}"
-            message = f"""
+            # Message body
+            message_body = f"""
 Hi {enrollment.name},
+
 Thank you for enrolling in {enrollment.course}.
 
 Details:
@@ -34,23 +34,38 @@ Email: {enrollment.email}
 Phone: {enrollment.phone}
 Course: {enrollment.course}
 Fees: {enrollment.fees}
+
 We will contact you soon.
 Best regards,
 NIITF Team
 """
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [enrollment.email,'info@niitf.com'],
-                fail_silently=False
-            )
+
+            try:
+                # 1. Send to student
+                EmailMessage(
+                    subject = f"Enrollment Confirmation: {enrollment.course}",
+                    body = message_body,
+                    from_email = settings.DEFAULT_FROM_EMAIL,
+                    to = [enrollment.email],
+                ).send(fail_silently=False)
+
+                # 2. Send to admin with student's info in reply-to
+                EmailMessage(
+                    subject = f"New Enrollment: {enrollment.course} by {enrollment.name}",
+                    body = message_body,
+                    from_email = settings.DEFAULT_FROM_EMAIL,
+                    to = ['info@niitf.com'],
+                    reply_to = [enrollment.email],  # <==== key line
+                ).send(fail_silently=False)
+
+            except Exception as e:
+                return JsonResponse({"success": False, "error": f"Email failed: {str(e)}"})
 
             return JsonResponse({"success": True})
         else:
             return JsonResponse({"success": False, "errors": form.errors})
-    return JsonResponse({"success": False, "error": "Invalid request method."})
 
+    return JsonResponse({"success": False, "error": "Invalid request method."})
 
 def course_detail(request, slug):
     course = get_object_or_404(Course.objects.prefetch_related('modules'), slug=slug)

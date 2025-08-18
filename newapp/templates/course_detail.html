@@ -1701,6 +1701,8 @@
 
         <!-- Enroll Form -->
         <form id="enrollForm">
+          {% csrf_token %}
+
           <div class="mb-3">
             <label>Full Name</label>
             <input type="text" class="form-control" name="name" required>
@@ -1721,7 +1723,7 @@
           <!-- Category Dropdown -->
           <div class="mb-3">
             <label>Category</label>
-            <select class="form-control" id="courseCategory" required>
+            <select class="form-control" id="courseCategory" name="category" required>
               <option value="" disabled selected>Select Category</option>
               {% for cat in categories %}
                 <option value="{{ cat }}">{{ cat }}</option>
@@ -1730,31 +1732,30 @@
           </div>
 
           <!-- Course Dropdown -->
-          <div class="mb-3">
-            <label>Course</label>
-            <select class="form-control" id="courseName" required>
-              <option value="" disabled selected>Select Course</option>
-              {% for c in courses %}
-                <option value="{{ c.title }}" 
-                        data-category="{{ c.category }}" 
-                        data-fees="{{ c.course_fees }}">
-                  {{ c.title }}
-                </option>
-              {% endfor %}
-            </select>
-          </div>
+         <select class="form-control" id="courseName" name="course" required>
+  <option value="" disabled selected>Select Course</option>
+  {% for c in courses %}
+    <option value="{{ c.id }}" 
+            data-title="{{ c.title }}"
+            data-category="{{ c.category }}" 
+            data-fees="{{ c.course_fees }}">
+      {{ c.title }}
+    </option>
+  {% endfor %}
+</select>
+
 
           <!-- Fees -->
           <div class="mb-3">
             <label>Course Fees</label>
-            <input type="text" class="form-control" id="courseFees" readonly>
+            <input type="text" class="form-control" id="courseFees" name="fees" readonly>
           </div>
 
           <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
 
         <!-- Success Message -->
-        <div id="successMessage" class="text-center" style="display:none;">
+         <div id="successMessage" class="text-center" style="display:none;">
           <h5 class="text-success">✅ Thank you for enrolling!</h5>
           <p>You have enrolled for <strong id="finalCourse"></strong> with fees <strong id="finalFees"></strong>.</p>
         </div>
@@ -1764,50 +1765,63 @@
   </div>
 </div>
 
+
 <!-- Script -->
 <script>
   const categorySelect = document.getElementById("courseCategory");
-  const courseSelect = document.getElementById("courseName");
-  const feesInput = document.getElementById("courseFees");
+const courseSelect = document.getElementById("courseName");
+const feesInput = document.getElementById("courseFees");
 
-  // Filter courses based on category
-  categorySelect.addEventListener("change", function() {
+// Filter courses based on category
+categorySelect.addEventListener("change", function() {
     let selectedCategory = this.value;
 
-    // Reset course dropdown
     for (let option of courseSelect.options) {
-      if (option.value === "") continue; // skip default
-      option.style.display = (option.getAttribute("data-category") === selectedCategory) 
-                              ? "block" 
-                              : "none";
+        if (option.value === "") continue;
+        option.style.display = (option.getAttribute("data-category") === selectedCategory) 
+                               ? "block" 
+                               : "none";
     }
     courseSelect.value = ""; 
     feesInput.value = "";
-  });
+});
 
-  // Auto fill fees on course select
-  courseSelect.addEventListener("change", function() {
+// Auto fill fees on course select
+courseSelect.addEventListener("change", function() {
     let selectedOption = this.options[this.selectedIndex];
     let fees = selectedOption.getAttribute("data-fees");
-    feesInput.value = fees ? fees + " INR" : "";
-  });
+    feesInput.value = fees ? parseFloat(fees) : "";
+ // send numeric value
+});
 
-  // Handle form submit
-  document.getElementById("enrollForm").addEventListener("submit", function(e) {
+
+// Handle form submit
+document.getElementById("enrollForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    // Get values
-    let course = courseSelect.value;
-    let fees = feesInput.value;
+    const formData = new FormData(this);
 
-    // Hide form & show success message
-    this.style.display = "none";
-    document.getElementById("successMessage").style.display = "block";
+    fetch("{% url 'enroll_course' %}", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            this.style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("finalCourse").innerText = formData.get("course");
+            document.getElementById("finalFees").innerText = formData.get("fees");
+        } else {
+            alert("Error: " + JSON.stringify(data.errors || data.error));
+        }
+    })
+    .catch(err => console.error("Error:", err));
+});
 
-    // Fill success message
-    document.getElementById("finalCourse").innerText = course;
-    document.getElementById("finalFees").innerText = fees;
-  });
 </script>
 
 

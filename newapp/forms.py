@@ -79,11 +79,13 @@ class CustomUserCreationForm(UserCreationForm):
 class EnrollmentForm(forms.ModelForm):
     class Meta:
         model = Enrollment
-        fields = ['name', 'email', 'phone', 'course', 'fees']
+        fields = ['name', 'email', 'phone', 'category', 'course', 'fees']
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Your Name', 'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'placeholder': 'Your Email', 'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}),
-            'course': forms.TextInput(attrs={'placeholder': 'Course Name', 'class': 'form-control'}),
-            'fees': forms.NumberInput(attrs={'placeholder': 'Fees', 'class': 'form-control'}),
-        }        
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'course': forms.Select(attrs={'class': 'form-control'}),
+            'fees': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+       
