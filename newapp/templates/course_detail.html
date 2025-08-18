@@ -667,15 +667,78 @@
 #enrollModal #successMessage {
     animation: fadeIn 0.5s ease-in-out;
 }
-#enrollModal .modal-dialog {
-    max-width: 420px;  
-    margin: auto;
-}
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+#enrollModal .modal-dialog {
+    max-width: 420px;
+    margin: auto;
+}
+
+
+@media (max-width: 576px) {
+    #enrollModal .modal-dialog {
+        max-width: 90%;       
+    }
+
+    #enrollModal .modal-body {
+        padding: 10px;         
+    }
+
+    #enrollModal input.form-control {
+        padding: 6px 8px;        
+        font-size: 14px;         
+    }
+
+    #enrollModal label {
+        font-size: 14px;         
+        margin-bottom: 4px;
+    }
+
+    #enrollModal button.btn {
+        padding: 6px 10px;       
+        font-size: 14px;
+    }
+}
+
+
+@media (min-width: 577px) and (max-width: 768px) {
+    #enrollModal input.form-control {
+        padding: 8px 10px;
+        font-size: 15px;
+    }
+
+    #enrollModal label {
+        font-size: 15px;
+    }
+
+    #enrollModal button.btn {
+        padding: 8px 12px;
+        font-size: 15px;
+    }
+}
+
+
+@media (min-width: 769px) {
+    #enrollModal input.form-control {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    #enrollModal label {
+        font-size: 16px;
+    }
+
+    #enrollModal button.btn {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+}
+
 
 .table {
     background: #fff;
