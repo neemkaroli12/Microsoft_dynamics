@@ -62,21 +62,8 @@
     </div>
   </section>
 
-  {% comment %}course section{% endcomment %}
-  <section class="dynamics-section mt-5">
-    <h1 class="section-title-courses">Microsoft Dynamics Courses</h1>
-    <div class="course-container">
-      {% for course in courses %}
-        <div class="course-card">
-          <img src="{{ course.image.url }}" alt="{{ course.title }}" />
-          <h3>{{ course.title }}</h3>
-          <p>{{ course.description }}</p>
-           <a href="{% url 'course_detail' course.slug %}" class="" style="  background: linear-gradient(135deg, #0078D7, #00B294); padding: 10px; border-radius: 20px; border: none; color: white;font-size:1.4rem; text-decoration:none;">View Details</a>
-        </div>
-      {% endfor %}
-      
-    </div>
-  </section>
+
+    
   {% comment %} how it Works? {% endcomment %}
   <section class="how-it-works py-5 ">
   <div class="container">

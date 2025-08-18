@@ -142,16 +142,32 @@ body.no-scroll {
   margin-right: 5px;
 }
 @media (max-width: 991px) {
-  .sub-dropdown {
+  .dropdown-submenu {
+    position: static;
+  }
+
+  .dropdown-submenu > .sub-dropdown {
     position: static !important;
     display: none;
     margin-left: 1rem;
     box-shadow: none;
     padding-left: 10px;
+    background-color: #f9f9f9;
   }
 
-  .sub-dropdown.show {
-    display: block;
+  .dropdown-submenu.show-sub > .sub-dropdown {
+    display: block !important;
+  }
+
+  .dropdown-submenu > .dropdown-item::after {
+    content: "▼";
+    float: right;
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+
+  .dropdown-submenu.show-sub > .dropdown-item::after {
+    transform: rotate(180deg);
   }
 }
 

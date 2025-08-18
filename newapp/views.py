@@ -13,11 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import re
 def home(request):
-    courses = Course.objects.all()
-    # courses = DynamicsCourse.objects.all()
-    return render(request, 'index.html', {'courses': courses })
-
-from django.http import JsonResponse
+    return render(request, 'index.html')
 
 @csrf_exempt
 def enroll_course(request):
@@ -30,7 +26,6 @@ def enroll_course(request):
             subject = f"Enrollment Confirmation: {enrollment.course}"
             message = f"""
 Hi {enrollment.name},
-
 Thank you for enrolling in {enrollment.course}.
 
 Details:
@@ -39,9 +34,7 @@ Email: {enrollment.email}
 Phone: {enrollment.phone}
 Course: {enrollment.course}
 Fees: {enrollment.fees}
-
 We will contact you soon.
-
 Best regards,
 NIITF Team
 """
@@ -57,8 +50,6 @@ NIITF Team
         else:
             return JsonResponse({"success": False, "errors": form.errors})
     return JsonResponse({"success": False, "error": "Invalid request method."})
-
-
 
 
 def course_detail(request, slug):
