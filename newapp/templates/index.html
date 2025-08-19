@@ -13,7 +13,162 @@
       align-items: center;
       overflow: hidden;
     }
-    
+      
+#enrollModal .modal-dialog {
+    transform: scale(0.95);
+    transition: all 0.3s ease-in-out;
+}
+
+#enrollModal.show .modal-dialog {
+    transform: scale(1);
+}
+
+#enrollModal .modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.2);
+    border: none;
+    overflow: hidden;
+}
+#enrollModal .modal-header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+}
+
+#enrollModal .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+#enrollModal .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+#enrollModal .form-control {
+    border-radius: 10px;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: inset 0px 2px 5px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+#enrollModal .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0px 0px 8px rgba(106, 17, 203, 0.3);
+}
+
+#enrollModal label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#enrollModal .input-group-text {
+    background: transparent;
+    border: none;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6a11cb;
+    font-size: 1.1rem;
+}
+
+
+#enrollModal .btn-primary {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+#enrollModal .btn-primary:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: translateY(-2px);
+}
+
+#enrollModal #successMessage {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#enrollModal .modal-dialog {
+    max-width: 420px;
+    margin: auto;
+}
+
+
+@media (max-width: 576px) {
+    #enrollModal .modal-dialog {
+        max-width: 90%;       
+    }
+
+    #enrollModal .modal-body {
+        padding: 10px;         
+    }
+
+    #enrollModal input.form-control {
+        padding: 6px 8px;        
+        font-size: 14px;         
+    }
+
+    #enrollModal label {
+        font-size: 14px;         
+        margin-bottom: 4px;
+    }
+
+    #enrollModal button.btn {
+        padding: 6px 10px;       
+        font-size: 14px;
+    }
+}
+
+
+@media (min-width: 577px) and (max-width: 768px) {
+    #enrollModal input.form-control {
+        padding: 8px 10px;
+        font-size: 15px;
+    }
+
+    #enrollModal label {
+        font-size: 15px;
+    }
+
+    #enrollModal button.btn {
+        padding: 8px 12px;
+        font-size: 15px;
+    }
+}
+
+
+@media (min-width: 769px) {
+    #enrollModal input.form-control {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    #enrollModal label {
+        font-size: 16px;
+    }
+
+    #enrollModal button.btn {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+}
+
 
   </style>
   <section class="hero-section">
@@ -62,63 +217,193 @@
     </div>
   </section>
 
-
-    
-  {% comment %} how it Works? {% endcomment %}
-  <section class="how-it-works py-5 ">
-  <div class="container">
-    <div class="text-center mt-5">
-      <p class="subtitle text-muted">Reach Your Educational Milestones</p>
-      <h4 class="section-title-works mb-2">How Does It Work?</h4>
-      <div class="line-decorator mx-auto"></div>
-    </div>
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6 d-flex justify-content-center">
+  {% comment %}how it Works?{% endcomment %}
+  <section class="how-it-works py-5">
+    <div class="container">
+      <div class="text-center mt-5">
+        <p class="subtitle text-muted">Reach Your Educational Milestones</p>
+        <h4 class="section-title-works mb-2">How Does It Work?</h4>
+        <div class="line-decorator mx-auto"></div>
+      </div>
+      <div class="row align-items-center g-5">
         <div class="col-lg-6 d-flex justify-content-center">
-          <div class="svg-wrapper text-center">
-            <img src="{% static 'images/Webinar-amico.svg' %}" alt="Interactive Online Learning" class="svg-img" />
+          <div class="col-lg-6 d-flex justify-content-center">
+            <div class="svg-wrapper text-center">
+              <img src="{% static 'images/Webinar-amico.svg' %}" alt="Interactive Online Learning" class="svg-img" />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="content-box">
-          <h3 class="" style="font-size: 45px;">Live Instructor-Led Interactive Online Classes</h3>
-          <div class="line-decorator mb-3"></div>
-          <p class="text-muted fs-5">
-            Join our real-time sessions featuring live screen sharing and hands-on demonstrations by industry professionals to help you
-            <strong>grasp every concept thoroughly</strong>. Missed a class? No problem — we'll arrange a make-up session so your learning journey continues uninterrupted!
-          </p>
-          <a href="#" style=" background-color: purple; padding: 10px; border-radius: 20px; border: none; color: white; text-decoration: none;" 
-        >Enroll Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="how-it-works py-5"  style="background-color:#e7edf3;">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <div class="content-box">
-          <h3 class="" style="font-size: 40px;">Comprehensive Curriculum from Basics to Expert Level</h3>
-          <div class="line-decorator mb-3"></div>
-          <p class="text-muted fs-5">
-            Our courses are designed to match each learner's level with clear explanations. Each topic is broken into manageable lessons, blending theory with practical exercises.
-          </p>
-          <a href="" style=" background-color: purple; padding: 10px; border-radius: 20px; border: none; color: white;text-decoration: none;">Start Learning Today</a>
-        </div>
-      </div>
-      <div class="col-lg-6 d-flex justify-content-center">
-        <div class="col-lg-6 d-flex justify-content-center">
-          <div class="svg-wrapper text-center">
-            <img src="{% static 'images/Statistics-rafiki.svg' %}" alt="Structured Learning" class="svg-img" />
+        <div class="col-lg-6">
+          <div class="content-box">
+            <h3 class="" style="font-size: 45px;">Live Instructor-Led Interactive Online Classes</h3>
+            <div class="line-decorator mb-3"></div>
+            <p class="text-muted fs-5">
+              Join our real-time sessions featuring live screen sharing and hands-on demonstrations by industry professionals to help you
+              <strong>grasp every concept thoroughly</strong>. Missed a class? No problem — we'll arrange a make-up session so your learning journey continues uninterrupted!
+            </p>
+            <a href="#" style=" background-color: purple; padding: 10px; border-radius: 20px; border: none; color: white; text-decoration: none;" data-bs-toggle="modal"  data-bs-target="#enrollModal">Enroll Now</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  
+  <section class="how-it-works py-5" style="background-color:#e7edf3;">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="content-box">
+            <h3 class="" style="font-size: 40px;">Comprehensive Curriculum from Basics to Expert Level</h3>
+            <div class="line-decorator mb-3"></div>
+            <p class="text-muted fs-5">Our courses are designed to match each learner's level with clear explanations. Each topic is broken into manageable lessons, blending theory with practical exercises.</p>
+            <a href="#" style=" background-color: purple; padding: 10px; border-radius: 20px; border: none; color: white;text-decoration: none;"data-bs-toggle="modal"  data-bs-target="#enrollModal">Start Learning Today</a>
+          </div>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center">
+          <div class="col-lg-6 d-flex justify-content-center">
+            <div class="svg-wrapper text-center">
+              <img src="{% static 'images/Statistics-rafiki.svg' %}" alt="Structured Learning" class="svg-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enroll Modal -->
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enroll Now</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Enroll Form -->
+        <form id="enrollForm">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label>Full Name</label>
+            <input type="text" class="form-control" name="name" required>
+          </div>
+
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label>Phone</label>
+            <input type="tel" class="form-control" name="phone" 
+                   pattern="[0-9]{10}" maxlength="10"
+                   placeholder="Enter 10-digit phone number" required>
+          </div>
+
+          <!-- Category Dropdown -->
+          <div class="mb-3">
+            <label>Category</label>
+            <select class="form-control" id="courseCategory" name="category" required>
+              <option value="" disabled selected>Select Category</option>
+              {% for cat in categories %}
+                <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Course Dropdown -->
+          <div class="mb-3">
+            <label>Course</label>
+         <select class="form-control" id="courseName" name="course" required>
+          <option value="" disabled selected>Select Course</option>
+          {% for c in courses %}
+            <option value="{{ c.id }}" 
+            data-title="{{ c.title }}"
+            data-category="{{ c.category }}" 
+            data-fees="{{ c.course_fees }}">
+            {{ c.title }}
+            </option>
+          {% endfor %}
+          </select>
+          </div>
+
+          <!-- Fees -->
+          <div class="mb-3">
+            <label>Course Fees</label>
+            <input type="text" class="form-control" id="courseFees" name="fees" readonly>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+
+        <!-- Success Message -->
+         <div id="successMessage" class="text-center" style="display:none;">
+          <h5 class="text-success">✅ Thank you for enrolling!</h5>
+          <p>You have enrolled for <strong id="finalCourse"></strong> with fees <strong id="finalFees"></strong>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script -->
+<script>
+  const categorySelect = document.getElementById("courseCategory");
+const courseSelect = document.getElementById("courseName");
+const feesInput = document.getElementById("courseFees");
+
+// Filter courses based on category
+categorySelect.addEventListener("change", function() {
+    let selectedCategory = this.value;
+
+    for (let option of courseSelect.options) {
+        if (option.value === "") continue;
+        option.style.display = (option.getAttribute("data-category") === selectedCategory) 
+                               ? "block" 
+                               : "none";
+    }
+    courseSelect.value = ""; 
+    feesInput.value = "";
+});
+
+// Auto fill fees on course select
+courseSelect.addEventListener("change", function() {
+    let selectedOption = this.options[this.selectedIndex];
+    let fees = selectedOption.getAttribute("data-fees");
+    feesInput.value = fees ? parseFloat(fees) : "";
+ // send numeric value
+});
+
+
+// Handle form submit
+document.getElementById("enrollForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("{% url 'enroll_course' %}", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            this.style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("finalCourse").innerText = formData.get("course");
+            document.getElementById("finalFees").innerText = formData.get("fees");
+        } else {
+            alert("Error: " + JSON.stringify(data.errors || data.error));
+        }
+    })
+    .catch(err => console.error("Error:", err));
+});
+
+</script>
 {% endblock %}
