@@ -270,7 +270,7 @@
     </div>
   </section>
 
-  <!-- Enroll Modal -->
+  {% comment %} Enroll al  {% endcomment %}
 <div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -280,7 +280,7 @@
       </div>
       <div class="modal-body">
 
-        <!-- Enroll Form -->
+        {% comment %} Enroll{% endcomment %}
         <form id="enrollForm">
           {% csrf_token %}
 
@@ -301,7 +301,7 @@
                    placeholder="Enter 10-digit phone number" required>
           </div>
 
-          <!-- Category Dropdown -->
+          {% comment %} Categorropdown  {% endcomment %}
           <div class="mb-3">
             <label>Category</label>
             <select class="form-control" id="courseCategory" name="category" required>
@@ -312,7 +312,7 @@
             </select>
           </div>
 
-          <!-- Course Dropdown -->
+          {% comment %} Course pdown  {% endcomment %}
           <div class="mb-3">
             <label>Course</label>
          <select class="form-control" id="courseName" name="course" required>
@@ -328,8 +328,8 @@
           </select>
           </div>
 
-          <!-- Fees -->
-          <div class="mb-3">
+          {% comment %} Fees      {% endcomment %}
+            <div class="mb-3">
             <label>Course Fees</label>
             <input type="text" class="form-control" id="courseFees" name="fees" readonly>
           </div>
@@ -337,9 +337,8 @@
           <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
 
-        <!-- Success Message -->
          <div id="successMessage" class="text-center" style="display:none;">
-          <h5 class="text-success">✅ Thank you for enrolling!</h5>
+          <h5 class="text-success">Thank you for enrolling!</h5>
           <p>You have enrolled for <strong id="finalCourse"></strong> with fees <strong id="finalFees"></strong>.</p>
         </div>
 
@@ -349,7 +348,7 @@
 </div>
 
 
-<!-- Script -->
+{% comment %} Script  {% endcomment %}
 <script>
   const categorySelect = document.getElementById("courseCategory");
 const courseSelect = document.getElementById("courseName");
