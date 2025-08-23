@@ -13,6 +13,11 @@ import os
 from pathlib import Path
 from decouple import config
 import cloudinary
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,10 +146,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # MEDIA_URL = '/media/'
 # # MEDIA_ROOT = BASE_DIR / 'media'
-cloudinary.config()  # automatically reads CLOUDINARY_URL environment variable
-
+ 
+CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
 # Use Cloudinary for media
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorag'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_ROOT = "/var/www/Company_Project/staticfiles"
 MEDIA_ROOT = "/var/www/Company_Project/media"
