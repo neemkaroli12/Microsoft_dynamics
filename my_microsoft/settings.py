@@ -133,12 +133,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
-STATIC_ROOT = "/var/www/Company_Project/static"
+STATIC_ROOT = "/var/www/Company_Project/staticfiles"
 MEDIA_ROOT = "/var/www/Company_Project/media"
 
 
