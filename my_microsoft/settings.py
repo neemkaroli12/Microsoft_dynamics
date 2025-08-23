@@ -147,7 +147,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # MEDIA_URL = '/media/'
 # # MEDIA_ROOT = BASE_DIR / 'media'
  
-CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+# CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_URL").split("@")[1],
+    api_key=os.getenv("CLOUDINARY_URL").split("//")[1].split(":")[0],
+    api_secret=os.getenv("CLOUDINARY_URL").split(":")[2].split("@")[0],
+)
 # Use Cloudinary for media
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
