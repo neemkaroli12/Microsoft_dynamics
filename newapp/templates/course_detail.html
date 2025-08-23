@@ -795,10 +795,12 @@
           <div class="w-100" style="max-width: 400px">
             <div class="ratio ratio-16x9">
               {% if course.video %}
-                <video width="100%" controls style="border: 5px solid white">
-                  <source src="{{ course.video.url }}" type="video/mp4" />
-                </video>
-              {% endif %}
+    <video width="100%" controls style="border: 5px solid white">
+        <source src="{{ course.video.url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+{% endif %}
+
             </div>
           </div>
         </div>

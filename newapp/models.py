@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Course(models.Model):
@@ -19,8 +20,7 @@ class Course(models.Model):
     assignments_duration = models.CharField(max_length=50, blank=True)
     job_oriented_training = models.BooleanField(default=False)
     support_available = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='courses/', blank=True, null=True)
-    video = models.FileField(upload_to='courses/videos/', blank=True, null=True)
+    video = CloudinaryField('course/video', resource_type='video', blank=True, null=True)
     syllabus_link = models.CharField(max_length=255, blank=True, null=True)
     course_fees = models.CharField(max_length=50, blank=True, null=True)
 
@@ -92,7 +92,7 @@ class Blog(models.Model):
 
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField(upload_to='blogs/', blank=True, null=True)
+    image = CloudinaryField('blog', blank=True, null=True)
     author = models.CharField(max_length=100, default='Anonymous')  # for outside user
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
