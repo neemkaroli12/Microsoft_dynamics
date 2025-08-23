@@ -138,7 +138,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
-STATIC_ROOT = "/var/www/Company_Project/staticfiles"
+STATIC_ROOT = "/var/www/Company_Project/static"
 MEDIA_ROOT = "/var/www/Company_Project/media"
 
 
