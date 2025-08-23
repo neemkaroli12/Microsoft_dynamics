@@ -107,68 +107,85 @@
     <!-- Page Content -->
     {% block content %}{% endblock %}
 
-    <!-- Footer -->
     <footer class="footer bg-light mt-5 pt-4 pb-3">
-      <div class="container-fluid">
-        <div class="row d-flex flex-column flex-md-row">
-          <div class="col-lg-3 mb-4 footer-logo">
-            <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Logo" height="150" width="150" /></a>
-          </div>
-          <div class="col-lg-2 mb-4">
-            <h5>Quick Links</h5>
-            <ul class="list-unstyled">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 mb-4">
-            <h5>Company</h5>
-            <ul class="list-unstyled">
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Terms</a></li>
-              <li><a href="#">Privacy</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-2 mb-4">
-            <h5>NIITF</h5>
-            <ul class="list-unstyled">
-              <li><a href="#">Our Programs</a></li>
-              <li><a href="#">Partners</a></li>
-            </ul>
-          </div>
-          <div class="col-lg-3 mb-4">
-            <h5>Contact Us</h5>
-            <div class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-geo-alt-fill colorchange" viewBox="0 0 16 16" style="color:black;">
-                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-              </svg>
-              <p>Neem Karoli House, Plot no-86, Heera Nagar,<br />Haldwani, Uttarakhand</p>
-            </div>
-            <div class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-geo-alt-fill colorchange" viewBox="0 0 16 16" style="color:black;">
-                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-              </svg>
-              
-              <p>Noida Office,Sector 62,<br> Noida, Uttar Pradesh</p>
-            </div>
-            <div class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill mt-1 colorchange" viewBox="0 0 16 16" style="color:black;">
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
-              </svg>
-              <p>info@niitf.com</p>
-            </div>
-            <div class="footer-contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill mt-1 colorchange" viewBox="0 0 16 16" style="color:black;">
-                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
-              </svg>
-              <p>+91 9389149580</p>
-            </div>
-          </div>
-        </div>
-        <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
+  <div class="container-fluid">
+    <div class="row d-flex flex-column flex-md-row">
+
+      <!-- Logo -->
+      <div class="col-lg-3 mb-4 footer-logo">
+        <a href="{% url 'index' %}">
+          <img src="{% static 'images/logo.png' %}" alt="Logo" height="150" width="150" />
+        </a>
       </div>
-    </footer>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 mb-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="col-lg-2 mb-4">
+        <h5>Company</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+
+      <!-- NIITF -->
+      <div class="col-lg-2 mb-4">
+        <h5>NIITF</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Our Programs</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-3 mb-4">
+        <h5>Contact Us</h5>
+
+        <div class="footer-contact-item d-flex align-items-start mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+          </svg>
+          <p class="mb-0">Neem Karoli House, Plot no-86, Heera Nagar, Haldwani, Uttarakhand</p>
+        </div>
+
+        <div class="footer-contact-item d-flex align-items-start mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+          </svg>
+          <p class="mb-0">Noida Office, Sector 62, Noida, Uttar Pradesh</p>
+        </div>
+
+        <div class="footer-contact-item d-flex align-items-start mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+          </svg>
+          <p class="mb-0">info@niitf.com</p>
+        </div>
+
+        <div class="footer-contact-item d-flex align-items-start">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+          </svg>
+          <p class="mb-0">+91 9389149580</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="text-center border-top pt-3 mt-3">&copy; 2025 NeemKaroli Institute of Information Technology and Finance. All rights reserved.</div>
+  </div>
+</footer>
 
     <!-- Dropdown Submenu Script -->
     <script>
