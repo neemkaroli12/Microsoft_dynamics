@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newapp',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -135,8 +139,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+# # MEDIA_ROOT = BASE_DIR / 'media'
+cloudinary.config()  # automatically reads CLOUDINARY_URL environment variable
+
+# Use Cloudinary for media
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorag'
 
 STATIC_ROOT = "/var/www/Company_Project/staticfiles"
 MEDIA_ROOT = "/var/www/Company_Project/media"
