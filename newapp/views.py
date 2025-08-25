@@ -132,23 +132,30 @@ def contact_view(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
+            # create full body
+            full_message = f"""
+You have a new contact form submission:
+
+Name: {name}
+Email: {email}
+
+Message:
+{message}
+"""
+
             # Send email
             send_mail(
-                subject=f"New message from {name}",
-                message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,  
-                recipient_list=['info@niitf.com'],  # <- send to your email
+                subject=f"New message from {name}",   # subject me name show hoga
+                message=full_message,                 # pura formatted message
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=['info@niitf.com'],
                 fail_silently=False,
             )
-
-
-
             return render(request, 'contact.html', {'form': ContactForm(), 'success': True})
     else:
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
-
 
 def blog_view(request):
     if request.user.is_staff:
